@@ -1,28 +1,91 @@
-# VaultWares Styles, Themes, Design Principles and others
+# VaultWares Design System Style Guide
 
-The VaultWares app should not all be dark and look like the matrix (1999) with green code and black background. They should all support a Light and Dark mode. Prefer a colorful palette over a drab one.
+This file defines VaultWares visual rules for themes, tokens, layout rhythm, and motion.
 
-## The Dark Themes
-They should be more dark blue-gray than black, something around #4A5459 for the main color, the secondary color should look something like, #cc9b21, #4ecc21, #21b8cc, or something else. In case of doubt refer to the Solarized Dark theme https://github.com/altercation/solarized.
+## Core Direction
 
-## The Light Themes
-They should look similar to the Solarized Light theme https://github.com/altercation/solarized with a personal touch. Prefer whiter background than solarized themes.
+- Avoid the generic "hacker terminal" look.
+- Support both `light` and `dark` modes in every product.
+- Favor calm, high-legibility palettes with vivid but controlled accents.
+- Prioritize clarity, accessibility, and consistency over visual noise.
 
-## Styles
-Let go of the "cybersecurity hacker matrix" style, and opt for a more modern and sleek minimalist design. The default font should be Segoe UI Semilight unless the situation calls for a personalized font or it doesn't fit with the theme. The font-weight can vary depending on circumstances of course. Adapt the general style to this slim, elegant font. Gradients are very welcome if they are discreet.
+## Color System
 
-## Design
-The design principles should follow those of modern react apps if they are not conflicting with our themes/styles. Applying our own library glass-ui is also a good idea https://github.com/p-potvin/glass-ui when used in small doses. There should be a lot of small subtle animations unless they impact performance of lesser hardware (let's say 8 years old maximum).
+### Principles
 
-## The Custom Skins 
-Here are base skins to implement when an app requires multiple skins.
-Premade skins (format: theme mode | primary color | accent color): 
-1. light theme | light beige | burgundy
-2. dark theme | Solarized base02 | Solarized orange
-3. dark theme | dark gray | gold yellow
-4. light theme | off-white | darker gray
-5. dark theme | red | light pink
-6. light theme | light gray | deep blue sea
-7. dark theme | light black | logo's color (either cyan or bright green)
-8. dark theme | dark purple (eggplant or violet) | bright orange (tangerine)
-9. light theme | pale white |  bright purple
+- Base surfaces should be neutral and slightly warm/cool, not pure black.
+- Accent colors should be energetic but used sparingly for hierarchy.
+- Brand accents should not reduce text readability.
+- Never hardcode ad-hoc hex values in app code. Use named tokens.
+
+### Baseline Palette Guidance
+
+- Dark foundations: charcoal or blue-gray (`#222222` to `#4A5459` family).
+- Light foundations: off-white or pale neutral (`#F5F5DC` to `#FDFDFD` family).
+- Accent examples: gold, cyan, burgundy, deep blue, violet, or tangerine.
+
+### Required Token Roles
+
+Each theme should provide these roles at minimum:
+
+- `background`
+- `surface`
+- `surface_elevated`
+- `text_primary`
+- `text_secondary`
+- `accent`
+- `accent_hover`
+- `border_subtle`
+- `focus_ring`
+- `success`
+- `warning`
+- `danger`
+
+## Typography
+
+- Primary UI typeface: `Segoe UI` with light/regular/semibold weights as needed.
+- Reserve heavy weights for headings and key actions only.
+- Maintain readable line-height:
+- Body text: `1.4` to `1.6`.
+- Headings: `1.15` to `1.3`.
+
+## Spacing and Layout Rhythm
+
+- Use an 8px spacing base for layout and component spacing.
+- Recommended scale: `4, 8, 12, 16, 24, 32, 40, 48, 64`.
+- Keep sections visually breathable and avoid dense card stacks.
+
+## Motion and Effects
+
+- Favor subtle entrance and state transitions (`120ms` to `240ms`).
+- Use easing that feels natural (`ease-out` for entry, `ease-in-out` for state).
+- Avoid infinite decorative animation loops by default.
+- `glass-ui` is allowed in small doses for elevated surfaces and overlays.
+
+## Accessibility Requirements
+
+- Body text contrast target: WCAG AA (>= 4.5:1).
+- Large text and UI component contrast target: >= 3.0:1.
+- Focus states must be clearly visible in both modes.
+- Do not rely on color alone to communicate state.
+
+## Custom Skin Catalog
+
+Format: `mode | primary | accent`
+
+1. `light | #F5F5DC | #800020` (Vintage Velvet)
+2. `dark | #073642 | #CB4B16` (Cyberpunk Cinder)
+3. `dark | #4A5459 | #D4AF37` (Golden Slate)
+4. `light | #FAF9F6 | #333333` (Modern Monolith)
+5. `dark | #8B0000 | #FFC0CB` (Crimson Bloom)
+6. `light | #D3D3D3 | #006994` (Ocean Mist)
+7. `dark | #222222 | #00FFFF` (Neon Void)
+8. `dark | #4B0082 | #F28500` (Royal Tangerine)
+9. `light | #FDFDFD | #800080` (Amethyst Frost)
+
+## Figma-to-Code Expectations
+
+- Map Figma color values to Vault theme tokens before implementing components.
+- Keep spacing aligned to the 8px scale unless host app constraints require otherwise.
+- Validate final screens in both light and dark modes.
+- Verify contrast and focus visibility before sign-off.
