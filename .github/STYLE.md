@@ -2,12 +2,17 @@
 
 This file defines VaultWares visual rules for themes, tokens, layout rhythm, and motion.
 
+**Note:** ALWAYS refer to this website: [Meta-Generated Theme Catalog][metaGeneratedTheme] for the most up-to-date visual direction and theme catalog. This document is a good example of the kind of direction and principles we follow, but keep the figma MCP in mind too.
+
 ## Core Direction
 
 - Avoid the generic "hacker terminal" look.
-- Support both `light` and `dark` modes in every product.
+- Support both `light` and `dark` modes in every product. Favor solarized palettes with a modern twist.
 - Favor calm, high-legibility palettes with vivid but controlled accents.
 - Prioritize clarity, accessibility, and consistency over visual noise.
+- Use a consistent 8px grid for all spacing and sizing.
+- Use `Segoe UI` as the primary typeface for a modern, clean look.
+- Use SVG icons with a consistent stroke style and 2px line weight.
 
 ## Color System
 
@@ -89,3 +94,33 @@ Format: `mode | primary | accent`
 - Keep spacing aligned to the 8px scale unless host app constraints require otherwise.
 - Validate final screens in both light and dark modes.
 - Verify contrast and focus visibility before sign-off.
+
+---
+Example of a tailwind config snippet for a theme:
+
+```js
+export default {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        vault: {
+          base: '#002B36',
+          slate: '#4A5459',
+          light: '#FDF6E3',
+          cyan: '#21B8CC',
+          green: '#4ECC21',
+          gold: '#CC9B21',
+          burgundy: '#A63D40',
+        }
+      },
+      fontFamily: {
+        sans: ['"Segoe UI Semilight"', '"Segoe UI"', 'Inter', 'system-ui']
+      },
+      borderRadius: { '3xl': '1.5rem', '4xl': '2rem' }
+    }
+  }
+}
+```
+
+[metaGeneratedTheme]: https://embed.fbsbx.com/playables/view/1617702179511809/?ext=1784086792&hash=Q92gDAFPAnV3KGwn5xl4FJ8TaV8m
