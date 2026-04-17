@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<!-- Playables SDK -->
+<script>// Playables SDK v1.0.0
+// Game lifecycle bridge: rAF-based game-ready detection + event communication
+(function() {
+  'use strict';
+
+  // Idempotency: skip if already initialized (e.g., server-side injection
+  // followed by client-side inject-javascript via the Bloks webview component).
+  if (window.playablesSDK) return;
+
+  var HANDLER_NAME = 'playablesGameEventHandler';
+  var ANDROID_BRIDGE_NAME = '_MetaPlayablesBridge';
+  var RAF_FRAME_THRESHOLD = 3;
+
+  var gameReadySent = false;
+  var firstInteractionSent = false;
+  var errorSent = false;
+  var frameCount = 0;
+  var originalRAF = window.requestAnimationFrame;
+
+  // --- Transport Layer ---
+
+  function hasIOSBridge() {
+    return !!(window.webkit &&
+              window.webkit.messageHandlers &&
+              window.webkit.messageHandlers[HANDLER_NAME]);
+  }
+
+  function hasAndroidBridge() {
+    return !!(window[ANDROID_BRIDGE_NAME] &&
+              typeof window[ANDROID_BRIDGE_NAME].postEvent === 'function');
+  }
+
+  function isInIframe() {
+    return !!(window.parent && window.parent !== window);
+  }
+
+  function sendEvent(eventName, payload) {
+    var message = {
+      type: eventName,
+      payload: payload || {},
+      timestamp: Date.now()
+    };
+
+    if (hasIOSBridge()) {
+      try {
+        window.webkit.messageHandlers[HANDLER_NAME].postMessage(message);
+      } catch (e) { /* ignore */ }
+      return;
+    }
+
+    if (hasAndroidBridge()) {
+    try {
+      var p = payload || {};
+      p.__secureToken = window.__fbAndroidBridgeAuthToken || '';
+      window[ANDROID_BRIDGE_NAME].postEvent(
+        eventName,
+        JSON.stringify(p)
+      );
+    } catch (e) { /* ignore */ }
+    return;
+  }
+
+    if (isInIframe()) {
+      try {
+        window.parent.postMessage(message, '*');
+      } catch (e) { /* ignore */ }
+      return;
+    }
+  }
+
+  // --- rAF Game-Ready Detection ---
+
+  function onFrame() {
+    if (gameReadySent) return;
+
+    frameCount++;
+    if (frameCount >= RAF_FRAME_THRESHOLD) {
+      gameReadySent = true;
+      sendEvent('game_ready', {
+        frame_count: frameCount,
+        detected_at: Date.now()
+      });
+      return;
+    }
+
+    originalRAF.call(window, onFrame);
+  }
+
+  if (originalRAF) {
+    window.requestAnimationFrame = function(callback) {
+      if (!gameReadySent) {
+        return originalRAF.call(window, function(timestamp) {
+          frameCount++;
+          if (frameCount >= RAF_FRAME_THRESHOLD && !gameReadySent) {
+            gameReadySent = true;
+            sendEvent('game_ready', {
+              frame_count: frameCount,
+              detected_at: Date.now()
+            });
+          }
+          callback(timestamp);
+        });
+      }
+      return originalRAF.call(window, callback);
+    };
+  }
+
+  // --- First User Interaction Detection ---
+
+  function setupFirstInteractionDetection() {
+    var events = ['touchstart', 'mousedown', 'keydown'];
+
+    function onFirstInteraction() {
+      if (firstInteractionSent) return;
+      firstInteractionSent = true;
+      sendEvent('user_interaction_start', null);
+
+      for (var i = 0; i < events.length; i++) {
+        document.removeEventListener(events[i], onFirstInteraction, true);
+      }
+    }
+
+    for (var i = 0; i < events.length; i++) {
+      document.addEventListener(events[i], onFirstInteraction, true);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFirstInteractionDetection);
+  } else {
+    setupFirstInteractionDetection();
+  }
+
+  // --- Auto Error Capture ---
+
+  window.addEventListener('error', function(event) {
+    if (errorSent) return;
+    errorSent = true;
+    sendEvent('error', {
+      message: event.message || 'Unknown error',
+      source: event.filename || '',
+      lineno: event.lineno || 0,
+      colno: event.colno || 0,
+      auto_captured: true
+    });
+  });
+
+  window.addEventListener('unhandledrejection', function(event) {
+    if (errorSent) return;
+    errorSent = true;
+    var reason = event.reason;
+    sendEvent('error', {
+      message: (reason instanceof Error) ? reason.message : String(reason),
+      type: 'unhandled_promise_rejection',
+      auto_captured: true
+    });
+  });
+
+  // --- Public API ---
+
+  window.playablesSDK = {
+    complete: function(score) {
+      sendEvent('game_ended', {
+        score: score,
+        completed: true
+      });
+    },
+
+    error: function(message) {
+      if (errorSent) return;
+      errorSent = true;
+      sendEvent('error', {
+        message: message || 'Unknown error',
+        auto_captured: false
+      });
+    },
+
+    sendEvent: function(eventName, payload) {
+      if (!eventName || typeof eventName !== 'string') return;
+      sendEvent(eventName, payload);
+    }
+  };
+
+  // Kick off rAF detection in case no game code calls rAF immediately
+  if (originalRAF) {
+    originalRAF.call(window, onFrame);
+  }
+})();</script>
+<script>window.Intl=window.Intl||{};Intl.t=function(s){return(Intl._locale&&Intl._locale[s])||s;};</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultWares — Brand Guide v2</title>
+    <meta name="theme-color" content="#CC9B21">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        vault: {
+                            slate: '#4A5459',
+                            gold: '#CC9B21',
+                            paper: '#FDFCF7',
+                            ink: '#002B36',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', '"Segoe UI Semilight"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 20px 40px -12px rgba(0, 43, 54, 0.12)',
+                        'gold': '0 0 0 1px rgba(204, 155, 33, 0.2), 0 4px 12px rgba(204, 155, 33, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { font-weight: 350; }
+        h1, h2, h3, strong, b { font-weight: 450; letter-spacing: -0.01em; }
+        .glass {
+            backdrop-filter: blur(16px) saturate(1.2);
+            -webkit-backdrop-filter: blur(16px) saturate(1.2);
+        }
+        ::selection { background: #CC9B21; color: #002B36; }
+        code, pre { font-family: ui-monospace, SFMono-Regular, 'Cascadia Code', Menlo, Consolas, monospace; font-size: 0.875rem; }
+        pre { scrollbar-width: thin; }
+        pre::-webkit-scrollbar { height: 6px; }
+        pre::-webkit-scrollbar-thumb { background: #CC9B21; border-radius: 3px; }
+        .gold-ring { box-shadow: 0 0 0 1px rgba(204,155,33,0.3), 0 0 0 4px rgba(204,155,33,0.1); }
+    </style>
+</head>
+<body class="bg-vault-paper dark:bg-vault-ink text-vault-slate dark:text-slate-200 font-sans antialiased transition-colors duration-500">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-vault-gold/20 to-amber-500/10 blur-[120px] dark:from-vault-gold/10 dark:to-amber-600/5"></div>
+        <div class="absolute bottom-[-30%] left-[-15%] w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-vault-slate/10 to-vault-ink/5 blur-[140px] dark:from-vault-slate/5"></div>
+    </div>
+
+    <header class="sticky top-0 z-40 border-b border-black/5 dark:border-white/5 glass bg-vault-paper/70 dark:bg-vault-ink/70">
+        <div class="max-w-6xl mx-auto px-6 h-[68px] flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="container:///mnt/data/vaultwares_logo_gold.jpg" alt="VaultWares" class="w-8 h-8 rounded-lg object-cover">
+                <span class="font-medium tracking-tight">VaultWares</span>
+                <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-vault-gold/10 text-vault-gold ring-1 ring-inset ring-vault-gold/20">v2</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 text-[14px]">
+                <a href="#foundation" class="hover:text-vault-gold transition">Foundation</a>
+                <a href="#vaultcore" class="hover:text-vault-gold transition">VaultCore</a>
+                <a href="#visual" class="hover:text-vault-gold transition">Visual</a>
+                <a href="#voice" class="hover:text-vault-gold transition">Voice</a>
+                <a href="#dev" class="hover:text-vault-gold transition">Developers</a>
+            </nav>
+            <button id="theme-toggle" aria-label="Toggle theme" class="w-9 h-9 grid place-items-center rounded-xl border border-black/10 dark:border-white/10 hover:border-vault-gold/50 transition">
+                <svg class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 0 0 1 7.5 0Z"/></svg>
+                <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6">
+        <!-- Hero -->
+        <section class="text-center pt-20 pb-16 md:pt-28 md:pb-24">
+            <div class="inline-flex flex-col items-center">
+                <div class="relative">
+                    <div class="absolute -inset-6 bg-vault-gold/20 blur-3xl rounded-full"></div>
+                    <img src="container:///mnt/data/vaultwares_logo_gold.jpg" alt="VaultWares Logo" class="relative w-24 h-24 md:w-28 md:h-28 rounded-[22px] shadow-glass gold-ring object-cover">
+                </div>
+                <h1 class="mt-10 text-[42px] md:text-[56px] leading-[1.05] tracking-[-0.02em] text-vault-ink dark:text-white">VaultWares</h1>
+                <p class="mt-4 text-[18px] md:text-[20px] text-vault-slate/80 dark:text-slate-300 max-w-xl">Privacy first. Security in service.</p>
+                <div class="mt-8 flex items-center gap-3">
+                    <span class="px-3 py-1.5 rounded-full bg-vault-ink text-vault-paper dark:bg-white dark:text-vault-ink text-xs font-medium tracking-wide">BRAND GUIDE</span>
+                    <span class="px-3 py-1.5 rounded-full bg-vault-gold/10 text-vault-gold ring-1 ring-vault-gold/25 text-xs font-medium">Version 2</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="space-y-16 md:space-y-24 pb-24">
+            <!-- 1. Brand Foundation -->
+            <section id="foundation" class="glass bg-white/70 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 shadow-glass rounded-[32px] p-8 md:p-14">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-2xl bg-vault-gold/10 text-vault-gold grid place-items-center shrink-0 mt-1">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.747 3.747 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.745 3.745 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-[28px] md:text-[32px] tracking-tight text-vault-ink dark:text-white">Brand Foundation</h2>
+                        <p class="mt-3 text-[15px] leading-7 text-vault-slate/80 dark:text-slate-300 max-w-2xl">VaultWares exists to protect individuals from pervasive tracking. We build tools where privacy is not a feature; it is the foundation.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 grid md:grid-cols-3 gap-6">
+                    <div class="group relative p-[1px] rounded-3xl bg-gradient-to-b from-vault-gold/40 to-transparent">
+                        <div class="h-full rounded-[23px] bg-vault-paper dark:bg-vault-ink/80 p-7">
+                            <div class="text-[11px] uppercase tracking-widest text-vault-gold font-medium">1. Privacy</div>
+                            <h3 class="mt-3 text-xl text-vault-ink dark:text-white">Default, not optional</h3>
+                            <p class="mt-2 text-[14px] leading-6 text-vault-slate/80 dark:text-slate-400">No tracking. No profiling. Data minimization by design. Local-first where possible.</p>
+                        </div>
+                    </div>
+                    <div class="group relative p-[1px] rounded-3xl bg-gradient-to-b from-vault-slate/30 to-transparent">
+                        <div class="h-full rounded-[23px] bg-vault-paper dark:bg-vault-ink/80 p-7">
+                            <div class="text-[11px] uppercase tracking-widest text-vault-slate font-medium">2. Security</div>
+                            <h3 class="mt-3 text-xl text-vault-ink dark:text-white">In service of privacy</h3>
+                            <p class="mt-2 text-[14px] leading-6 text-vault-slate/80 dark:text-slate-400">End-to-end encryption, self-hosted infrastructure, verifiable builds.</p>
+                        </div>
+                    <div class="group relative p-[1px] rounded-3xl bg-gradient-to-b from-vault-slate/20 to-transparent">
+                        <div class="h-full rounded-[23px] bg-vault-paper dark:bg-vault-ink/80 p-7">
+                            <div class="text-[11px] uppercase tracking-widest text-vault-slate/70 font-medium">3. Functionality</div>
+                            <h3 class="mt-3 text-xl text-vault-ink dark:text-white">Without compromise</h3>
+                            <p class="mt-2 text-[14px] leading-6 text-vault-slate/80 dark:text-slate-400">Features must earn their place and never violate 1 or 2.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. VaultCore -->
+            <section id="vaultcore" class="glass bg-white/70 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 shadow-glass rounded-[32px] p-8 md:p-14">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-2xl bg-vault-ink/5 dark:bg-white/10 text-vault-ink dark:text-white grid place-items-center shrink-0 mt-1">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9.75V21"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-[28px] md:text-[32px] tracking-tight text-vault-ink dark:text-white">Core Product: VaultCore</h2>
+                        <p class="mt-3 text-[15px] leading-7 text-vault-slate/80 dark:text-slate-300 max-w-2xl">Central API integrating identity management and AI models. Built for developers who refuse to leak user data.</p>
+                    </div>
+                </div>
+
+                <div class="mt-10 grid lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-3 space-y-6">
+                        <div class="p-6 rounded-2xl border border-black/5 dark:border-white/10 bg-vault-paper/50 dark:bg-black/20">
+                            <h4 class="font-medium text-vault-ink dark:text-white">Architecture</h4>
+                            <ul class="mt-4 space-y-3 text-[14px] leading-6">
+                                <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-vault-gold shrink-0"></span><span><strong>Self-hosted AI:</strong> All models run on VaultWares infrastructure. No third-party cloud providers (no OpenAI, Anthropic, or Google APIs in the data path).</span></li>
+                                <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-vault-gold shrink-0"></span><span><strong>End-to-end encryption:</strong> TLS 1.3 in transit. AES-256-GCM at rest. Keys never leave your tenant.</span></li>
+                                <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-vault-gold shrink-0"></span><span><strong>Optional Local Mode:</strong> Inference runs entirely on-device. Zero network calls. Perfect for sensitive workflows.</span></li>
+                                <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-vault-gold shrink-0"></span><span><strong>No tracking, no selling:</strong> We do not log prompts. We do not train on your data. Ever.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <div class="h-full p-6 rounded-2xl bg-gradient-to-b from-vault-ink/[0.04] to-transparent dark:from-white/[0.04] border border-black/5 dark:border-white/10">
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-xl bg-white dark:bg-vault-ink border border-black/5 dark:border-white/10 shadow-sm">
+                                    <div class="text-[11px] uppercase tracking-wide text-vault-slate/60">Client App</div>
+                                    <div class="mt-1 text-sm font-medium">Your Product</div>
+                                </div>
+                                <div class="flex justify-center"><svg width="20" height="20" class="text-vault-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7-7-7"/></svg></div>
+                                <div class="p-4 rounded-xl bg-vault-ink text-white dark:bg-white dark:text-vault-ink border-vault-gold/30">
+                                    <div class="text-[11px] uppercase tracking-wide opacity-70">VaultCore API</div>
+                                    <div class="mt-1 text-sm font-medium">Identity + AI Gateway</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="p-3 rounded-lg bg-vault-gold/10 border border-vault-gold/20 text-center">
+                                        <div class="text-[11px] text-vault-gold">VaultWares Cloud</div>
+                                        <div class="text-xs mt-1">Self-hosted</div>
+                                    </div>
+                                    <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-center">
+                                        <div class="text-[11px] text-emerald-600 dark:text-emerald-400">Local Mode</div>
+                                        <div class="text-xs mt-1">On-device</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Visual System -->
+            <section id="visual" class="glass bg-white/70 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 shadow-glass rounded-[32px] p-8 md:p-14">
+                <h2 class="text-[28px] md:text-[32px] tracking-tight text-vault-ink dark:text-white">Visual System</h2>
+                
+                <div class="mt-10 grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-sm uppercase tracking-widest text-vault-slate/60 font-medium">Color</h3>
+                        <div class="mt-5 grid grid-cols-2 gap-4">
+                            <div class="group">
+                                <div class="h-24 rounded-2xl bg-[#4A5459] shadow-inner"></div>
+                                <div class="mt-2 flex justify-between text-xs"><span class="font-medium">Slate</span><span class="text-vault-slate/60">#4A5459</span></div>
+                            </div>
+                            <div class="group">
+                                <div class="h-24 rounded-2xl bg-[#CC9B21] shadow-inner ring-1 ring-black/5"></div>
+                                <div class="mt-2 flex justify-between text-xs"><span class="font-medium">Gold</span><span class="text-vault-slate/60">#CC9B21</span></div>
+                            </div>
+                            <div class="group">
+                                <div class="h-24 rounded-2xl bg-[#FDFCF7] border border-black/10"></div>
+                                <div class="mt-2 flex justify-between text-xs"><span class="font-medium">Paper</span><span class="text-vault-slate/60">#FDFCF7</span></div>
+                            </div>
+                            <div class="group">
+                                <div class="h-24 rounded-2xl bg-[#002B36]"></div>
+                                <div class="mt-2 flex justify-between text-xs"><span class="font-medium">Ink</span><span class="text-vault-slate/60">#002B36</span></div>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-[13px] leading-5 text-vault-slate/70">Contrast ratios meet WCAG AA. Gold is reserved for trust, never for decoration.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm uppercase tracking-widest text-vault-slate/60 font-medium">Typography</h3>
+                        <div class="mt-5 p-6 rounded-2xl border border-black/5 dark:border-white/10 bg-vault-paper/50 dark:bg-black/20">
+                            <div class="text-[13px] text-vault-slate/60">Segoe UI Semilight</div>
+                            <div class="mt-2 text-[32px] leading-none tracking-tight text-vault-ink dark:text-white">Privacy first</div>
+                            <div class="mt-1 text-[18px] text-vault-slate/80">Security in service</div>
+                            <div class="mt-4 text-[13px] leading-6">Weights: 300 (Semilight), 400 (Regular), 600 (Semibold). Fallback: system-ui.</div>
+                        </div>
+
+                        <h3 class="mt-8 text-sm uppercase tracking-widest text-vault-slate/60 font-medium">Gold for Trust Moments</h3>
+                        <div class="mt-4 flex flex-wrap gap-3">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-vault-gold/10 text-vault-gold ring-1 ring-vault-gold/30 text-[12px] font-medium"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 11v4m0-4v-1a1 1 0 1 1 2 0v1m-2 0H9a1 1 0 0 0-1 1v3a1 1 0 0 1 1h6a1 1 0 0 1-1v-3a1 1 0 0 0-1-1h-3z"/></svg> Encrypted</span>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-vault-gold/10 text-vault-gold ring-1 ring-vault-gold/30 text-[12px] font-medium"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Local Only</span>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-vault-gold/10 text-vault-gold ring-1 ring-vault-gold/30 text-[12px] font-medium"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"/></svg> No Tracking</span>
+                        </div>
+                        <p class="mt-3 text-[13px] leading-5 text-vault-slate/70">Use gold sparingly: verification badges, secure states, active privacy controls.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Voice and Tone -->
+            <section id="voice" class="glass bg-white/70 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 shadow-glass rounded-[32px] p-8 md:p-14">
+                <h2 class="text-[28px] md:text-[32px] tracking-tight text-vault-ink dark:text-white">Voice & Tone</h2>
+                <p class="mt-3 text-[15px] leading-7 text-vault-slate/80 dark:text-slate-300 max-w-2xl">Transparent, minimal, competent. We explain without patronizing. No fear-mongering, no hype.</p>
+
+                <div class="mt-10 grid lg:grid-cols-2 gap-8">
+                    <div class="p-6 rounded-2xl border border-black/5 dark:border-white/10">
+                        <h4 class="font-medium text-vault-ink dark:text-white">Principles</h4>
+                        <ul class="mt-4 space-y-2.5 text-[14px]">
+                            <li class="flex gap-2.5"><span class="text-vault-gold">—</span><span>Say what we do, plainly.</span></li>
+                            <li class="flex gap-2.5"><span class="text-vault-gold">—</span><span>Prefer verbs over adjectives.</span></li>
+                            <li class="flex gap-2.5"><span class="text-vault-gold">—</span><span>Show proof, not promises.</span></li>
+                            <li class="flex gap-2.5"><span class="text-vault-gold">—</span><span>Avoid fear language.</span></li>
+                        </ul>
+                    </div>
+                    <div class="p-6 rounded-2xl border border-black/5 dark:border-white/10">
+                        <h4 class="font-medium text-vault-ink dark:text-white">Examples</h4>
+                        <div class="mt-4 space-y-4 text-[14px]">
+                            <div>
+                                <div class="text-[11px] uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Do — English</div>
+                                <p class="mt-1">“Your data stays on your device in Local Mode.”</p>
+                            </div>
+                            <div>
+                                <div class="text-[11px] uppercase tracking-wide text-emerald-600 dark:text-emerald-400">Do — Français</div>
+                                <p class="mt-1">« Vos données restent sur votre appareil en mode local. »</p>
+                            </div>
+                            <div>
+                                <div class="text-[11px] uppercase tracking-wide text-red-600 dark:text-red-400">Don't</div>
+                                <p class="mt-1 line-through opacity-70">“Don't get hacked! Military-grade protection!”</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Developer Notes -->
+            <section id="dev" class="glass bg-white/70 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 shadow-glass rounded-[32px] p-8 md:p-14">
+                <h2 class="text-[28px] md:text-[32px] tracking-tight text-vault-ink dark:text-white">Developer Notes</h2>
+                
+                <div class="mt-10 space-y-8">
+                    <div>
+                        <h3 class="text-[15px] font-medium text-vault-ink dark:text-white flex items-center gap-2"><span class="w-6 h-6 grid place-items-center rounded-lg bg-vault-gold/10 text-vault-gold text-[12px]">1</span> Tailwind Config</h3>
+                        <div class="mt-3 relative group">
+                            <pre class="overflow-x-auto p-4 rounded-2xl bg-vault-ink text-vault-paper dark:bg-black dark:ring-1 dark:ring-white/10 text-[13px] leading-6">
+                                <code>
+                                // tailwind.config.js
+                                module.exports = {
+                                  theme: {
+                                    extend: {
+                                      colors: {
+                                        'vault-slate': '#4A5459',
+                                        'vault-gold': '#CC9B21',
+                                        'vault-paper': '#FDFCF7',
+                                        'vault-ink': '#002B36',
+                                      },
+                                      fontFamily: {
+                                        sans: ['"Segoe UI Semilight"', '"Segoe UI"', 'system-ui', 'sans-serif']
+                                      }
+                                    }
+                                  }
+                                }</code>
+                            </pre>
+                            <button data-copy class="absolute top-3 right-3 px-2.5 py-1.5 text-[11px] rounded-lg bg-white/10 hover:bg-white/20 text-white backdrop-blur transition opacity-0 group-hover:opacity-100">Copy</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[15px] font-medium text-vault-ink dark:text-white flex items-center gap-2"><span class="w-6 h-6 grid place-items-center rounded-lg bg-vault-gold/10 text-vault-gold text-[12px]">2</span> Correlation ID</h3>
+                        <p class="mt-2 text-[14px] text-vault-slate/80 dark:text-slate-400">Format: <code class="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10">c</code> + 6 hex chars. Use for tracing without PII.</p>
+                        <div class="mt-3 relative group">
+                            <pre class="overflow-x-auto p-4 rounded-2xl bg-vault-ink text-vault-paper dark:bg-black dark:ring-1 dark:ring-white/10 text-[13px] leading-6">
+                                <code>
+                                function newCorrelationId() {
+                                  const hex = Math.floor(Math.random() * 0xffffff)
+                                    .toString(16).padStart(6, '0');
+                                  return `c${hex}`;
+                                }
+                                // example: c4f9a2b
+                                </code>
+                            </pre>
+                            <button data-copy class="absolute top-3 right-3 px-2.5 py-1.5 text-[11px] rounded-lg bg-white/10 hover:bg-white/20 text-white backdrop-blur transition opacity-0 group-hover:opacity-100">Copy</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[15px] font-medium text-vault-ink dark:text-white flex items-center gap-2"><span class="w-6 h-6 grid place-items-center rounded-lg bg-vault-gold/10 text-vault-gold text-[12px]">3</span> Zod Validation</h3>
+                        <div class="mt-3 relative group">
+                            <pre class="overflow-x-auto p-4 rounded-2xl bg-vault-ink text-vault-paper dark:bg-black dark:ring-1 dark:ring-white/10 text-[13px] leading-6">
+                                <code>
+                                import { z } from 'zod';
+                                export const VaultRequest = z.object({
+                                  correlationId: z.string().regex(/^c[0-9a-f]{6}$/),
+                                  timestamp: z.number().int().positive(),
+                                  mode: z.enum(['cloud', 'local']),
+                                  payload: z.unknown()
+                                });
+                                </code>
+                            </pre>
+                            <button data-copy class="absolute top-3 right-3 px-2.5 py-1.5 text-[11px] rounded-lg bg-white/10 hover:bg-white/20 text-white backdrop-blur transition opacity-0 group-hover:opacity-100">Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl border border-amber-500/20 bg-amber-500/5 text-[13px] leading-6">
+                        <strong class="text-amber-700 dark:text-amber-300 font-medium">No third-party analytics.</strong> Use server-side metrics with anonymized Correlation IDs only. No Google Analytics, Mixpanel, or similar.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Deliverables -->
+            <section class="glass bg-white/70 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 shadow-glass rounded-[32px] p-8 md:p-14">
+                <h2 class="text-[28px] md:text-[32px] tracking-tight text-vault-ink dark:text-white">Deliverables Checklist</h2>
+                <div class="mt-8 grid md:grid-cols-2 gap-4 text-[14px]">
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>Logo assets (SVG, PNG @1x/@2x/@3x, gold/ink/white)</span></label>
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>Color tokens exported (Figma + CSS variables)</span></label>
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>Typography scale (12–56px, 1.2 ratio)</span></label>
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>UI kit: buttons, inputs, trust badges (light/dark)</span></label>
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>VaultCore API docs template</span></label>
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>Privacy copy pack (EN/FR)</span></label>
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>Icon set (lucide-based, 1.5px stroke)</span></label>
+                    <label class="flex items-start gap-3 p-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition cursor-pointer"><input type="checkbox" class="mt-0.5 w-4 h-4 rounded border-vault-slate/30 text-vault-gold focus:ring-vault-gold/30 bg-transparent"> <span>Brand examples (marketing site, dashboard)</span></label>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-black/5 dark:border-white/5 py-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-vault-slate/70 dark:text-slate-400">
+            <div class="flex items-center gap-2">
+                <img src="container:///mnt/data/vaultwares_logo_gold.jpg" class="w-5 h-5 rounded object-cover opacity-80" alt="">
+                <span>© 2026 VaultWares</span>
+            </div>
+            <div>Built under VaultWares Enterprise Guidelines • v2.0</div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const html = document.documentElement;
+        const toggle = document.getElementById('theme-toggle');
+        const stored = localStorage.getItem('vault-theme');
+        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        toggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('vault-theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Copy code blocks
+        document.querySelectorAll('[data-copy]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.parentElement.querySelector('code').innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    const prev = btn.textContent;
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.textContent = prev, 1400);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
