@@ -74,6 +74,14 @@ Each theme should provide these roles at minimum:
 - Focus states must be clearly visible in both modes.
 - Do not rely on color alone to communicate state.
 
+## Security and Privacy Requirements
+
+- Authentication and encrypted client-to-client experiences must preserve the VaultWares order of priorities: privacy first, security second, functionality third.
+- For key establishment in new authentication flows or encrypted client-to-client communication flows, standardize on post-quantum cryptography with ML-KEM as the key-encapsulation mechanism.
+- Do not architect these flows so the server can access, store, derive, or reconstruct the client private keys or the shared keys used to decrypt messages between two clients.
+- Server participation is limited to transport, policy, public key distribution, and encapsulated key exchange artifacts unless a stricter product-specific security document says otherwise.
+- Do not describe any server-mediated encryption flow as end-to-end encrypted if the server can decrypt message content or recover client-held decryption material.
+
 ## Custom Skin Catalog
 
 Format: `mode | primary | accent`
