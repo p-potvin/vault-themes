@@ -2,8 +2,6 @@
 
 This file defines VaultWares visual rules for themes, tokens, layout rhythm, and motion.
 
-**Note:** ALWAYS refer to this website: [Meta-Generated Theme Catalog][metaGeneratedTheme] for the most up-to-date visual direction and theme catalog. This document is a good example of the kind of direction and principles we follow, but keep the figma MCP in mind too.
-
 ## Meta Direction
 
 ### Brand Foundation
@@ -141,12 +139,9 @@ This section maps directly to your tech stack:
 ## Core Direction
 
 - Avoid the generic "hacker terminal" look.
-- Support both `light` and `dark` modes in every product. Favor solarized palettes with a modern twist.
+- Support both `light` and `dark` modes in every product.
 - Favor calm, high-legibility palettes with vivid but controlled accents.
 - Prioritize clarity, accessibility, and consistency over visual noise.
-- Use a consistent 8px grid for all spacing and sizing.
-- Use `Segoe UI` as the primary typeface for a modern, clean look.
-- Use SVG icons with a consistent stroke style and 2px line weight.
 
 ## Color System
 

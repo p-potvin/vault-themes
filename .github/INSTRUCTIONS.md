@@ -28,8 +28,6 @@ VaultWares is a premium SaaS and e-commerce platform built with a "Privacy-First
 These are general guidelines to apply when coding under the VaultWares umbrella. Use common sense to determine what applies to your project. Prioritize security, performance, and scalability in that order. Always follow best practices for the specific language and framework you are using, but when in doubt, refer to these guidelines.
 Privacy and security often get bundled together, but they are not the same thing. **Privacy** is about what we collect, what we keep, and what we share. **Security** is about how we protect what exists. A product can be secure and still be invasive. Bad actors can also weaponize "security" language to scare people into accepting unnecessary surveillance or data collection. Our job is to **strike the balance**: use security in service of privacy, and avoid fear-driven shortcuts that erode it.
 
-These are general guidelines to apply when coding under the VaultWares umbrella. Use common sense to determine what applies to your project. When tradeoffs are unavoidable, default to: **Privacy (Individuals) → Security → Functionality**. After that, optimize for performance and scalability. Always follow best practices for the specific language and framework you are using, but when in doubt, refer to these guidelines.
-
 ## 🚀 Core Tech Stack (varies by project, needs, and team preferences)
 
 - **Google Cloud Services Integration:** If possible, use Google Cloud Run, Deploy, Build, SQL Tools, etc.
