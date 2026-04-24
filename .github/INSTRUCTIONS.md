@@ -25,8 +25,9 @@ Read them before writing any component, string, or style rule.
 - **What is VaultWares?**
 VaultWares is a premium SaaS and e-commerce platform built with a "Privacy-First" philosophy that aims to educate and protect its users. It leverages a modern, type-safe stack to deliver a seamless experience while shopping for high-value digital services and physical goods. It handles a vast array of projects in many different spheres that all have a common goal: data-privacy. It is very important to educate and spread awareness about the impact of data-tracking in our society.
 
-These are general guidelines to apply when coding under the VaultWares umbrella. Use common sense to determine what applies to your project. Prioritize security, performance, and scalability in that order. Always follow best practices for the specific language and framework you are using, but when in doubt, refer to these guidelines.
 Privacy and security often get bundled together, but they are not the same thing. **Privacy** is about what we collect, what we keep, and what we share. **Security** is about how we protect what exists. A product can be secure and still be invasive. Bad actors can also weaponize "security" language to scare people into accepting unnecessary surveillance or data collection. Our job is to **strike the balance**: use security in service of privacy, and avoid fear-driven shortcuts that erode it.
+
+These are general guidelines to apply when coding under the VaultWares umbrella. Use common sense to determine what applies to your project. When tradeoffs are unavoidable, default to: **Privacy (Individuals) → Security → Functionality**. After that, optimize for performance and scalability. Always follow best practices for the specific language and framework you are using, but when in doubt, refer to these guidelines.
 
 ## 🚀 Core Tech Stack (varies by project, needs, and team preferences)
 
