@@ -2,17 +2,146 @@
 
 This file defines VaultWares visual rules for themes, tokens, layout rhythm, and motion.
 
-**Note:** ALWAYS refer to this website: [Meta-Generated Theme Catalog][metaGeneratedTheme] for the most up-to-date visual direction and theme catalog. This document is a good example of the kind of direction and principles we follow, but keep the figma MCP in mind too.
+## Meta Direction
+
+### Brand Foundation
+
+VaultWares builds premium SaaS, desktop apps, browser extensions, and open-source libraries. Everything shares one north star.
+
+## Mission
+
+Protect individuals from tracking, fingerprinting, and surveillance without making tools unusable
+
+## Priority Order
+
+    Privacy (individuals) → 2. Security → 3. Functionality → 4. Performance → 5. Scalability → 6. Dev experience
+
+## Tagline
+
+Privacy first. Security in service.
+
+## French
+
+La confidentialité d'abord. La sécurité au service.
+
+## Positioning
+
+Not fear-driven security. Calm, competent tools that collect the minimum, keep it briefly, and explain clearly
+
+Your docs are explicit: privacy and security are different. We never use "security" language to justify surveillance. That becomes the brand differentiator.
+Visual Identity
+
+Built from STYLE.md — no Matrix black, real light/dark modes, colorful but restrained.
+Color System
+
+**Dark theme (primary surfaces `#4A5459`, not pure black):**
+
+    - Slate Base: `#4A5459`
+    - Vault Cyan: `#21B8CC`
+    - Signal Green: `#4ECC21`
+    - Warm Gold: `#CC9B21`
+
+**Light theme (Solarized Light inspired, whiter background):**
+
+    - Paper: `#FDFCF7`
+    - Ink: `#002B36`    
+    - Accent Burgundy: `#A63D40`
+    - Deep Sea Blue: `#0A2540`
+
+**Use gradients sparingly, discreetly, never neon.**
+
+## Typography
+
+Per your style guide: Segoe UI Semilight as default. It's slim, elegant, and native to Windows (your WinUI 3 target). Fallbacks: Inter, system-ui.
+
+    - Headlines: Semilight, 300-400 weight, generous tracking
+    - Body: Regular 400, 16px base, 1.6 line-height
+    - Code: JetBrains Mono (for dev-facing products)
+
+## Logo
+
+    Wordmark "VaultWares" with integrated vault-door 'A' (the cyan shape in the render)
+    No lock icons floating alone — too generic in privacy space
+    Versions: full color, mono slate, reversed white, 32px extension icon, favicon
+    Clear space = height of the 'V' on all sides
+
+## UI Language
+
+    Components: Radix UI + Shadcn patterns from /components/ui — never modify directly
+    Glass: Use your glass-ui library in small doses for interactive cards only
+    Icons: Lucide React, 1.5px stroke, no filled security shields
+    Motion: Subtle 150-200ms fades and slides. Skip animations on hardware older than 8 years
+
+## Voice & Tone
+
+You require English + French at minimum, plain language, and no fear-mongering.
+
+| Do | Don't |
+| --- | --- |
+| "We don't track you. Here's what we store, and why." | "Military-grade encryption keeps you safe from hackers!" |
+| "Turn this on if you want analytics. It's off by default." | "For your security, we collect..." |
+| "Failed to save. CorrelationId: c3f9a1b" | Silent failures or stack traces in UI |
+
+Three adjectives from your code standards: Transparent, Minimal, Competent
+
+## Implementation Kit for Developers
+
+This section maps directly to your tech stack:
+**Tailwind config snippet** (for the current theme)
+
+    ```ts
+    export default {
+        darkMode: 'class',
+        theme: {
+            extend: {
+            colors: {
+                slate: { DEFAULT: '#4A5459' },
+                cyan: { DEFAULT: '#21B8CC' },
+                green: { DEFAULT: '#4ECC21' },
+                gold: { DEFAULT: '#CC9B21' },
+                paper: '#FDFCF7',
+                ink: '#002B36'
+            },
+            fontFamily: {
+                sans: ['"Segoe UI Semilight"', 'Inter', 'system-ui']
+            }
+            }
+        }
+    }
+    ```
+
+## Folder-ready assets
+
+    - /public/brand/logo-full.svg, logo-mono.svg, icon-32.png
+    - /styles/brand.css — light/dark CSS variables
+    - /components/ui/brand/ — Toast with CorrelationId pattern, privacy toggle component
+    - i18n keys: brand.tagline, privacy.notice, security.explainer
+
+## Brand Applications
+
+    - Web app (Next.js 15): App Router layout with dark slate sidebar, paper content, cyan focus rings
+    - Windows desktop (WinUI 3): MVVM views using Segoe UI Semilight, glass panels for settings
+    - Browser extension: 32px vault-door icon, no permission badges in branding
+    - Open-source libs: README header uses mono logo, links to privacy principles, not just security
+
+## Code Review Checklist (Brand Edition)
+
+**From your CONTRIBUTING.md, adapted:**
+
+    - No personal data in screenshots or mockups
+    - Light and dark mode both tested
+    - All user strings via react-i18next (en/fr)
+    - No new tracking pixels in marketing pages
+    - CorrelationId shown in error toasts, not logs only
+    - Tailwind tokens used for colors, spacing, typography
+    - Do not consider hardware older than 8 years as a target.
 
 ## Core Direction
 
 - Avoid the generic "hacker terminal" look.
-- Support both `light` and `dark` modes in every product. Favor solarized palettes with a modern twist.
+- Support both `light` and `dark` modes in every product.
 - Favor calm, high-legibility palettes with vivid but controlled accents.
 - Prioritize clarity, accessibility, and consistency over visual noise.
-- Use a consistent 8px grid for all spacing and sizing.
-- Use `Segoe UI` as the primary typeface for a modern, clean look.
-- Use SVG icons with a consistent stroke style and 2px line weight.
 
 ## Color System
 
@@ -46,7 +175,7 @@ Each theme should provide these roles at minimum:
 - `warning`
 - `danger`
 
-## Typography
+## Figma Typography
 
 - Primary UI typeface: `Segoe UI` with light/regular/semibold weights as needed.
 - Reserve heavy weights for headings and key actions only.
@@ -106,29 +235,29 @@ Format: `mode | primary | accent`
 ---
 Example of a tailwind config snippet for a theme:
 
-```js
-export default {
-  darkMode: 'class',
-  theme: {
-    extend: {
-      colors: {
-        vault: {
-          base: '#002B36',
-          slate: '#4A5459',
-          light: '#FDF6E3',
-          cyan: '#21B8CC',
-          green: '#4ECC21',
-          gold: '#CC9B21',
-          burgundy: '#A63D40',
+    ```js
+    export default {
+    darkMode: 'class',
+    theme: {
+        extend: {
+        colors: {
+            vault: {
+            base: '#002B36',
+            slate: '#4A5459',
+            light: '#FDF6E3',
+            cyan: '#21B8CC',
+            green: '#4ECC21',
+            gold: '#CC9B21',
+            burgundy: '#A63D40',
+            }
+        },
+        fontFamily: {
+            sans: ['"Segoe UI Semilight"', '"Segoe UI"', 'Inter', 'system-ui']
+        },
+        borderRadius: { '3xl': '1.5rem', '4xl': '2rem' }
         }
-      },
-      fontFamily: {
-        sans: ['"Segoe UI Semilight"', '"Segoe UI"', 'Inter', 'system-ui']
-      },
-      borderRadius: { '3xl': '1.5rem', '4xl': '2rem' }
     }
-  }
-}
-```
+    }
+    ```
 
 [metaGeneratedTheme]: https://embed.fbsbx.com/playables/view/1617702179511809/?ext=1784086792&hash=Q92gDAFPAnV3KGwn5xl4FJ8TaV8m
