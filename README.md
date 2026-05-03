@@ -19,6 +19,11 @@ vault-themes/
 │   ├── vaultwares-logo-dark.svg   # Wordmark — dark backgrounds
 │   ├── vaultwares-logo-mono.svg   # Wordmark — monochrome (embossing / print)
 │   ├── vaultwares_logo_gold.jpg   # Raster reference
+│   ├── minimal-logos/             # Minimal "V" logos for small spaces
+│   │   ├── vaultwares-minimal-ink-filled.png  # Default (ink)
+│   │   ├── vaultwares-minimal-mono-filled.png # Monochrome
+│   │   └── vaultwares-minimal-gold-filled.png # Gold
+│   ├── favicons/                  # Browser and system favicons
 │   └── VaultWares — Brand Guide.htm  # Full visual brand guide (HTML)
 ├── branding/                      # Production-ready exported assets (see branding/README.md)
 ├── components/
@@ -120,6 +125,18 @@ VaultWares is built on three principles:
 - Minimum size: **32px height** (digital), **10mm** (print)
 - Clear space: **½ logo height** on all sides
 - Never stretch, recolor, rotate, or apply effects to the logo
+
+---
+
+## Minimal Logo & Favicon Usage
+
+- Use **minimal logos** from `Brand/minimal-logos/` when the full wordmark is constrained or does not fit (e.g., UI headers, small avatars).
+- **Default Variants**:
+    - `-ink-filled`: Standard for light backgrounds.
+    - `-mono-filled`: General purpose monochrome.
+    - `-gold-filled`: High-contrast brand accent.
+- **Favicons**: Use assets from `Brand/favicons/` for web browsers and application shortcuts.
+- **Scaling**: Minimal logos are optimized for small sizes (e.g., 25x25px) but are provided as high-resolution sources. Always scale with smooth transformation.
 
 ---
 
