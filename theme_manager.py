@@ -15,6 +15,7 @@ class VaultThemeManager:
     """
     def __init__(self):
         self._themes = [
+            VaultTheme("Codex Solarized Light Revisited", "light", "#FDF6E3", "#268BD2"),
             VaultTheme("Vintage Velvet", "light", "#F5F5DC", "#800020"),
             VaultTheme("Cyberpunk Cinder", "dark", "#073642", "#CB4B16"),
             VaultTheme("Golden Slate", "dark", "#4A5459", "#D4AF37"),
@@ -32,7 +33,7 @@ class VaultThemeManager:
     def get_theme(self, index: int) -> VaultTheme:
         if 0 <= index < len(self._themes):
             return self._themes[index]
-        return self._themes[1]  # Default to Cyberpunk Cinder (index 1)
+        return self._themes[0]  # Default to Codex Solarized Light Revisited (index 0)
 
     @staticmethod
     def get_glass_rgba(hex_color: str, alpha: int) -> str:
