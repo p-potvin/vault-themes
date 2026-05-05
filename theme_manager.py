@@ -1,151 +1,354 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, List
 
 
 @dataclass
 class VaultTheme:
+    """
+    Full semantic color token set for a VaultWares theme.
+
+    Tokens
+    ------
+    name        : User-facing display name (Title Case).
+    mode        : "light" or "dark".
+    primary     : Main window background color.
+    surface     : Panel / card background (slightly offset from primary).
+    surface_alt : Secondary surface for nested elements.
+    accent      : Brand accent — primary interactive color.
+    accent_muted: A 60%-opacity or desaturated version of the accent.
+    text        : Primary body text color.
+    text_muted  : Secondary / caption text color.
+    text_inverse: Text on accent-colored surfaces.
+    border      : Subtle border color for panels and inputs.
+    error       : Semantic error / destructive state color.
+    error_bg    : Translucent background for error banners.
+    warning     : Semantic warning / caution state color.
+    warning_bg  : Translucent background for warning banners.
+    success     : Semantic success / positive state color.
+    success_bg  : Translucent background for success banners.
+    info        : Semantic informational state color.
+    info_bg     : Translucent background for info banners.
+    muted       : Muted/disabled UI elements and placeholder text.
+    """
     name: str
     mode: str                # "light" | "dark"
     primary: str             # legacy alias for background (back-compat)
     background: str
     surface: str
+    surface_alt: str
     surface_elevated: str
     text_primary: str
     text_secondary: str
     text_muted: str
     accent: str
-    accent_hover: str
-    border_subtle: str
-    focus_ring: str
-    success: str
+    accent_muted: str
+    text: str
+    text_muted: str
+    text_inverse: str
+    border: str
+    error: str
+    error_bg: str
     warning: str
-    danger: str
-
-    def to_qss_map(self) -> Dict[str, str]:
-        return {
-            "background": self.background,
-            "surface": self.surface,
-            "surface_elevated": self.surface_elevated,
-            "text_primary": self.text_primary,
-            "text_secondary": self.text_secondary,
-            "text_muted": self.text_muted,
-            "accent": self.accent,
-            "accent_hover": self.accent_hover,
-            "border_subtle": self.border_subtle,
-            "focus_ring": self.focus_ring,
-            "success": self.success,
-            "warning": self.warning,
-            "danger": self.danger,
-            "primary": self.primary,
-        }
+    warning_bg: str
+    success: str
+    success_bg: str
+    info: str
+    info_bg: str
+    muted: str
 
 
 class VaultThemeManager:
-    """Centralised theme manager for VaultWares projects."""
+    """
+    Centralized theme manager for VaultWares projects.
+    Handles theme definitions, color extraction, and glass-ui style generation.
 
-    def __init__(self) -> None:
-        self._themes: List[VaultTheme] = [
+    All colors are derived from VaultWares brand tokens (Brand/tokens.ts) and
+    per-theme complementary/analogous palettes designed for WCAG AA compliance.
+    """
+
+    def __init__(self):
+        self._themes = [
+            # ── Golden Slate (DARK) — flagship dark theme ──────────────────
+            # Accent: warm gold. Complementary: deep teal blue.
+            # Error: terracotta-red (analogous to gold). Success: muted olive-green.
             VaultTheme(
-                "Vintage Velvet", "light",
-                primary="#F5F5DC", background="#F5F5DC", surface="#EEEAD0",
-                surface_elevated="#F8F6E8", text_primary="#1a1a1a", text_secondary="#4a3527",
-                text_muted="#8a7060", accent="#800020", accent_hover="#9a0025",
-                border_subtle="#d4ccaa", focus_ring="#800020",
-                success="#2d6a2d", warning="#a07000", danger="#cc1836",
+                name="Golden Slate",
+                mode="dark",
+                primary="#2E3538",
+                surface="#363D41",
+                surface_alt="#3F474C",
+                accent="#D4AF37",
+                accent_muted="#A8892A",
+                text="#EDE8DE",
+                text_muted="#8FA0A8",
+                text_inverse="#1C2226",
+                border="rgba(212,175,55,0.18)",
+                error="#E05C4A",        # terracotta — warm, fits gold palette
+                error_bg="rgba(224,92,74,0.14)",
+                warning="#E09D34",      # amber — analogous to gold
+                warning_bg="rgba(224,157,52,0.14)",
+                success="#5BAD72",      # sage green — complementary to burgundy
+                success_bg="rgba(91,173,114,0.14)",
+                info="#5B9FBF",         # steel blue — cool offset to warm gold
+                info_bg="rgba(91,159,191,0.14)",
+                muted="#586672",
             ),
+
+            # ── Codex Solarized Light Revisited (LIGHT) ────────────────────
+            # Classic Solarized. Accent: deep cyan-blue. Error: red-orange.
             VaultTheme(
-                "Cyberpunk Cinder", "dark",
-                primary="#073642", background="#002b36", surface="#073642",
-                surface_elevated="#0d4558", text_primary="#fdf6e3", text_secondary="#93a1a1",
-                text_muted="#657b83", accent="#CB4B16", accent_hover="#e05818",
-                border_subtle="#144250", focus_ring="#CB4B16",
-                success="#859900", warning="#b58900", danger="#dc322f",
+                name="Codex Solarized Light Revisited",
+                mode="light",
+                primary="#FDF6E3",
+                surface="#F5EFD6",
+                surface_alt="#EDE5C8",
+                accent="#268BD2",
+                accent_muted="#1A6BA8",
+                text="#073642",
+                text_muted="#657B83",
+                text_inverse="#FDF6E3",
+                border="rgba(38,139,210,0.2)",
+                error="#DC322F",        # solarized red — canonical
+                error_bg="rgba(220,50,47,0.1)",
+                warning="#CB4B16",      # solarized orange
+                warning_bg="rgba(203,75,22,0.1)",
+                success="#859900",      # solarized green
+                success_bg="rgba(133,153,0,0.1)",
+                info="#2AA198",         # solarized cyan
+                info_bg="rgba(42,161,152,0.1)",
+                muted="#93A1A1",
             ),
+
+            # ── Cyberpunk Cinder (DARK) ────────────────────────────────────
+            # Accent: burnt orange. Error: neon magenta. Success: acid green.
             VaultTheme(
-                "Golden Slate", "dark",
-                primary="#4A5459", background="#2b3035", surface="#333d42",
-                surface_elevated="#3e484e", text_primary="#f0ede8", text_secondary="#a9b4ba",
-                text_muted="#6e7e86", accent="#D4AF37", accent_hover="#e8c84a",
-                border_subtle="#445058", focus_ring="#D4AF37",
-                success="#5a9048", warning="#D4AF37", danger="#c0392b",
+                name="Cyberpunk Cinder",
+                mode="dark",
+                primary="#0A1520",
+                surface="#0F1E2E",
+                surface_alt="#162537",
+                accent="#CB4B16",
+                accent_muted="#9A3A12",
+                text="#D4CFCF",
+                text_muted="#587080",
+                text_inverse="#F0EBE0",
+                border="rgba(203,75,22,0.22)",
+                error="#FF2A6D",        # neon magenta-pink — cyberpunk danger
+                error_bg="rgba(255,42,109,0.12)",
+                warning="#FF9F1C",      # neon amber
+                warning_bg="rgba(255,159,28,0.12)",
+                success="#05E988",      # acid green — classic cyber
+                success_bg="rgba(5,233,136,0.12)",
+                info="#00B4D8",         # electric cyan
+                info_bg="rgba(0,180,216,0.12)",
+                muted="#3D5060",
             ),
+
+            # ── Vintage Velvet (LIGHT) ─────────────────────────────────────
+            # Accent: deep burgundy. Error: crimson. Success: forest green.
             VaultTheme(
-                "Modern Monolith", "light",
-                primary="#FAF9F6", background="#FAF9F6", surface="#F0EEE9",
-                surface_elevated="#F8F7F4", text_primary="#1a1a1a", text_secondary="#4a4a4a",
-                text_muted="#9a9a9a", accent="#333333", accent_hover="#555555",
-                border_subtle="#DDDBD5", focus_ring="#333333",
-                success="#2e7d32", warning="#e65100", danger="#c62828",
+                name="Vintage Velvet",
+                mode="light",
+                primary="#F5F0E8",
+                surface="#EDE7D9",
+                surface_alt="#E2DAC9",
+                accent="#800020",
+                accent_muted="#5E0018",
+                text="#2C1810",
+                text_muted="#7D6E62",
+                text_inverse="#F5F0E8",
+                border="rgba(128,0,32,0.2)",
+                error="#B22222",        # firebrick — heavier than crimson, vintage
+                error_bg="rgba(178,34,34,0.1)",
+                warning="#C47D0E",      # antique gold
+                warning_bg="rgba(196,125,14,0.1)",
+                success="#2E6B4F",      # forest green
+                success_bg="rgba(46,107,79,0.1)",
+                info="#2C5F8A",         # Prussian blue — period-accurate
+                info_bg="rgba(44,95,138,0.1)",
+                muted="#9E8E82",
             ),
+
+            # ── Modern Monolith (LIGHT) ────────────────────────────────────
+            # Accent: near-black. Clean, editorial. Error: vivid red.
             VaultTheme(
-                "Crimson Bloom", "dark",
-                primary="#8B0000", background="#1a0000", surface="#2d0000",
-                surface_elevated="#400000", text_primary="#fdf0f0", text_secondary="#cc9999",
-                text_muted="#aa6666", accent="#FFC0CB", accent_hover="#FFD5DB",
-                border_subtle="#4d0000", focus_ring="#FFC0CB",
-                success="#66aa66", warning="#cc8822", danger="#ff4444",
+                name="Modern Monolith",
+                mode="light",
+                primary="#F8F7F4",
+                surface="#EFEDE8",
+                surface_alt="#E5E2DC",
+                accent="#1A1A1A",
+                accent_muted="#444444",
+                text="#111111",
+                text_muted="#888888",
+                text_inverse="#F8F7F4",
+                border="rgba(26,26,26,0.14)",
+                error="#C0392B",        # muted vivid red
+                error_bg="rgba(192,57,43,0.09)",
+                warning="#D4892A",      # warm amber
+                warning_bg="rgba(212,137,42,0.09)",
+                success="#27AE60",      # medium emerald
+                success_bg="rgba(39,174,96,0.09)",
+                info="#2980B9",         # modern blue
+                info_bg="rgba(41,128,185,0.09)",
+                muted="#AAAAAA",
             ),
+
+            # ── Neon Void (DARK) ───────────────────────────────────────────
+            # Accent: electric cyan. Error: hot magenta. Success: lime.
             VaultTheme(
-                "Ocean Mist", "light",
-                primary="#D3D3D3", background="#D3D3D3", surface="#C5C5C5",
-                surface_elevated="#DCDCDC", text_primary="#1a2a3a", text_secondary="#3a5a70",
-                text_muted="#6a8a9a", accent="#006994", accent_hover="#0080b8",
-                border_subtle="#b9b9b9", focus_ring="#006994",
-                success="#2e7d32", warning="#e65100", danger="#c62828",
+                name="Neon Void",
+                mode="dark",
+                primary="#0D0D0D",
+                surface="#141414",
+                surface_alt="#1C1C1C",
+                accent="#00E5FF",
+                accent_muted="#008FA8",
+                text="#E8E8E8",
+                text_muted="#606060",
+                text_inverse="#0D0D0D",
+                border="rgba(0,229,255,0.2)",
+                error="#FF00AA",        # hot magenta — neon danger
+                error_bg="rgba(255,0,170,0.12)",
+                warning="#FFDD00",      # electric yellow
+                warning_bg="rgba(255,221,0,0.12)",
+                success="#39FF14",      # neon lime
+                success_bg="rgba(57,255,20,0.12)",
+                info="#BD00FF",         # electric violet
+                info_bg="rgba(189,0,255,0.12)",
+                muted="#383838",
             ),
+
+            # ── Ocean Mist (LIGHT) ─────────────────────────────────────────
+            # Accent: deep ocean blue. Error: coral. Success: teal.
             VaultTheme(
-                "Neon Void", "dark",
-                primary="#222222", background="#111111", surface="#1a1a1a",
-                surface_elevated="#222222", text_primary="#e8e8e8", text_secondary="#aaaaaa",
-                text_muted="#666666", accent="#00FFFF", accent_hover="#33FFFF",
-                border_subtle="#2e2e2e", focus_ring="#00FFFF",
-                success="#00cc66", warning="#cc9900", danger="#ff3355",
+                name="Ocean Mist",
+                mode="light",
+                primary="#EEF2F5",
+                surface="#E3EAEF",
+                surface_alt="#D6E0E8",
+                accent="#006994",
+                accent_muted="#004F6E",
+                text="#1A2A35",
+                text_muted="#708090",
+                text_inverse="#FFFFFF",
+                border="rgba(0,105,148,0.18)",
+                error="#CD5C5C",        # indian red/coral — warm vs cool
+                error_bg="rgba(205,92,92,0.1)",
+                warning="#C4822A",      # sandy amber
+                warning_bg="rgba(196,130,42,0.1)",
+                success="#20B2AA",      # light sea green — analogous to ocean
+                success_bg="rgba(32,178,170,0.1)",
+                info="#4682B4",         # steel blue
+                info_bg="rgba(70,130,180,0.1)",
+                muted="#8FA0AA",
             ),
+
+            # ── Royal Tangerine (DARK) ─────────────────────────────────────
+            # Accent: vivid tangerine on deep indigo. Error: vermilion. Success: spring green.
             VaultTheme(
-                "Royal Tangerine", "dark",
-                primary="#4B0082", background="#2a0050", surface="#370070",
-                surface_elevated="#440090", text_primary="#f5f0ff", text_secondary="#bb99dd",
-                text_muted="#8855bb", accent="#F28500", accent_hover="#FF9910",
-                border_subtle="#4d0090", focus_ring="#F28500",
-                success="#66bb44", warning="#F28500", danger="#ff3344",
+                name="Royal Tangerine",
+                mode="dark",
+                primary="#1A0A2E",
+                surface="#231240",
+                surface_alt="#2C1850",
+                accent="#F28500",
+                accent_muted="#B86500",
+                text="#EEE8F8",
+                text_muted="#7A6A9A",
+                text_inverse="#1A0A2E",
+                border="rgba(242,133,0,0.2)",
+                error="#FF4500",        # vermilion-red (warm, analogous to orange)
+                error_bg="rgba(255,69,0,0.13)",
+                warning="#FFB700",      # golden amber — adjacent to tangerine
+                warning_bg="rgba(255,183,0,0.13)",
+                success="#00E676",      # spring green — complementary to indigo
+                success_bg="rgba(0,230,118,0.13)",
+                info="#7B61FF",         # electric violet — analogous to indigo bg
+                info_bg="rgba(123,97,255,0.13)",
+                muted="#4A3A6A",
             ),
+
+            # ── Crimson Bloom (DARK) ───────────────────────────────────────
+            # Accent: dusty rose / blush on dark crimson. Error: bright red. Success: mint.
             VaultTheme(
-                "Amethyst Frost", "light",
-                primary="#FDFDFD", background="#FDFDFD", surface="#F5F0F8",
-                surface_elevated="#FEFBFF", text_primary="#1a001a", text_secondary="#5a2a5a",
-                text_muted="#9a6a9a", accent="#800080", accent_hover="#aa00aa",
-                border_subtle="#e8dde8", focus_ring="#800080",
-                success="#2e7d32", warning="#e65100", danger="#c62828",
+                name="Crimson Bloom",
+                mode="dark",
+                primary="#2A0A0A",
+                surface="#361212",
+                surface_alt="#421818",
+                accent="#E8A0B4",
+                accent_muted="#B07086",
+                text="#F5E8EA",
+                text_muted="#9A7A82",
+                text_inverse="#2A0A0A",
+                border="rgba(232,160,180,0.2)",
+                error="#FF4444",        # bright red on dark crimson — high contrast
+                error_bg="rgba(255,68,68,0.14)",
+                warning="#E8A030",      # amber — warm contrast to rose
+                warning_bg="rgba(232,160,48,0.14)",
+                success="#48D090",      # mint green — complementary contrast
+                success_bg="rgba(72,208,144,0.14)",
+                info="#90A8E8",         # periwinkle — cool offset
+                info_bg="rgba(144,168,232,0.14)",
+                muted="#5A3A3E",
             ),
+
+            # ── Amethyst Frost (LIGHT) ─────────────────────────────────────
+            # Accent: deep purple on near-white. Error: rose. Success: jade.
             VaultTheme(
-                "Solarized Light Revisited", "light",
-                primary="#fef6e2", background="#fef6e2", surface="#f5ecce",
-                surface_elevated="#fdfaf0", text_primary="#002B36", text_secondary="#657b83",
-                text_muted="#839496", accent="#b58900", accent_hover="#CC9B21",
-                border_subtle="#e0d4b0", focus_ring="#b58900",
-                success="#859900", warning="#CC9B21", danger="#dc322f",
+                name="Amethyst Frost",
+                mode="light",
+                primary="#FAFAFE",
+                surface="#F0EEF8",
+                surface_alt="#E4E0F4",
+                accent="#6B30A8",
+                accent_muted="#4E2280",
+                text="#1A0A2E",
+                text_muted="#7A6A9A",
+                text_inverse="#FAFAFE",
+                border="rgba(107,48,168,0.18)",
+                error="#C2185B",        # rose/fuchsia — adjacent to purple
+                error_bg="rgba(194,24,91,0.09)",
+                warning="#E67E22",      # pumpkin orange — complement to purple
+                warning_bg="rgba(230,126,34,0.09)",
+                success="#388E3C",      # jade green — complementary to purple
+                success_bg="rgba(56,142,60,0.09)",
+                info="#0288D1",         # cerulean — analogous to purple
+                info_bg="rgba(2,136,209,0.09)",
+                muted="#C0B8D8",
             ),
         ]
 
     def get_themes(self) -> List[VaultTheme]:
         return self._themes
 
-    def get_theme(self, index: int) -> VaultTheme:
+    def get_theme(self, name: str = None, index: int = 0) -> VaultTheme:
+        if name:
+            for t in self._themes:
+                if t.name == name:
+                    return t
         if 0 <= index < len(self._themes):
             return self._themes[index]
-        return self._themes[2]  # Default: Golden Slate
+        return self._themes[0]
 
     def get_theme_by_name(self, name: str) -> VaultTheme:
         for theme in self._themes:
             if theme.name == name:
                 return theme
-        return self._themes[2]  # Default: Golden Slate
+        return self._themes[0]
+
 
     @staticmethod
-    def get_glass_rgba(hex_color: str, alpha: int) -> str:
-        """Convert hex to rgba for glass-ui elements."""
-        hex_color = hex_color.lstrip("#")
-        r, g, b = tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
+    def hex_to_rgba(hex_color: str, alpha: float) -> str:
+        """Converts hex to rgba for glass-ui elements. Alpha in 0.0–1.0."""
+        hex_color = hex_color.lstrip('#')
+        r, g, b = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
         return f"rgba({r}, {g}, {b}, {alpha})"
+
+    # Legacy alias
+    @staticmethod
+    def get_glass_rgba(hex_color: str, alpha: int) -> str:
+        return VaultThemeManager.hex_to_rgba(hex_color, alpha / 255)
