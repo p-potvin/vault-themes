@@ -35,14 +35,13 @@ class VaultTheme:
     name: str
     mode: str                # "light" | "dark"
     primary: str             # legacy alias for background (back-compat)
-    background: str
-    surface: str
-    surface_alt: str
-    surface_elevated: str
-    text_primary: str
-    text_secondary: str
-    text_muted: str
-    accent: str
+    background: str          # Main window background
+    surface: str             # Panel / card background
+    surface_alt: str         # Secondary surface
+    surface_elevated: str    # Elevated surface (e.g. hovered cards)
+    text_primary: str        # Main text
+    text_secondary: str      # Secondary text
+    accent: str              # Brand accent
     accent_muted: str
     text: str
     text_muted: str
@@ -77,8 +76,12 @@ class VaultThemeManager:
                 name="Golden Slate",
                 mode="dark",
                 primary="#2E3538",
+                background="#2E3538",
                 surface="#363D41",
                 surface_alt="#3F474C",
+                surface_elevated="#485157",
+                text_primary="#EDE8DE",
+                text_secondary="#B8B1A5",
                 accent="#D4AF37",
                 accent_muted="#A8892A",
                 text="#EDE8DE",
@@ -102,8 +105,12 @@ class VaultThemeManager:
                 name="Codex Solarized Light Revisited",
                 mode="light",
                 primary="#FDF6E3",
+                background="#FDF6E3",
                 surface="#F5EFD6",
                 surface_alt="#EDE5C8",
+                surface_elevated="#E6DDBA",
+                text_primary="#073642",
+                text_secondary="#586E75",
                 accent="#268BD2",
                 accent_muted="#1A6BA8",
                 text="#073642",
@@ -127,8 +134,12 @@ class VaultThemeManager:
                 name="Cyberpunk Cinder",
                 mode="dark",
                 primary="#0A1520",
+                background="#0A1520",
                 surface="#0F1E2E",
                 surface_alt="#162537",
+                surface_elevated="#1D2E42",
+                text_primary="#D4CFCF",
+                text_secondary="#A0AAB2",
                 accent="#CB4B16",
                 accent_muted="#9A3A12",
                 text="#D4CFCF",
@@ -152,8 +163,12 @@ class VaultThemeManager:
                 name="Vintage Velvet",
                 mode="light",
                 primary="#F5F0E8",
+                background="#F5F0E8",
                 surface="#EDE7D9",
                 surface_alt="#E2DAC9",
+                surface_elevated="#D8CDB8",
+                text_primary="#2C1810",
+                text_secondary="#5A4A42",
                 accent="#800020",
                 accent_muted="#5E0018",
                 text="#2C1810",
@@ -177,8 +192,12 @@ class VaultThemeManager:
                 name="Modern Monolith",
                 mode="light",
                 primary="#F8F7F4",
+                background="#F8F7F4",
                 surface="#EFEDE8",
                 surface_alt="#E5E2DC",
+                surface_elevated="#DBD8D0",
+                text_primary="#111111",
+                text_secondary="#444444",
                 accent="#1A1A1A",
                 accent_muted="#444444",
                 text="#111111",
@@ -202,8 +221,12 @@ class VaultThemeManager:
                 name="Neon Void",
                 mode="dark",
                 primary="#0D0D0D",
+                background="#0D0D0D",
                 surface="#141414",
                 surface_alt="#1C1C1C",
+                surface_elevated="#252525",
+                text_primary="#E8E8E8",
+                text_secondary="#B0B0B0",
                 accent="#00E5FF",
                 accent_muted="#008FA8",
                 text="#E8E8E8",
@@ -227,8 +250,12 @@ class VaultThemeManager:
                 name="Ocean Mist",
                 mode="light",
                 primary="#EEF2F5",
+                background="#EEF2F5",
                 surface="#E3EAEF",
                 surface_alt="#D6E0E8",
+                surface_elevated="#C9D6DF",
+                text_primary="#1A2A35",
+                text_secondary="#4A5A65",
                 accent="#006994",
                 accent_muted="#004F6E",
                 text="#1A2A35",
@@ -252,8 +279,12 @@ class VaultThemeManager:
                 name="Royal Tangerine",
                 mode="dark",
                 primary="#1A0A2E",
+                background="#1A0A2E",
                 surface="#231240",
                 surface_alt="#2C1850",
+                surface_elevated="#361F62",
+                text_primary="#EEE8F8",
+                text_secondary="#B8B0D0",
                 accent="#F28500",
                 accent_muted="#B86500",
                 text="#EEE8F8",
@@ -277,8 +308,12 @@ class VaultThemeManager:
                 name="Crimson Bloom",
                 mode="dark",
                 primary="#2A0A0A",
+                background="#2A0A0A",
                 surface="#361212",
                 surface_alt="#421818",
+                surface_elevated="#4E1F1F",
+                text_primary="#F5E8EA",
+                text_secondary="#C5B8BA",
                 accent="#E8A0B4",
                 accent_muted="#B07086",
                 text="#F5E8EA",
@@ -302,8 +337,12 @@ class VaultThemeManager:
                 name="Amethyst Frost",
                 mode="light",
                 primary="#FAFAFE",
+                background="#FAFAFE",
                 surface="#F0EEF8",
                 surface_alt="#E4E0F4",
+                surface_elevated="#D8D2F0",
+                text_primary="#1A0A2E",
+                text_secondary="#4A3A6A",
                 accent="#6B30A8",
                 accent_muted="#4E2280",
                 text="#1A0A2E",
