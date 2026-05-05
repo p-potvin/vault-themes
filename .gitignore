@@ -3,3 +3,4 @@ __pycache__/
 *.pyo
 *.pyd
 __init__.*
+node_modules/
