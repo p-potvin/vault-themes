@@ -1,154 +1,120 @@
-# AGENTS.md — vault-themes
+# AGENTS.md - vault-themes
 
-This repository is the **source of truth** for VaultWares visual rules, brand
-tokens, and theme primitives. Every agent working on this repo or any consuming
-VaultWares project must read and follow this file in full.
+This repository is the canonical VaultWares source of truth for brand, visual
+style, theme tokens, shared UI references, and cross-agent guidance.
 
----
+## Required Reading
 
-## Required Reading — Read These Files First
+Before changing UI, branding, design tokens, theme exports, agent instructions,
+auth UX, encrypted communication UX, or consumer propagation rules, read:
 
-Before writing any code, generating any UI, or modifying any brand asset, read:
+- `brand/brand-guide.md`
+- `brand/philosophy.md`
+- `brand/tokens/tokens.ts`
+- `brand/tokens/tailwind.config.ts`
+- `brand/i18n/brand.i18n.ts`
+- `CONTEXT.md`
 
-1. `Brand/BRAND_PHILOSOPHY.md` — Vision, mission, voice, positioning, and the
-   rationale behind every visual and verbal decision. This is the "why."
-2. `Brand/tokens.ts` — All color, typography, spacing, glass, and radius tokens.
-   This is the only permitted source of design values.
-3. `Brand/tailwind.config.ts` — Tailwind token mapping. Use `vault.*` classes.
-4. `Brand/brand.i18n.ts` — All user-facing strings in EN and FR. Never write
-   a UI string that isn't in this file.
+## Brand Direction
 
-If you are working in a consuming project (not this repo), these files are
-available as a submodule or package. Always resolve token references back to
-this source.
+Priority order:
 
----
+1. Privacy for individuals
+2. Security in service of privacy
+3. Functionality
+4. Performance
+5. Scalability
+6. Developer experience
 
-## Scope
+VaultWares should feel calm, precise, human, premium, and practical. Do not use
+fear-based security copy, hacker stereotypes, Matrix visuals, pure black/neon
+green palettes, vague "military-grade" claims, or jargon when plain language
+works.
 
-Apply these rules to any work touching `theme_manager.py`, style guides, token
-exports, Figma-to-code implementation, UI components, or brand assets.
+All visible brand language should support English and French/Quebec French. Make
+layouts tolerant of French strings being 15-20% longer than English.
 
-Prefer consistency and accessibility over novelty.
+## Token Rules
 
----
+- Never hardcode reusable colors, spacing, fonts, radii, motion, or glass values.
+- Use named tokens from `brand/tokens/tokens.ts`.
+- Keep Tailwind mapping in `brand/tokens/tailwind.config.ts`.
+- Add platform exports under `theme-manager/` when another framework needs the
+  same values.
+- Every theme must define at least: `background`, `surface`,
+  `surfaceElevated`, `textPrimary`, `textSecondary`, `accent`, `accentHover`,
+  `borderSubtle`, `focusRing`, `success`, `warning`, and `danger`.
 
-## Brand Identity Rules
+## Visual Rules
 
-VaultWares is calm, precise, and human. These rules are non-negotiable:
+- Dark mode uses deep teal/slate, not pure black.
+- Light mode uses warm paper/off-white, not stark white-only surfaces.
+- Gold is the primary brand accent; cyan is the interactive accent.
+- Use glass UI sparingly for elevated overlays, cards, tool panels, and command
+  surfaces. Do not turn entire pages into blurred glass.
+- Motion should be subtle: 120-240ms, no infinite decorative loops by default.
+- Body text contrast must meet WCAG AA, 4.5:1 or better.
+- Do not rely on color alone for state.
 
-- **No black backgrounds + neon green.** We are not a hacker movie. The aesthetic
-  is closer to a premium notebook than a threat-intelligence dashboard.
-- **No fear-mongering copy.** Write "Vault secured" not "Encrypted!". Write
-  "Something went wrong. Try again." not "CRITICAL ERROR."
-- **No jargon or acronyms** in user-facing copy unless defined inline.
-- **No "hacker" clichés** — no Matrix rain, no terminal fonts in UI, no padlocks
-  surrounded by lightning bolts.
-- **Always bilingual.** Every string you write must have both an `en` and `fr`
-  entry in `Brand/brand.i18n.ts`. FR strings run 15–20% longer than EN —
-  account for this in layout.
+## Repo Layout
 
----
+- Root: only durable entrypoints such as `AGENTS.md`, `CONTEXT.md`,
+  `README.md`, `LICENSE`, `.gitignore`, and repo config.
+- `brand/`: maintainable brand guide, philosophy, tokens, bilingual strings,
+  and legacy notes worth preserving.
+- `assets/`: logos, icons, favicons, source design assets.
+- `theme-manager/`: Python managers, sync tools, validation, and platform
+  exports.
+- `components/`: reusable component references.
+- `examples/brand-guide/`: optional lightweight demo.
+- `docs/`: maintenance notes and consumer update plans.
 
-## Theme System Rules
+## Agent And IDE Guidance
 
-- **Never hardcode a color, spacing value, or font.** Always use a named token
-  from `Brand/tokens.ts` or the corresponding `vault.*` Tailwind class.
-- Theme mode must be explicit: `light` or `dark`. Never infer it.
-- Every theme must define at least `background` and `accent` role colors via
-  the manager API in `theme_manager.py`.
-- Keep theme definitions centralized in `theme_manager.py`. Do not duplicate
-  theme catalogs across files.
-- Theme names are Title Case (user-facing). Theme IDs are kebab-case (machine).
+This file is the single canonical instruction source. Tool-specific files such
+as `.github/copilot-instructions.md`, `CLAUDE.md`, Cursor rules, Windsurf rules,
+Continue context, or VS Code guidance should contain only a short pointer back
+to this file and `CONTEXT.md` unless the tool requires a specific wrapper.
 
-### Color token reference (from `Brand/tokens.ts`)
+Use `theme-manager/tools/sync_submodule_rules.py` to propagate managed guidance
+blocks into consumer repositories that include `vault-themes`.
 
-| Token | Hex | Role |
-|---|---|---|
-| `vault.base` | `#002B36` | Dark background |
-| `vault.paper` / `vault.light` | `#FDF6E3` | Light background |
-| `vault.gold` | `#CC9B21` | Primary brand accent |
-| `vault.cyan` | `#21B8CC` | Interactive / primary action |
-| `vault.green` | `#4ECC21` | Success / secured state |
-| `vault.burgundy` | `#A63D40` | Error / destructive |
-| `vault.slate` | `#4A5459` | Secondary text / surfaces |
-| `vault.muted` | `#586E75` | Captions / tertiary text |
+## Consumer Repo Policy
 
----
+Submodule-local instructions do not automatically govern parent repos. Consumer
+repos need their own managed pointers that tell agents and IDEs to read this
+repo before UI, branding, token, theme, auth UX, encrypted communication UX, or
+Figma-derived implementation work.
 
-## Accessibility Requirements
+This cleanup only updates compatibility pointers. A full consumer repo
+style/token migration is future work and is tracked in
+`docs/consumer-update-roadmap.md`.
 
-- Body text contrast: **WCAG AA ≥ 4.5:1** — required on every component.
-- Large text / UI elements: **WCAG AA large ≥ 3.0:1** — required.
-- New or changed themes must pass a contrast check against white and black
-  foreground references before merging.
-- Bilingual strings must be tested at the same layout breakpoints — FR is longer.
+## Python And Tooling
 
----
+Python files belong under `theme-manager/`. Keep them dependency-light and
+cross-platform. When moving tools, keep import paths working and run:
 
-## Security & Cryptography Rules
+```powershell
+python -m py_compile (Get-ChildItem -Recurse theme-manager -Filter *.py).FullName
+```
 
-These are product requirements, not suggestions:
+## Brand Guide Demo
 
-- Authentication and encrypted client-to-client communication flows must be
-  designed around **post-quantum cryptography with ML-KEM** as the
-  key-encapsulation mechanism.
-- **Never** design a flow where the server can read, persist, derive, or
-  reconstruct private keys or shared decryption keys used between two clients.
-  The server may only coordinate: public key material, routing metadata, and
-  encapsulated key exchange artifacts.
-- Security-related UI must preserve the VaultWares privacy-first posture.
-  Authentication UX must never weaken end-to-end key control for clients.
+The editable guide source is `brand/brand-guide.md`. The optional visual demo is
+under `examples/brand-guide/`. The demo must:
 
----
+- Use local assets only.
+- Avoid external network requests.
+- Stay isolated from consumer runtime dependencies.
+- Build successfully before completion when touched.
 
-## Figma MCP Integration Rules
+## Completion Checklist
 
-### Required flow (do not skip steps)
-
-1. Run `get_design_context` on the exact node(s) to implement.
-2. Run `get_screenshot` for visual parity checks.
-3. Map all Figma color values to `vault.*` token references before writing code.
-4. Reuse existing components from `components/` first; only create new ones when
-   reuse is not possible.
-5. Validate final UI for both visual parity and WCAG AA contrast compliance.
-
-### Implementation rules
-
-- Treat Figma-generated code as a structural draft — never final style output.
-- Replace all raw hex / pixel values with token references.
-- Use an 8px spacing base scale unless the host project enforces a stricter scale.
-- Prefer subtle motion. Avoid continuous animations — they distract and degrade
-  performance on low-end hardware.
-
----
-
-## Asset Handling
-
-- If Figma MCP provides localhost asset URLs, use them directly during
-  implementation.
-- Do not introduce new icon packs unless explicitly requested.
-- Store static assets under the consuming app's standard asset path (e.g.
-  `public/assets/`).
-- Logo variants are in `Brand/`:
-  - `vaultwares-logo.svg` — light backgrounds (default)
-  - `vaultwares-logo-dark.svg` — dark backgrounds
-  - `vaultwares-logo-mono.svg` — monochrome (embossing, watermarks)
-- Production-ready exported assets belong in `branding/`. See `branding/README.md`.
-
----
-
-## Quality Gates
-
-Before marking any task complete:
-
-- [ ] All colors use `vault.*` tokens — no raw hex
-- [ ] All strings exist in `Brand/brand.i18n.ts` in both EN and FR
-- [ ] WCAG AA contrast passes for all text and interactive elements
-- [ ] No hardcoded pixel values — spacing uses the 8px scale
-- [ ] No neon green, black terminal backgrounds, or "hacker" visual clichés
-- [ ] If a new theme was added: contrast check against white and black passes
-- [ ] Any fallback behavior is deterministic and documented
-
-If a rule here conflicts with a host application's stricter style or
-accessibility policy, **the stricter policy wins.**
+- Updated paths in `README.md`, `CONTEXT.md`, and relevant docs.
+- No duplicate canonical instruction files.
+- No generated caches or build bundles committed unless intentionally needed.
+- Python tools compile.
+- Brand guide demo builds when touched.
+- Consumer pointers still resolve.
+- Agent ledger entry recorded before final response when available.
