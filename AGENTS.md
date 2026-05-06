@@ -31,14 +31,12 @@ fear-based security copy, hacker stereotypes, Matrix visuals, pure black/neon
 green palettes, vague "military-grade" claims, or jargon when plain language
 works.
 
-<<<<<<< HEAD
 All visible brand language should support English and French/Quebec French. Make
 layouts tolerant of French strings being 15-20% longer than English.
-=======
+
 Apply these rules to any work touching `theme_manager.py`, `qt_exporter.py`,
 style guides, token exports, Figma-to-code implementation, UI components, or
 brand assets.
->>>>>>> 4652555a70585bbbe8b7fc3dcb278a41583bbbd9
 
 ## Token Rules
 
@@ -77,7 +75,6 @@ brand assets.
 
 ## Agent And IDE Guidance
 
-<<<<<<< HEAD
 This file is the single canonical instruction source. Tool-specific files such
 as `.github/copilot-instructions.md`, `CLAUDE.md`, Cursor rules, Windsurf rules,
 Continue context, or VS Code guidance should contain only a short pointer back
@@ -87,7 +84,7 @@ Use `theme-manager/tools/sync_submodule_rules.py` to propagate managed guidance
 blocks into consumer repositories that include `vault-themes`.
 
 ## Consumer Repo Policy
-=======
+
 - **Never hardcode a color, spacing value, or font.** Always use a named token
   from `Brand/tokens.ts` or the `VaultTheme` dataclass attributes.
 - Theme mode must be explicit: `light` or `dark`. Never infer it.
@@ -215,7 +212,6 @@ When generating QSS for a consuming application:
    `setValue()` to the worker's `progress_percent` signal.
 6. Scrollbars must be styled to use `border` and `accent_muted` so they remain
    consistent across all themes.
->>>>>>> 4652555a70585bbbe8b7fc3dcb278a41583bbbd9
 
 Submodule-local instructions do not automatically govern parent repos. Consumer
 repos need their own managed pointers that tell agents and IDEs to read this
@@ -226,15 +222,13 @@ This cleanup only updates compatibility pointers. A full consumer repo
 style/token migration is future work and is tracked in
 `docs/consumer-update-roadmap.md`.
 
-<<<<<<< HEAD
 ## Python And Tooling
-=======
+
 - Body text contrast: **WCAG AA ≥ 4.5:1** — required on every component.
 - Large text / UI elements: **WCAG AA large ≥ 3.0:1** — required.
 - New or changed themes must pass a contrast check against the `text` /
   `text_inverse` foreground values before merging.
 - Bilingual strings must be tested at the same layout breakpoints — FR is longer.
->>>>>>> 4652555a70585bbbe8b7fc3dcb278a41583bbbd9
 
 Python files belong under `theme-manager/`. Keep them dependency-light and
 cross-platform. When moving tools, keep import paths working and run:
@@ -245,17 +239,17 @@ python -m py_compile (Get-ChildItem -Recurse theme-manager -Filter *.py).FullNam
 
 ## Brand Guide Demo
 
-<<<<<<< HEAD
 The editable guide source is `brand/brand-guide.md`. The optional visual demo is
 under `examples/brand-guide/`. The demo must:
-=======
+
+Security-related UX must follow these rules:
+
 - Authentication and encrypted client-to-client communication flows must be
   designed around **post-quantum cryptography with ML-KEM** as the
   key-encapsulation mechanism.
 - **Never** design a flow where the server can read, persist, derive, or
   reconstruct private keys or shared decryption keys used between two clients.
 - Security-related UI must preserve the VaultWares privacy-first posture.
->>>>>>> 4652555a70585bbbe8b7fc3dcb278a41583bbbd9
 
 - Use local assets only.
 - Avoid external network requests.
@@ -264,7 +258,6 @@ under `examples/brand-guide/`. The demo must:
 
 ## Completion Checklist
 
-<<<<<<< HEAD
 - Updated paths in `README.md`, `CONTEXT.md`, and relevant docs.
 - No duplicate canonical instruction files.
 - No generated caches or build bundles committed unless intentionally needed.
@@ -272,7 +265,7 @@ under `examples/brand-guide/`. The demo must:
 - Brand guide demo builds when touched.
 - Consumer pointers still resolve.
 - Agent ledger entry recorded before final response when available.
-=======
+
 ### Required flow (do not skip steps)
 
 1. Run `get_design_context` on the exact node(s) to implement.
@@ -308,4 +301,3 @@ Before marking any task complete:
 
 If a rule here conflicts with a host application's stricter style or
 accessibility policy, **the stricter policy wins.**
->>>>>>> 4652555a70585bbbe8b7fc3dcb278a41583bbbd9
