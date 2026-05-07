@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Check, Copy, Eye, Languages, ShieldCheck, Sparkles } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -47,6 +48,14 @@ const summaryCards: Array<{ title: string; text: string; Icon: LucideIcon }> = [
 ]
 
 export function App() {
+  const [copiedToken, setCopiedToken] = useState<string | null>(null)
+
+  const handleCopy = (token: string, value: string) => {
+    navigator.clipboard.writeText(value)
+    setCopiedToken(token)
+    setTimeout(() => setCopiedToken(null), 2000)
+  }
+
   return (
     <main className="min-h-screen bg-vault-paper text-vault-ink">
       <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
@@ -91,12 +100,20 @@ export function App() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {swatches.map((swatch) => (
               <article key={swatch.token} className="overflow-hidden rounded-[20px] border border-vault-muted/20 bg-vault-paper-bright">
-                <div className="h-24" style={{ backgroundColor: swatch.value }} />
+                <div className="h-24 border-b border-vault-muted/10" style={{ backgroundColor: swatch.value }} />
                 <div className="p-4">
-                  <div className="flex items-center justify-between gap-3">
+                  <button
+                    onClick={() => handleCopy(swatch.token, swatch.value)}
+                    className="flex w-full items-center justify-between gap-3 rounded p-1 -m-1 hover:bg-vault-muted/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vault-cyan transition-colors group cursor-pointer"
+                    aria-label={`Copy hex code for ${swatch.name}`}
+                    title="Click to copy hex code"
+                  >
                     <h3 className="font-medium">{swatch.name}</h3>
-                    <code className="text-xs text-vault-muted">{swatch.value}</code>
-                  </div>
+                    <div className="flex items-center gap-2">
+                      <code className="text-xs text-vault-muted">{swatch.value}</code>
+                      {copiedToken === swatch.token ? <Check className="h-3.5 w-3.5 text-vault-green" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5 text-vault-muted opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />}
+                    </div>
+                  </button>
                   <p className="mt-1 text-xs text-vault-muted">{swatch.token}</p>
                   <p className="mt-3 text-sm text-vault-slate">{swatch.use}</p>
                 </div>
