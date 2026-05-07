@@ -1,7 +1,9 @@
 # AGENTS.md - vault-themes
 
-This repository is the canonical VaultWares source of truth for brand, visual
-style, theme tokens, shared UI references, and cross-agent guidance.
+> For company-wide rules, read `vaultwares-docs/AGENTS.md` first.
+
+This repository is the **Tier 2 Source of Truth** for brand, visual style,
+theme tokens, shared UI references, and cross-AI-Assistant guidance.
 
 ## Required Reading
 
