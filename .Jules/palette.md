@@ -8,3 +8,6 @@
 ## 2026-05-07 - Brand Guide Token Swatch Copy-to-Clipboard Enhancement
 **Learning:** When displaying reference data like hex color codes in a brand guide or style dictionary, users frequently need to copy them. Providing a one-click copy mechanism wrapped in a semantic `<button>` with clear focus states (`focus-visible:ring-2`) and aria-labels improves workflow efficiency and keyboard accessibility significantly compared to static text.
 **Action:** When creating visual reference UI (swatches, tokens, IDs), always consider adding an inline copy action with visual and screen-reader accessible feedback (e.g., swapping a copy icon to a check icon temporarily).
+## 2026-05-08 - Brand Guide Token Swatch Copy-to-Clipboard Enhancement (Focus & Screen Reader)
+**Learning:** While wrapping token copy actions in a `<button>` with clear focus states and aria-labels is great, the visual feedback needs to accommodate all interactive states, and screen readers need explicit feedback when visually silent background actions (like copying) complete.
+**Action:** When a hover-revealed icon indicates interactivity (like a copy icon), ensure it is also revealed on keyboard focus (e.g. `group-focus-visible:opacity-100`). Always pair background copy actions with a visually hidden `aria-live="polite"` region that announces the successful outcome.
