@@ -111,7 +111,10 @@ export function App() {
                     <h3 className="font-medium">{swatch.name}</h3>
                     <div className="flex items-center gap-2">
                       <code className="text-xs text-vault-muted">{swatch.value}</code>
-                      {copiedToken === swatch.token ? <Check className="h-3.5 w-3.5 text-vault-green" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5 text-vault-muted opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />}
+                      {copiedToken === swatch.token ? <Check className="h-3.5 w-3.5 text-vault-green" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5 text-vault-muted opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity" aria-hidden="true" />}
+                      <span aria-live="polite" className="sr-only">
+                        {copiedToken === swatch.token ? 'Copied token to clipboard' : ''}
+                      </span>
                     </div>
                   </button>
                   <p className="mt-1 text-xs text-vault-muted">{swatch.token}</p>
