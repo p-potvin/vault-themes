@@ -11,3 +11,6 @@
 ## 2026-05-08 - Brand Guide Token Swatch Copy-to-Clipboard Enhancement (Focus & Screen Reader)
 **Learning:** While wrapping token copy actions in a `<button>` with clear focus states and aria-labels is great, the visual feedback needs to accommodate all interactive states, and screen readers need explicit feedback when visually silent background actions (like copying) complete.
 **Action:** When a hover-revealed icon indicates interactivity (like a copy icon), ensure it is also revealed on keyboard focus (e.g. `group-focus-visible:opacity-100`). Always pair background copy actions with a visually hidden `aria-live="polite"` region that announces the successful outcome.
+## 2025-01-20 - Screen Reader Context for Color-Coded Tables
+**Learning:** Tables that use purely visual or color-based cues (like a Voice Replacement table using burgundy text vs. a green checkmark to indicate "do/don't") fail to provide context to screen reader users.
+**Action:** Always prepend visually hidden text (`<span className="sr-only">Avoid saying: </span>`, `<span className="sr-only">Instead use: </span>`) to the content to ensure the meaning is semantically clear without relying on visual style.
