@@ -15,3 +15,6 @@
 ## 2026-05-13 - Comparison Table Accessibility
 **Learning:** Comparison tables (like "Avoid vs Use") shouldn't rely solely on color to indicate meaning (e.g. red for avoid, green for use). Additionally, when icons are used for visual queues, screen readers need explicit visually hidden labels (`sr-only`) to give context to the list items, otherwise it's just a series of disconnected strings.
 **Action:** Always include an icon for both positive and negative states. Use `sr-only` spans to provide explicit textual context (like "Avoid:" or "Use:") next to visual queues in comparison list items.
+## 2025-01-20 - Screen Reader Context for Color-Coded Tables
+**Learning:** Tables that use purely visual or color-based cues (like a Voice Replacement table using burgundy text vs. a green checkmark to indicate "do/don't") fail to provide context to screen reader users.
+**Action:** Always prepend visually hidden text (`<span className="sr-only">Avoid saying: </span>`, `<span className="sr-only">Instead use: </span>`) to the content to ensure the meaning is semantically clear without relying on visual style.
