@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, Copy, Eye, Languages, ShieldCheck, Sparkles } from 'lucide-react'
+import { Check, Copy, Eye, Languages, ShieldCheck, Sparkles, X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 const swatches = [
@@ -71,13 +71,13 @@ export function App() {
 
           <div className="glass-panel rounded-[20px] p-6 shadow-xl">
             <div className="flex items-center gap-3 text-vault-slate">
-              <ShieldCheck className="h-6 w-6 text-vault-gold" />
+              <ShieldCheck className="h-6 w-6 text-vault-gold" aria-hidden="true" />
               <span className="text-sm font-medium uppercase tracking-wide">Brand priorities</span>
             </div>
-            <ol className="mt-6 space-y-3 text-sm text-vault-muted">
-              <li>1. Privacy for individuals</li>
-              <li>2. Security in service of privacy</li>
-              <li>3. Functionality that stays understandable</li>
+            <ol className="mt-6 space-y-3 text-sm text-vault-muted list-decimal list-inside">
+              <li>Privacy for individuals</li>
+              <li>Security in service of privacy</li>
+              <li>Functionality that stays understandable</li>
             </ol>
           </div>
         </header>
@@ -85,7 +85,7 @@ export function App() {
         <section className="mt-14 grid gap-4 md:grid-cols-3">
           {summaryCards.map(({ title, text, Icon }) => (
             <article key={title} className="rounded-[20px] border border-vault-muted/20 bg-vault-paper-bright p-6">
-              <Icon className="h-5 w-5 text-vault-cyan" />
+              <Icon className="h-5 w-5 text-vault-cyan" aria-hidden="true" />
               <h2 className="mt-4 text-xl font-normal text-vault-ink">{title}</h2>
               <p className="mt-2 text-sm leading-6 text-vault-muted">{text}</p>
             </article>
@@ -94,7 +94,7 @@ export function App() {
 
         <section className="mt-16">
           <div className="mb-6 flex items-center gap-3">
-            <Copy className="h-5 w-5 text-vault-gold" />
+            <Copy className="h-5 w-5 text-vault-gold" aria-hidden="true" />
             <h2 className="text-3xl font-light">Token palette</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -106,12 +106,15 @@ export function App() {
                     onClick={() => handleCopy(swatch.token, swatch.value)}
                     className="flex w-full items-center justify-between gap-3 rounded p-1 -m-1 hover:bg-vault-muted/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vault-cyan transition-colors group cursor-pointer"
                     aria-label={`Copy hex code for ${swatch.name}`}
-                    title="Click to copy hex code"
+                    title={copiedToken === swatch.token ? "Copied!" : "Click to copy hex code"}
                   >
                     <h3 className="font-medium">{swatch.name}</h3>
                     <div className="flex items-center gap-2">
                       <code className="text-xs text-vault-muted">{swatch.value}</code>
-                      {copiedToken === swatch.token ? <Check className="h-3.5 w-3.5 text-vault-green" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5 text-vault-muted opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />}
+                      {copiedToken === swatch.token ? <Check className="h-3.5 w-3.5 text-vault-green" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5 text-vault-muted opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity" aria-hidden="true" />}
+                      <span aria-live="polite" className="sr-only">
+                        {copiedToken === swatch.token ? 'Copied token to clipboard' : ''}
+                      </span>
                     </div>
                   </button>
                   <p className="mt-1 text-xs text-vault-muted">{swatch.token}</p>
@@ -128,10 +131,16 @@ export function App() {
             <div className="mt-6 overflow-hidden rounded-[20px] border border-vault-muted/20 bg-vault-paper-bright">
               {voiceRows.map(([avoid, use]) => (
                 <div key={avoid} className="grid gap-3 border-b border-vault-muted/10 p-4 last:border-b-0 sm:grid-cols-2">
-                  <p className="text-sm text-vault-burgundy">{avoid}</p>
+                  <p className="text-sm text-vault-burgundy">
+                    <span className="sr-only">Avoid saying: </span>
+                    {avoid}
+                  </p>
                   <p className="flex items-start gap-2 text-sm text-vault-slate">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vault-green" />
-                    {use}
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vault-green" aria-hidden="true" />
+                    <span>
+                      <span className="sr-only">Instead use: </span>
+                      {use}
+                    </span>
                   </p>
                 </div>
               ))}

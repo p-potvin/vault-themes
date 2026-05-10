@@ -88,6 +88,7 @@ blocks into consumer repositories that include `vault-themes`.
 
 ## Consumer Repo Policy
 
+- **#1 most important:** The branding guide must be consulted before making any stylistic choices.
 - **Never hardcode a color, spacing value, or font.** Always use a named token
   from `Brand/tokens.ts` or the `VaultTheme` dataclass attributes.
 - Theme mode must be explicit: `light` or `dark`. Never infer it.
@@ -96,6 +97,10 @@ blocks into consumer repositories that include `vault-themes`.
 - Keep theme definitions centralized in `theme_manager.py`. Do not duplicate
   theme catalogs across files.
 - Theme names are Title Case (user-facing). Theme IDs are kebab-case (machine).
+- Every app that uses vault-themes must implement a theme picker with the 10 themes defined.
+- Every app must implement a dark/light switch that defaults to the user's OS (dark: `golden-slate`, light: `codex-solar-light-revisited`).
+- Use the full VaultWares logo if a good place can be found without forcing it; otherwise, at the very least, use the VaultWares minimal-icon in the header.
+- Implement a language switch next to the theme switch with EN/QC for English and Quebecois (the app must therefore be translated).
 
 ### VaultTheme — Full Semantic Token Reference
 
