@@ -16,7 +16,6 @@ The repo is intentionally small at the root. Start here:
 | `examples/brand-guide/` | Optional local React/Tailwind brand-guide demo. |
 | `docs/` | Consumer setup, maintenance notes, migration notes, and future work. |
 
-<<<<<<< HEAD
 ## Quick Checks
 
 ```powershell
@@ -55,7 +54,6 @@ vault-themes/
 ├── AGENTS.md                      # AI agent rules and constraints
 ├── agent_manifest.md              # Registered agents and permissions
 └── theme_manager.py               # Python theme token manager
->>>>>>> 4652555a70585bbbe8b7fc3dcb278a41583bbbd9
 ```
 
 ## Brand Guide
@@ -73,7 +71,6 @@ steps.
 
 ## Rules In Short
 
-<<<<<<< HEAD
 - Privacy first, security second, functionality third.
 - Do not use fear, hacker clichés, Matrix aesthetics, neon green on black, or
   jargon-heavy copy.
@@ -181,4 +178,3 @@ VaultWares is built on three principles:
 ---
 
 *© 2025 VaultWares — Built under VaultWares Enterprise Guidelines*
->>>>>>> 4652555a70585bbbe8b7fc3dcb278a41583bbbd9

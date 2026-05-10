@@ -15,7 +15,8 @@ auth UX, encrypted communication UX, or consumer propagation rules, read:
 - `brand/tokens/tokens.ts`
 - `brand/tokens/tailwind.config.ts`
 - `brand/i18n/brand.i18n.ts`
-- `CONTEXT.md`
+- `CONTEXT.md` 
+- `PQC_PROTOCOL_IMPLEMENTATION.md`
 
 ## Brand Direction
 
