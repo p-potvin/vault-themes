@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, Copy, Eye, Languages, ShieldCheck, Sparkles } from 'lucide-react'
+import { Check, Copy, Eye, Languages, ShieldCheck, Sparkles, X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 const swatches = [

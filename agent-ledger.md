@@ -1,4 +1,9 @@
-## 2025-01-20 - Palette UX & Accessibility Enhancements
+## 2026-05-10 - Comparison Table Accessibility Enhancement
+- **Agent**: Palette 🎨
+- **Project**: vault-themes (brand-guide-demo)
+- **Change**: Added X icons and visually hidden labels to the voice replacement table in App.tsx.
+- **Reasoning**: Comparison tables shouldn't rely solely on color to indicate meaning. Screen readers also need context for visual queues.
+- **Impact**: Improved accessibility and visual scannability for all users.
 
 ### Context
 User requested a micro-UX improvement focusing on accessibility and intuitive interaction, acting as "Palette". Explored the `examples/brand-guide` react application.
