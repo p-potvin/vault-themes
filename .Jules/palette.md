@@ -11,3 +11,7 @@
 ## 2026-05-08 - Brand Guide Token Swatch Copy-to-Clipboard Enhancement (Focus & Screen Reader)
 **Learning:** While wrapping token copy actions in a `<button>` with clear focus states and aria-labels is great, the visual feedback needs to accommodate all interactive states, and screen readers need explicit feedback when visually silent background actions (like copying) complete.
 **Action:** When a hover-revealed icon indicates interactivity (like a copy icon), ensure it is also revealed on keyboard focus (e.g. `group-focus-visible:opacity-100`). Always pair background copy actions with a visually hidden `aria-live="polite"` region that announces the successful outcome.
+
+## 2026-05-13 - Comparison Table Accessibility
+**Learning:** Comparison tables (like "Avoid vs Use") shouldn't rely solely on color to indicate meaning (e.g. red for avoid, green for use). Additionally, when icons are used for visual queues, screen readers need explicit visually hidden labels (`sr-only`) to give context to the list items, otherwise it's just a series of disconnected strings.
+**Action:** Always include an icon for both positive and negative states. Use `sr-only` spans to provide explicit textual context (like "Avoid:" or "Use:") next to visual queues in comparison list items.

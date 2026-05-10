@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, Copy, Eye, Languages, ShieldCheck, Sparkles } from 'lucide-react'
+import { Check, Copy, Eye, Languages, ShieldCheck, Sparkles, X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 const swatches = [
@@ -131,10 +131,15 @@ export function App() {
             <div className="mt-6 overflow-hidden rounded-[20px] border border-vault-muted/20 bg-vault-paper-bright">
               {voiceRows.map(([avoid, use]) => (
                 <div key={avoid} className="grid gap-3 border-b border-vault-muted/10 p-4 last:border-b-0 sm:grid-cols-2">
-                  <p className="text-sm text-vault-burgundy">{avoid}</p>
+                  <p className="flex items-start gap-2 text-sm text-vault-burgundy">
+                    <X className="mt-0.5 h-4 w-4 shrink-0 text-vault-burgundy" aria-hidden="true" />
+                    <span className="sr-only">Avoid:</span>
+                    <span>{avoid}</span>
+                  </p>
                   <p className="flex items-start gap-2 text-sm text-vault-slate">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vault-green" />
-                    {use}
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vault-green" aria-hidden="true" />
+                    <span className="sr-only">Use:</span>
+                    <span>{use}</span>
                   </p>
                 </div>
               ))}
