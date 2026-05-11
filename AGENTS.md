@@ -15,7 +15,7 @@ auth UX, encrypted communication UX, or consumer propagation rules, read:
 - `brand/tokens/tokens.ts`
 - `brand/tokens/tailwind.config.ts`
 - `brand/i18n/brand.i18n.ts`
-- `CONTEXT.md` 
+- `CONTEXT.md`
 - `PQC_PROTOCOL_IMPLEMENTATION.md`
 
 ## Brand Direction
@@ -29,13 +29,11 @@ Priority order:
 5. Scalability
 6. Developer experience
 
-VaultWares should feel calm, precise, human, premium, and practical. Do not use
-fear-based security copy, hacker stereotypes, Matrix visuals, pure black/neon
-green palettes, vague "military-grade" claims, or jargon when plain language
-works.
+VaultWares should feel calm, precise, human, premium, and practical. Do not use fear-based security copy, hacker stereotypes, Matrix visuals, pure black/neon green palettes, vague "military-grade" claims, or jargon when plain language works.
 
-All visible brand language should support English and French/Quebec French. Make
-layouts tolerant of French strings being 15-20% longer than English.
+All visible brand language should support English (code: EN) and Quebecois (code: QC). Make layouts while considering French strings may be 15-20% longer than English.
+
+All projects must implement a dark/light theme switch (light: `codex-solar-light-revisited`, dark: `golden-slate`) situated near the EN/QC language switch, both having persistent state across sessions.
 
 Apply these rules to any work touching `theme_manager.py`, `qt_exporter.py`,
 style guides, token exports, Figma-to-code implementation, UI components, or
@@ -104,41 +102,41 @@ blocks into consumer repositories that include `vault-themes`.
 
 ### VaultTheme — Full Semantic Token Reference
 
-| Token         | Type   | Role                                                      |
-|---------------|--------|-----------------------------------------------------------|
-| `name`        | str    | User-facing name (Title Case)                             |
-| `mode`        | str    | `"light"` or `"dark"`                                     |
-| `primary`     | hex    | Main window / root background                             |
-| `surface`     | hex    | Panel / card background (slightly offset from primary)    |
-| `surface_alt` | hex    | Nested element background (deepest layer)                 |
-| `accent`      | hex    | Brand accent — primary interactive / highlight color      |
-| `accent_muted`| hex    | Desaturated or hover variant of accent                    |
-| `text`        | hex    | Primary body text                                         |
-| `text_muted`  | hex    | Secondary / caption / placeholder text                    |
-| `text_inverse`| hex    | Text rendered on accent-colored surfaces                  |
-| `border`      | rgba   | Subtle border for panels, inputs, separators              |
-| `error`       | hex    | Semantic error / destructive state                        |
-| `error_bg`    | rgba   | Translucent background for error banners                  |
-| `warning`     | hex    | Semantic warning / caution state                          |
-| `warning_bg`  | rgba   | Translucent background for warning banners                |
-| `success`     | hex    | Semantic success / positive state                         |
-| `success_bg`  | rgba   | Translucent background for success banners                |
-| `info`        | hex    | Semantic informational state                              |
-| `info_bg`     | rgba   | Translucent background for info banners                   |
-| `muted`       | hex    | Muted / disabled UI elements, placeholder text            |
+| Token          | Type | Role                                                   |
+| -------------- | ---- | ------------------------------------------------------ |
+| `name`         | str  | User-facing name (Title Case)                          |
+| `mode`         | str  | `"light"` or `"dark"`                                  |
+| `primary`      | hex  | Main window / root background                          |
+| `surface`      | hex  | Panel / card background (slightly offset from primary) |
+| `surface_alt`  | hex  | Nested element background (deepest layer)              |
+| `accent`       | hex  | Brand accent — primary interactive / highlight color   |
+| `accent_muted` | hex  | Desaturated or hover variant of accent                 |
+| `text`         | hex  | Primary body text                                      |
+| `text_muted`   | hex  | Secondary / caption / placeholder text                 |
+| `text_inverse` | hex  | Text rendered on accent-colored surfaces               |
+| `border`       | rgba | Subtle border for panels, inputs, separators           |
+| `error`        | hex  | Semantic error / destructive state                     |
+| `error_bg`     | rgba | Translucent background for error banners               |
+| `warning`      | hex  | Semantic warning / caution state                       |
+| `warning_bg`   | rgba | Translucent background for warning banners             |
+| `success`      | hex  | Semantic success / positive state                      |
+| `success_bg`   | rgba | Translucent background for success banners             |
+| `info`         | hex  | Semantic informational state                           |
+| `info_bg`      | rgba | Translucent background for info banners                |
+| `muted`        | hex  | Muted / disabled UI elements, placeholder text         |
 
 ### Color harmony rules when adding a new theme
 
 When choosing semantic colors for a new theme, derive them from color theory
 relative to the theme's `accent`:
 
-- **`error`**: Use a warm red / crimson that is *analogous* (adjacent hue) to the
-  accent on warm themes, or *complementary* (opposite hue) on cool themes.
+- **`error`**: Use a warm red / crimson that is _analogous_ (adjacent hue) to the
+  accent on warm themes, or _complementary_ (opposite hue) on cool themes.
   Never use pure `#FF0000` — it looks undesigned.
 - **`warning`**: Use amber / orange. It should sit between `accent` and `error`
   on the hue wheel if possible.
-- **`success`**: Use a mid-saturation green or teal — the *complementary* of a
-  red or warm accent, or an *analogous* neighbor of a cool/cyan accent.
+- **`success`**: Use a mid-saturation green or teal — the _complementary_ of a
+  red or warm accent, or an _analogous_ neighbor of a cool/cyan accent.
 - **`info`**: Use a calm blue or violet that does not conflict with the accent.
 - **`muted`**: Desaturate and darken (dark themes) or desaturate and lighten
   (light themes) by 30–40%.
@@ -147,18 +145,18 @@ relative to the theme's `accent`:
 
 ### Base color token reference (from `Brand/tokens.ts`)
 
-| Token                | Hex       | Role                          |
-|----------------------|-----------|-------------------------------|
-| `vault.base`         | `#002B36` | Dark background               |
-| `vault.paper`        | `#FDF6E3` | Light background              |
-| `vault.gold`         | `#CC9B21` | Primary brand accent          |
-| `vault.gold.muted`   | `#B78C1E` | Hover / pressed accent        |
-| `vault.gold.light`   | `#E5C06A` | Lighter accent tint           |
-| `vault.cyan`         | `#21B8CC` | Interactive / primary action  |
-| `vault.green`        | `#4ECC21` | Success / secured state       |
-| `vault.burgundy`     | `#A63D40` | Error / destructive           |
-| `vault.slate`        | `#4A5459` | Secondary text / surfaces     |
-| `vault.muted`        | `#586E75` | Captions / tertiary text      |
+| Token              | Hex       | Role                         |
+| ------------------ | --------- | ---------------------------- |
+| `vault.base`       | `#002B36` | Dark background              |
+| `vault.paper`      | `#FDF6E3` | Light background             |
+| `vault.gold`       | `#CC9B21` | Primary brand accent         |
+| `vault.gold.muted` | `#B78C1E` | Hover / pressed accent       |
+| `vault.gold.light` | `#E5C06A` | Lighter accent tint          |
+| `vault.cyan`       | `#21B8CC` | Interactive / primary action |
+| `vault.green`      | `#4ECC21` | Success / secured state      |
+| `vault.burgundy`   | `#A63D40` | Error / destructive          |
+| `vault.slate`      | `#4A5459` | Secondary text / surfaces    |
+| `vault.muted`      | `#586E75` | Captions / tertiary text     |
 
 ---
 
@@ -166,11 +164,11 @@ relative to the theme's `accent`:
 
 ### Logo Variants (`Brand/`)
 
-| File                                            | Usage                                       |
-|-------------------------------------------------|---------------------------------------------|
-| `Brand/vaultwares-logo.svg`                     | Light backgrounds (default SVG)             |
-| `Brand/vaultwares-logo-dark.svg`                | Dark backgrounds (SVG)                      |
-| `Brand/vaultwares-logo-mono.svg`                | Monochrome — embossing, watermarks (SVG)    |
+| File                             | Usage                                    |
+| -------------------------------- | ---------------------------------------- |
+| `Brand/vaultwares-logo.svg`      | Light backgrounds (default SVG)          |
+| `Brand/vaultwares-logo-dark.svg` | Dark backgrounds (SVG)                   |
+| `Brand/vaultwares-logo-mono.svg` | Monochrome — embossing, watermarks (SVG) |
 
 ### Minimal Icons (`Brand/minimal-logos/`)
 
@@ -178,15 +176,16 @@ These are **PNG exports** of the compact VaultWares mark (no wordmark), intended
 for use as window icons, taskbar icons, tab favicons, and small UI spots where
 the full wordmark doesn't fit.
 
-| File                                                       | Usage                                             |
-|------------------------------------------------------------|---------------------------------------------------|
-| `Brand/minimal-logos/vaultwares-minimal-gold-filled.png`   | Primary icon — dark backgrounds, window titlebar  |
-| `Brand/minimal-logos/vaultwares-minimal-ink-filled.png`    | Light mode icon — light backgrounds               |
-| `Brand/minimal-logos/vaultwares-minimal-mono-filled.png`   | Monochrome icon — single-color contexts           |
-| `Brand/minimal-logos/vaultwares-minimal-mono-v2.png`       | Alternate mono — outlined/stroke variant          |
-| `Brand/minimal-logos/vaultwares-minimal-mono.png`          | Legacy mono — use `v2` for new work               |
+| File                                                     | Usage                                            |
+| -------------------------------------------------------- | ------------------------------------------------ |
+| `Brand/minimal-logos/vaultwares-minimal-gold-filled.png` | Primary icon — dark backgrounds, window titlebar |
+| `Brand/minimal-logos/vaultwares-minimal-ink-filled.png`  | Light mode icon — light backgrounds              |
+| `Brand/minimal-logos/vaultwares-minimal-mono-filled.png` | Monochrome icon — single-color contexts          |
+| `Brand/minimal-logos/vaultwares-minimal-mono-v2.png`     | Alternate mono — outlined/stroke variant         |
+| `Brand/minimal-logos/vaultwares-minimal-mono.png`        | Legacy mono — use `v2` for new work              |
 
 **Usage rules:**
+
 - Desktop apps (`vault_gui.py`): use `vaultwares-minimal-gold-filled.png` for
   `setWindowIcon()` on dark themes; switch to `vaultwares-minimal-ink-filled.png`
   on light themes when possible.
@@ -209,11 +208,11 @@ When generating QSS for a consuming application:
 1. **All color values must come from `VaultTheme` attributes** — no inline hex
    or raw color strings inside `generate_qss()`.
 2. Use the three-tier surface hierarchy:
-   - `primary` → window root background
-   - `surface` → panels, cards, inputs
-   - `surface_alt` → nested inputs, dropdown popups, pressed states
+    - `primary` → window root background
+    - `surface` → panels, cards, inputs
+    - `surface_alt` → nested inputs, dropdown popups, pressed states
 3. Expose semantic frame `objectName` IDs for status banners:
-   - `ErrorBanner`, `WarningBanner`, `SuccessBanner`, `InfoBanner`
+    - `ErrorBanner`, `WarningBanner`, `SuccessBanner`, `InfoBanner`
 4. Color-code log/monitor text inline using `theme.<semantic_token>` values —
    never hardcode error/warning/success colors in application logic.
 5. For the `QProgressBar`, always set `setTextVisible(True)` and connect
