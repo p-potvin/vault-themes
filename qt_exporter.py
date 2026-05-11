@@ -218,6 +218,7 @@ class QtThemeExporter:
             QCheckBox::indicator:checked {{
                 background-color: {t.accent};
                 border-color: {t.accent};
+                image: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 8.5L7 11.5L12 5.5' stroke='{t.text_inverse.replace('#','%23')}' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
             }}
 
             QCheckBox:disabled {{
