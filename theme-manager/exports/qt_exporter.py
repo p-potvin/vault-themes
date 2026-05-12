@@ -294,7 +294,7 @@ class QtThemeExporter:
                 border: none;
                 border-radius: 6px;
                 color: {t.text};
-                font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+                font-family: 'JetBrains Mono',  'Cascadia Code', 'Consolas', 'Courier New', monospace;
                 font-size: 11px;
                 line-height: 1.5;
                 padding: 4px;
