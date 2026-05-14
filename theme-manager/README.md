@@ -7,7 +7,7 @@ design tokens across every language and platform that VaultWares products target
 
 ## Contents
 
-```
+```text
 theme-manager/
 ├── exports/               # Ready-to-import files for each platform
 │   ├── theme-manager.ts   # TypeScript/JavaScript — full VaultTheme catalog
@@ -31,31 +31,31 @@ theme-manager/
 
 ```ts
 // Option A — direct import (vault-themes is a sibling/submodule)
-import { THEMES, VaultThemeManager } from '../vault-themes/theme-manager/exports/theme-manager';
+import { THEMES, VaultThemeManager } from "../vault-themes/theme-manager/exports/theme-manager";
 
 // Option B — if you copy or symlink the file
-import { THEMES, VaultThemeManager } from './theme-manager';
+import { THEMES, VaultThemeManager } from "./theme-manager";
 
 // Usage
 const manager = new VaultThemeManager();
-const theme   = manager.getTheme('Golden Slate');   // by name
-const default_ = manager.getTheme(undefined, 0);    // by index
+const theme = manager.getTheme("Golden Slate"); // by name
+const default_ = manager.getTheme(undefined, 0); // by index
 ```
 
 **Inject tokens at runtime (required for CSS utilities to work):**
 
 ```ts
 function applyTheme(theme: VaultTheme) {
-  const root = document.documentElement;
-  Object.entries(theme).forEach(([key, value]) => {
-    if (!['name', 'id', 'mode'].includes(key)) {
-      root.style.setProperty(`--${key.replaceAll('_', '-')}`, value);
-    }
-  });
-  root.setAttribute('data-mode', theme.mode);
-  // Persist across sessions
-  localStorage.setItem('vw-theme-id',   theme.id);
-  localStorage.setItem('vw-theme-mode', theme.mode);
+    const root = document.documentElement;
+    Object.entries(theme).forEach(([key, value]) => {
+        if (!["name", "id", "mode"].includes(key)) {
+            root.style.setProperty(`--${key.replaceAll("_", "-")}`, value);
+        }
+    });
+    root.setAttribute("data-mode", theme.mode);
+    // Persist across sessions
+    localStorage.setItem("vw-theme-id", theme.id);
+    localStorage.setItem("vw-theme-mode", theme.mode);
 }
 ```
 
@@ -82,15 +82,15 @@ snippet above — the bridge only maps existing `--tokens` to Tailwind class nam
 
 ```js
 // tailwind.config.js
-const vaultExtend = require('./vault-themes/theme-manager/exports/theme-manager.tw');
+const vaultExtend = require("./vault-themes/theme-manager/exports/theme-manager.tw");
 
 module.exports = {
-  content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
-      colors: vaultExtend.theme.extend.colors,
-    },
-  },
+    content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+    theme: {
+        extend: {
+            colors: vaultExtend.theme.extend.colors
+        }
+    }
 };
 ```
 
@@ -178,13 +178,13 @@ For WPF / WinUI XAML ResourceDictionary injection:
 
 ## Theme Defaults
 
-| Theme | Mode | Default? |
-|-------|------|----------|
-| Golden Slate | dark | ✅ dark default |
+| Theme                     | Mode  | Default?         |
+| ------------------------- | ----- | ---------------- |
+| Golden Slate              | dark  | ✅ dark default  |
 | Solarized Light Revisited | light | ✅ light default |
-| Cyberpunk Cinder | dark | — |
-| Vintage Velvet | light | — |
-| … (15 total) | — | — |
+| Cyberpunk Cinder          | dark  | —                |
+| Vintage Velvet            | light | —                |
+| … (15 total)              | —     | —                |
 
 Per `AGENTS.md`: always default to **Golden Slate** (dark) and **Solarized Light Revisited** (light).
 Both must respect the user's OS `prefers-color-scheme` on first visit.
@@ -195,25 +195,25 @@ Both must respect the user's OS `prefers-color-scheme` on first visit.
 
 Every theme must define all 19 semantic tokens:
 
-| Token | Role |
-|-------|------|
-| `background` | Root page / window background |
-| `surface` | Panel / card background |
-| `surface_alt` | Nested element background |
-| `surface_elevated` | Overlay / elevated surface |
-| `text` | Alias for `text_primary` |
-| `text_primary` | Primary body text |
-| `text_secondary` | Captions, secondary labels |
-| `text_muted` | Tertiary / placeholder text |
-| `text_inverse` | Text on accent-colored surfaces |
-| `accent` | Brand accent, primary interactive |
-| `accent_muted` | Hover / pressed accent |
-| `border` | Subtle panel / input borders |
-| `error` / `error_bg` | Error / destructive state + bg |
-| `warning` / `warning_bg` | Warning / caution state + bg |
-| `success` / `success_bg` | Success / secured state + bg |
-| `info` / `info_bg` | Informational state + bg |
-| `muted` | Disabled / muted elements |
+| Token                    | Role                              |
+| ------------------------ | --------------------------------- |
+| `background`             | Root page / window background     |
+| `surface`                | Panel / card background           |
+| `surface_alt`            | Nested element background         |
+| `surface_elevated`       | Overlay / elevated surface        |
+| `text`                   | Alias for `text_primary`          |
+| `text_primary`           | Primary body text                 |
+| `text_secondary`         | Captions, secondary labels        |
+| `text_muted`             | Tertiary / placeholder text       |
+| `text_inverse`           | Text on accent-colored surfaces   |
+| `accent`                 | Brand accent, primary interactive |
+| `accent_muted`           | Hover / pressed accent            |
+| `border`                 | Subtle panel / input borders      |
+| `error` / `error_bg`     | Error / destructive state + bg    |
+| `warning` / `warning_bg` | Warning / caution state + bg      |
+| `success` / `success_bg` | Success / secured state + bg      |
+| `info` / `info_bg`       | Informational state + bg          |
+| `muted`                  | Disabled / muted elements         |
 
 `*_bg` values must use **rgba with 12–15% alpha** for readability.
 
@@ -222,9 +222,9 @@ Every theme must define all 19 semantic tokens:
 ## Adding a New Theme
 
 1. Add the theme object to **all** platform files simultaneously to keep them in sync:
-   - `exports/theme-manager.ts`
-   - `exports/theme_manager.py`
-   - `exports/themeManager.cs`
+    - `exports/theme-manager.ts`
+    - `exports/theme_manager.py`
+    - `exports/themeManager.cs`
 2. Follow the color harmony rules in `AGENTS.md` § "Color harmony rules".
 3. Run the contrast check: body text vs background must pass **WCAG AA (4.5:1)**.
 4. Add the theme name to `brand/i18n/brand.i18n.ts` in both EN and QC.
@@ -236,7 +236,7 @@ Every theme must define all 19 semantic tokens:
 If your target language / platform does not have a theme manager file yet, create one
 in `vault-themes/theme-manager/exports/` following the naming convention:
 
-```
+```text
 theme-manager.<ext>    e.g. theme-manager.dart, theme-manager.swift, theme-manager.kt
 ```
 
@@ -244,20 +244,20 @@ Then update this README and the AGENTS.md with import instructions.
 
 **Currently supported:**
 
-| Language / Platform | File | Notes |
-|--------------------|------|-------|
-| TypeScript / JS | `theme-manager.ts` | Universal — works in any bundler |
-| Tailwind CSS v4 | `vault-tailwind-v4.css` | CSS-only bridge |
-| Tailwind CSS v3 | `theme-manager.tw` | Static config extend |
-| Python / Qt | `theme_manager.py` + `qt_exporter.py` | PySide6 QSS |
-| C# / .NET | `themeManager.cs` | WinUI 3, WPF, MAUI |
-| WPF / WinUI XAML | `VaultWares.Brand.xaml` | ResourceDictionary |
+| Language / Platform | File                                  | Notes                            |
+| ------------------- | ------------------------------------- | -------------------------------- |
+| TypeScript / JS     | `theme-manager.ts`                    | Universal — works in any bundler |
+| Tailwind CSS v4     | `vault-tailwind-v4.css`               | CSS-only bridge                  |
+| Tailwind CSS v3     | `theme-manager.tw`                    | Static config extend             |
+| Python / Qt         | `theme_manager.py` + `qt_exporter.py` | PySide6 QSS                      |
+| C# / .NET           | `themeManager.cs`                     | WinUI 3, WPF, MAUI               |
+| WPF / WinUI XAML    | `VaultWares.Brand.xaml`               | ResourceDictionary               |
 
 **Planned / community contributed:**
 
-| Language | File (proposed) | Status |
-|----------|----------------|--------|
-| Dart / Flutter | `theme-manager.dart` | Planned |
-| Swift / SwiftUI | `VaultTheme.swift` | Planned |
-| Kotlin / Jetpack Compose | `VaultTheme.kt` | Planned |
-| CSS-only (no framework) | `vault-tokens.css` | Planned |
+| Language                 | File (proposed)      | Status  |
+| ------------------------ | -------------------- | ------- |
+| Dart / Flutter           | `theme-manager.dart` | Planned |
+| Swift / SwiftUI          | `VaultTheme.swift`   | Planned |
+| Kotlin / Jetpack Compose | `VaultTheme.kt`      | Planned |
+| CSS-only (no framework)  | `vault-tokens.css`   | Planned |

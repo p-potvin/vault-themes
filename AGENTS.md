@@ -61,6 +61,14 @@ brand assets.
 - Body text contrast must meet WCAG AA, 4.5:1 or better.
 - Do not rely on color alone for state.
 
+## Visual Cues & Progress Bars
+
+All long-running or resource-intensive operations must provide explicit, real-time visual feedback to the user.
+
+- **CLI Implementation**: Use high-fidelity progress bars. Preferred: `tqdm` (Python) and `indicatif` (Rust).
+- **GUI/Web Implementation**: Use standard progress or spinner tokens defined in `theme_manager.py`. Avoid static "Loading..." text without motion.
+- **Consistency**: Visual cues should follow the brand's cyan interactive accent color.
+
 ## Repo Layout
 
 - Root: only durable entrypoints such as `AGENTS.md`, `CONTEXT.md`,
