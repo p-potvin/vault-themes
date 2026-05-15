@@ -68,6 +68,7 @@ class QtThemeExporter:
                 color: {t.text_muted};
                 font-size: 11px;
                 font-style: italic;
+                min-height: 16px;
             }}
 
             QLabel#TagBadge {{
@@ -201,6 +202,7 @@ class QtThemeExporter:
             QCheckBox {{
                 color: {t.text};
                 spacing: 8px;
+                min-height: 20px;
             }}
 
             QCheckBox::indicator {{
