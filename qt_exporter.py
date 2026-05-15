@@ -16,6 +16,9 @@ class QtThemeExporter:
     def get_all_themes(self):
         return self.manager.get_themes()
 
+    def get_theme_by_name(self, name: str):
+        return self.manager.get_theme_by_name(name)
+
     def generate_qss(self, theme: VaultTheme) -> str:
         """
         Generates a PySide6 QSS stylesheet for the given VaultTheme.
@@ -84,9 +87,9 @@ class QtThemeExporter:
             QLineEdit, QTextEdit, QSpinBox, QDoubleSpinBox {{
                 background-color: {t.surface};
                 border: 1px solid {t.border};
-                border-radius: 7px;
-                padding: 5px 10px;
-                min-height: 30px;
+                border-radius: 3px;
+                padding: 2px 4px;
+                min-height: 22px;
                 color: {t.text};
                 selection-background-color: {t.accent};
                 selection-color: {t.text_inverse};
@@ -111,9 +114,9 @@ class QtThemeExporter:
             QComboBox {{
                 background-color: {t.surface};
                 border: 1px solid {t.border};
-                border-radius: 7px;
-                padding: 5px 10px;
-                min-height: 30px;
+                border-radius: 3px;
+                padding: 2px 4px;
+                min-height: 22px;
                 color: {t.text};
             }}
 
@@ -134,7 +137,7 @@ class QtThemeExporter:
             QComboBox QAbstractItemView {{
                 background-color: {t.surface_alt};
                 border: 1px solid {t.border};
-                border-radius: 7px;
+                border-radius: 3px;
                 selection-background-color: {t.accent};
                 selection-color: {t.text_inverse};
                 padding: 4px;
@@ -145,7 +148,7 @@ class QtThemeExporter:
             QPushButton {{
                 background-color: {t.surface};
                 border: 1px solid {t.border};
-                border-radius: 8px;
+                border-radius: 4px;
                 padding: 7px 16px;
                 color: {t.text};
                 font-weight: 500;
@@ -175,7 +178,7 @@ class QtThemeExporter:
                 font-size: 13px;
                 letter-spacing: 1px;
                 border: none;
-                border-radius: 10px;
+                border-radius: 4px;
             }}
 
             QPushButton#PrimaryBtn:hover {{
@@ -196,6 +199,21 @@ class QtThemeExporter:
             QPushButton#DangerBtn:hover {{
                 background-color: {t.error};
                 color: {t.text_inverse};
+            }}
+
+            QPushButton#SecondaryBtn {{
+                background-color: transparent;
+                border: 1px solid {t.border};
+                border-radius: 4px;
+                color: {t.text_muted};
+                padding: 2px 6px;
+                min-height: 20px;
+            }}
+
+            QPushButton#SecondaryBtn:hover {{
+                background-color: {t.surface_elevated};
+                border-color: {t.accent_muted};
+                color: {t.text};
             }}
 
             /* ── CheckBox ─────────────────────────────────────── */
@@ -220,7 +238,7 @@ class QtThemeExporter:
             QCheckBox::indicator:checked {{
                 background-color: {t.accent};
                 border-color: {t.accent};
-                image: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 8.5L7 11.5L12 5.5' stroke='{t.text_inverse.replace('#','%23')}' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+                image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16'><path d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='{t.text_inverse.replace('#', '%23')}'/></svg>");
             }}
 
             QCheckBox:disabled {{
@@ -250,28 +268,28 @@ class QtThemeExporter:
             QFrame#ErrorBanner {{
                 background-color: {t.error_bg};
                 border: 1px solid {t.error};
-                border-radius: 8px;
+                border-radius: 4px;
                 padding: 4px;
             }}
 
             QFrame#WarningBanner {{
                 background-color: {t.warning_bg};
                 border: 1px solid {t.warning};
-                border-radius: 8px;
+                border-radius: 4px;
                 padding: 4px;
             }}
 
             QFrame#SuccessBanner {{
                 background-color: {t.success_bg};
                 border: 1px solid {t.success};
-                border-radius: 8px;
+                border-radius: 4px;
                 padding: 4px;
             }}
 
             QFrame#InfoBanner {{
                 background-color: {t.info_bg};
                 border: 1px solid {t.info};
-                border-radius: 8px;
+                border-radius: 4px;
                 padding: 4px;
             }}
 
@@ -279,7 +297,7 @@ class QtThemeExporter:
             QProgressBar {{
                 background-color: {t.surface_alt};
                 border: none;
-                border-radius: 8px;
+                border-radius: 4px;
                 text-align: center;
                 color: {t.text};
                 font-size: 10px;
@@ -288,7 +306,7 @@ class QtThemeExporter:
 
             QProgressBar::chunk {{
                 background-color: {t.accent};
-                border-radius: 8px;
+                border-radius: 4px;
             }}
 
             /* ── Log Area ─────────────────────────────────────── */
