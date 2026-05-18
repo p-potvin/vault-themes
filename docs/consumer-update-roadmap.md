@@ -7,11 +7,11 @@ A full style/token migration should happen later as its own pass.
 
 For each consumer repo:
 
-1. Update the `vault-themes` submodule.
+1. Update the `vaultwares-themes` submodule.
 2. Replace local duplicated style guidance with managed pointers.
 3. Replace hardcoded VaultWares colors/spacing/fonts with tokens from
-   `vault-themes/brand/tokens/`.
-4. Replace external logo URLs with local `vault-themes/assets/` references where
+   `vaultwares-themes/brand/tokens/`.
+4. Replace external logo URLs with local `vaultwares-themes/assets/` references where
    deployment shape allows it.
 5. Review bilingual copy for EN/QC parity.
 6. Run the consumer repo's own lint/typecheck/build/test flow.
@@ -31,7 +31,7 @@ For each consumer repo:
 - `vaultwares-website`
 
 Also check repos that have `.gitmodules` entries but may not have initialized
-`vault-themes` locally:
+`vaultwares-themes` locally:
 
 - `cultural-rhythm`
 - `deconstructed-website-a-la-mode`

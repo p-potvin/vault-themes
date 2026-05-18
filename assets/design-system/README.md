@@ -13,13 +13,13 @@ The system was assembled from the following materials. All paths below are read-
 
 | Source | Path / URL | What we used |
 | --- | --- | --- |
-| **vault-themes** repo (Tier-2 source of truth) | [`p-potvin/vault-themes`](https://github.com/p-potvin/vault-themes) — branch `main` | `brand/tokens/tokens.ts`, `brand/tokens/css-variables.css`, `brand/brand-guide.md`, `brand/philosophy.md`, `examples/brand-guide/` |
+| **vaultwares-themes** repo (Tier-2 source of truth) | [`p-potvin/vaultwares-themes`](https://github.com/p-potvin/vaultwares-themes) — branch `main` | `brand/tokens/tokens.ts`, `brand/tokens/css-variables.css`, `brand/brand-guide.md`, `brand/philosophy.md`, `examples/brand-guide/` |
 | **vaultwares-docs** repo (Mintlify docs) | [`p-potvin/vaultwares-docs`](https://github.com/p-potvin/vaultwares-docs) — branch `main` | `docs.json`, `index.mdx`, `quickstart.mdx`, `branding.mdx`, `logo/{light,dark}.svg`, `favicon.svg`, `CLAUDE.md` |
 | **Brand guidelines** (pasted) | `branding.mdx` — Last updated April 24, 2026 · v1.0 | Tagline, forbidden language, primary/accent colors, font stack |
 | **Local asset folder** (mounted, read-only) | `assets/{logos,favicons,icons,source}` | Wordmark + minimal-V PNG/SVG variants, favicon set |
 | **Uploaded files** | `uploads/vaultwares-*` | Same logo set, plus `vaultwares-react-logo.jsx` placeholder |
 
-> Tokens here intentionally follow `vault-themes/brand/tokens/tokens.ts` rather than the `docs.json` Mintlify theme (which uses a default Tailwind-blue `#1E40AF` set). The brand-guide repo is the canonical source.
+> Tokens here intentionally follow `vaultwares-themes/brand/tokens/tokens.ts` rather than the `docs.json` Mintlify theme (which uses a default Tailwind-blue `#1E40AF` set). The brand-guide repo is the canonical source.
 
 ---
 
@@ -44,7 +44,7 @@ A privacy-first cybersecurity company shipping hardware and software products bu
 | `assets/favicons/` | Browser favicons by color and size. |
 | `preview/` | Design-system tab cards — palettes, type specimens, components, brand. |
 | `ui_kits/docs-site/` | Mintlify-style docs site (the live `docs.vaultwares.com` shape) recreated as a clickable React/JSX prototype. |
-| `ui_kits/brand-guide-app/` | The interactive brand-guide reference app from `vault-themes/examples/brand-guide`. |
+| `ui_kits/brand-guide-app/` | The interactive brand-guide reference app from `vaultwares-themes/examples/brand-guide`. |
 | `SKILL.md` | Cross-compatible Claude Skill definition (brand voice + token use + asset inventory). |
 
 ---
@@ -177,7 +177,7 @@ Cool and quiet. If photography is used, it leans neutral or slightly cool, with 
 
 ## Iconography
 
-**Lucide is the default icon system.** The brand-guide example app at `vault-themes/examples/brand-guide` imports from `lucide-react` (`Check`, `Copy`, `Eye`, `Languages`, `ShieldCheck`, `Sparkles`, `Lock`, etc.). Lucide's stroke style — 1.5–2px, rounded joins, square caps — matches our line weight.
+**Lucide is the default icon system.** The brand-guide example app at `vaultwares-themes/examples/brand-guide` imports from `lucide-react` (`Check`, `Copy`, `Eye`, `Languages`, `ShieldCheck`, `Sparkles`, `Lock`, etc.). Lucide's stroke style — 1.5–2px, rounded joins, square caps — matches our line weight.
 
 The Mintlify docs site (`docs.json`) uses **FontAwesome** icon names (`shield-halved`, `microchip`, `usb-drive`, `book-open`, `wand-magic-sparkles`). When recreating the docs surface we substitute the closest Lucide equivalent for visual consistency.
 

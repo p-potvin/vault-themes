@@ -18,7 +18,7 @@
      - muted    ≈ desaturated by 30–40%
    ------------------------------------------------------------------------- */
 
-window.VAULT_THEMES = [
+window.vaultwares_themes = [
   /* ── Your existing themes (for context + comparison) ────────────────── */
   {
     id: "golden-slate",
@@ -392,7 +392,7 @@ window.VAULT_THEMES = [
   },
 ];
 
-window.VAULT_THEME_BY_ID = Object.fromEntries(window.VAULT_THEMES.map(t => [t.id, t]));
+window.VAULT_THEME_BY_ID = Object.fromEntries(window.vaultwares_themes.map(t => [t.id, t]));
 
 /* ──────────────────────────────────────────────────────────────────────────
    applyVaultTheme — set every VaultTheme key as a CSS custom property on
@@ -426,4 +426,4 @@ window.applyVaultTheme = function (id, root) {
 };
 
 window.getVaultTheme = (id) => window.VAULT_THEME_BY_ID[id];
-window.listVaultThemes = (mode) => window.VAULT_THEMES.filter(t => !mode || t.mode === mode);
+window.listVaultThemes = (mode) => window.vaultwares_themes.filter(t => !mode || t.mode === mode);

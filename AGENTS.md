@@ -1,4 +1,4 @@
-# AGENTS.md - vault-themes
+# AGENTS.md - vaultwares-themes
 
 > For company-wide rules, read `vaultwares-docs/AGENTS.md` first.
 
@@ -91,7 +91,7 @@ Continue context, or VS Code guidance should contain only a short pointer back
 to this file and `CONTEXT.md` unless the tool requires a specific wrapper.
 
 Use `theme-manager/tools/sync_submodule_rules.py` to propagate managed guidance
-blocks into consumer repositories that include `vault-themes`.
+blocks into consumer repositories that include `vaultwares-themes`.
 
 ## Consumer Repo Policy
 
@@ -104,7 +104,7 @@ blocks into consumer repositories that include `vault-themes`.
 - Keep theme definitions centralized in `theme_manager.py`. Do not duplicate
   theme catalogs across files.
 - Theme names are Title Case (user-facing). Theme IDs are kebab-case (machine).
-- Every app that uses vault-themes must implement a theme picker with the 25+ themes defined in `theme_manager.py`.
+- Every app that uses vaultwares-themes must implement a theme picker with the 25+ themes defined in `theme_manager.py`.
 - Every app must implement a dark/light switch that defaults to the user's OS (dark: `golden-slate`, light: `codex-solar-light-revisited`).
 - Use the full VaultWares logo if a good place can be found without forcing it; otherwise, at the very least, use the VaultWares minimal-icon in the header.
 - Implement a language switch next to the theme switch with EN/QC for English and Quebecois (the app must therefore be translated).
@@ -294,7 +294,7 @@ To optimize credit usage while ensuring assistants don't miss "expensive" info, 
 > 2. **Canonical Failure**: If a search for a file mentioned in the SoT Hierarchy fails.
 > 3. **High-Value Context**: If the prompt contains keywords: `VPS`, `SSH`, `HSM`, `deployment`, `credential`, or `submodule`.
 
-## Design & Brand → vault-themes
+## Design & Brand → vaultwares-themes
 
 ### Required flow (do not skip steps)
 

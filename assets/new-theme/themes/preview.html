@@ -650,9 +650,9 @@
   let currentId = "golden-slate";
 
   // ── Counts ─────────────────────────────────────────────────────────
-  document.getElementById("count-all").textContent = window.VAULT_THEMES.length;
-  document.getElementById("count-light").textContent = window.VAULT_THEMES.filter(t => t.mode === "light").length;
-  document.getElementById("count-dark").textContent = window.VAULT_THEMES.filter(t => t.mode === "dark").length;
+  document.getElementById("count-all").textContent = window.vaultwares_themes.length;
+  document.getElementById("count-light").textContent = window.vaultwares_themes.filter(t => t.mode === "light").length;
+  document.getElementById("count-dark").textContent = window.vaultwares_themes.filter(t => t.mode === "dark").length;
 
   // ── Group by family ────────────────────────────────────────────────
   function groupedByFamily(themes) {
@@ -666,7 +666,7 @@
 
   function renderPicker() {
     picker.innerHTML = "";
-    const visible = window.VAULT_THEMES.filter(t => currentFilter === "all" || t.mode === currentFilter);
+    const visible = window.vaultwares_themes.filter(t => currentFilter === "all" || t.mode === currentFilter);
     const groups = groupedByFamily(visible);
     for (const [fam, items] of groups) {
       const row = document.createElement("div");
@@ -792,7 +792,7 @@
   }
   function renderWall() {
     wall.innerHTML = "";
-    const visible = window.VAULT_THEMES.filter(t => currentFilter === "all" || t.mode === currentFilter);
+    const visible = window.vaultwares_themes.filter(t => currentFilter === "all" || t.mode === currentFilter);
     for (const t of visible) {
       const tile = document.createElement("div");
       tile.className = "tile" + (t.id === currentId ? " active" : "");

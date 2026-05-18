@@ -1,6 +1,6 @@
-# vault-themes
+# vaultwares-themes
 
-`vault-themes` is the shared VaultWares source of truth for brand direction,
+`vaultwares-themes` is the shared VaultWares source of truth for brand direction,
 design tokens, reusable UI references, theme exports, and agent/IDE guidance.
 
 The repo is intentionally small at the root. Start here:
@@ -26,7 +26,7 @@ npm install
 npm run build
 =======
 ```
-vault-themes/
+vaultwares-themes/
 ├── Brand/                         # Source of truth for all brand assets
 │   ├── BRAND_PHILOSOPHY.md        # Vision, mission, positioning, investor reference
 │   ├── tokens.ts                  # Design token definitions (colors, type, spacing)

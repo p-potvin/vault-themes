@@ -119,9 +119,9 @@ Port `themes.js` to your `theme_manager.py` as new `VaultTheme(...)` entries. Th
 
 ## The VaultWares spec — required theme picker
 
-Per [`vault-themes/AGENTS.md`](https://github.com/p-potvin/vault-themes/blob/main/AGENTS.md):
+Per [`vaultwares-themes/AGENTS.md`](https://github.com/p-potvin/vaultwares-themes/blob/main/AGENTS.md):
 
-> Every app that uses vault-themes must implement a theme picker with the 10 themes defined.
+> Every app that uses vaultwares-themes must implement a theme picker with the 10 themes defined.
 
 Library now provides **14**. Pick your favourite ten if you want to stay exactly within spec, or update the rule to ≥ 10.
 

@@ -1,11 +1,11 @@
-# Deploying this to vault-themes
+# Deploying this to vaultwares-themes
 
-These artifacts are ready to lift into [`p-potvin/vault-themes`](https://github.com/p-potvin/vault-themes). They replace nothing existing; they are net-new additions to a repo you already maintain.
+These artifacts are ready to lift into [`p-potvin/vaultwares-themes`](https://github.com/p-potvin/vaultwares-themes). They replace nothing existing; they are net-new additions to a repo you already maintain.
 
 ## What's in this folder
 
 ```
-dist-to-vault-themes/
+dist-to-vaultwares-themes/
 ├── README.md                              ← you are here
 ├── brand/
 │   └── ui-kit.md                          ← NEW canonical doc for the UI kit
@@ -20,9 +20,9 @@ dist-to-vault-themes/
 ### Step 1 — Add the canonical doc (1 minute)
 
 ```bash
-cp dist-to-vault-themes/brand/ui-kit.md \
-   ../vault-themes/brand/ui-kit.md
-cd ../vault-themes
+cp dist-to-vaultwares-themes/brand/ui-kit.md \
+   ../vaultwares-themes/brand/ui-kit.md
+cd ../vaultwares-themes
 git add brand/ui-kit.md
 git commit -m "docs(brand): add UI kit source of truth"
 ```
@@ -53,7 +53,7 @@ git push -u origin chore/vw-rules
 gh pr create --fill --base main
 ```
 
-**Automated.** Drop the GitHub Action from `sync-templates/host-targets.md` into `vault-themes/.github/workflows/`. Then any push to `vault-themes/main` opens a PR against every consumer within a minute.
+**Automated.** Drop the GitHub Action from `sync-templates/host-targets.md` into `vaultwares-themes/.github/workflows/`. Then any push to `vaultwares-themes/main` opens a PR against every consumer within a minute.
 
 ### Step 4 — Verify
 
@@ -76,9 +76,9 @@ Open a fresh chat in each host. Ask: *"What's the primary brand color?"* The ans
 
 ### 1. Pointer vs full content
 
-The managed block is intentionally **pointer-only** (~50 lines) — it lists the canonical files, the non-negotiables, the color quick-ref, and the anti-patterns. It does NOT duplicate the full UI kit doc. Reason: the more content lives in the block, the more it drifts. Anything an agent needs the full detail on, it should read from `vault-themes/brand/ui-kit.md` directly.
+The managed block is intentionally **pointer-only** (~50 lines) — it lists the canonical files, the non-negotiables, the color quick-ref, and the anti-patterns. It does NOT duplicate the full UI kit doc. Reason: the more content lives in the block, the more it drifts. Anything an agent needs the full detail on, it should read from `vaultwares-themes/brand/ui-kit.md` directly.
 
-If a consumer doesn't have `vault-themes` as a submodule, the block instructs the agent to fetch it before proceeding. This is the *correct* failure mode — better to pause than to act on stale info.
+If a consumer doesn't have `vaultwares-themes` as a submodule, the block instructs the agent to fetch it before proceeding. This is the *correct* failure mode — better to pause than to act on stale info.
 
 ### 2. MCP as the future state
 
@@ -99,9 +99,9 @@ MCP-capable hosts (Claude Desktop, Claude Code, Cursor + MCP, Windsurf + MCP, yo
 - A new `philosophy.md` — yours is already canonical, nothing to change.
 - A new `AGENTS.md` — yours is already canonical, this just adds `ui-kit.md` to its required-reading list (a 1-line patch).
 
-## One-line patch to vault-themes/AGENTS.md
+## One-line patch to vaultwares-themes/AGENTS.md
 
-In the "Required Reading" section of `vault-themes/AGENTS.md`, add this line:
+In the "Required Reading" section of `vaultwares-themes/AGENTS.md`, add this line:
 
 ```markdown
 - `brand/ui-kit.md`

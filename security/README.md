@@ -7,13 +7,13 @@ Zero-knowledge encryption module shared across all VaultWares projects.
 - **`crypto-vault.ts`** — ML-KEM + AES-256-GCM envelope encryption, Argon2id PIN derivation. Implements the [zero-knowledge encryption standard](https://github.com/p-potvin/vaultwares-docs/blob/main/security/zero-knowledge-encryption-standard.mdx) (Tier 1 SoT).
 - **`crypto-vault.test.ts`** — vitest unit suite covering ML-KEM-1024, ML-KEM-512, AES-only fallback, wrong-PIN rejection, lossless envelope (de)serialization.
 
-## Why this lives in vault-themes
+## Why this lives in vaultwares-themes
 
-Per VaultWares philosophy, vault-themes is the cross-cutting submodule for company-wide primitives. Encryption primitives are normative across every project (per the Tier 1 standard) and benefit from a single vetted implementation. Importing projects pull this submodule and import the source file directly.
+Per VaultWares philosophy, vaultwares-themes is the cross-cutting submodule for company-wide primitives. Encryption primitives are normative across every project (per the Tier 1 standard) and benefit from a single vetted implementation. Importing projects pull this submodule and import the source file directly.
 
 ## Consumer requirements
 
-The module imports from `@noble/post-quantum` and `@noble/hashes`. Consumer projects must declare these as their own dependencies — vault-themes does not ship a `package.json` since it is consumed as source, not as an npm package.
+The module imports from `@noble/post-quantum` and `@noble/hashes`. Consumer projects must declare these as their own dependencies — vaultwares-themes does not ship a `package.json` since it is consumed as source, not as an npm package.
 
 ```json
 "dependencies": {
@@ -24,10 +24,10 @@ The module imports from `@noble/post-quantum` and `@noble/hashes`. Consumer proj
 
 ## Importing
 
-From a consumer project (e.g. vault-central) where vault-themes is a git submodule at the repo root:
+From a consumer project (e.g. vault-central) where vaultwares-themes is a git submodule at the repo root:
 
 ```ts
-import { setupVault, unlockVault, encryptBlobWithUnlocked, decryptBlob } from '../vault-themes/security/crypto-vault';
+import { setupVault, unlockVault, encryptBlobWithUnlocked, decryptBlob } from '../vaultwares-themes/security/crypto-vault';
 ```
 
 Adjust the relative path to your project layout. Module is plain ESM TypeScript with no framework dependencies.

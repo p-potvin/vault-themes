@@ -7,7 +7,7 @@ The `MANAGED` block from `managed-block.md` is **identical content** across ever
 | Host / IDE | File path in each consumer repo | Notes |
 | --- | --- | --- |
 | **Claude Code · Claude.ai chat** | `CLAUDE.md` | Project root only; subfolders ignored. |
-| **OpenAI Codex CLI · `vaultwares-cli`** | `AGENTS.md` | Same convention as `vault-themes` itself. |
+| **OpenAI Codex CLI · `vaultwares-cli`** | `AGENTS.md` | Same convention as `vaultwares-themes` itself. |
 | **Cursor** | `.cursor/rules/vaultwares.mdc` | New format (multi-file rules). Legacy fallback: `.cursorrules`. |
 | **Windsurf** | `.windsurf/rules/vaultwares.md` | Legacy fallback: `.windsurfrules`. |
 | **GitHub Copilot** | `.github/copilot-instructions.md` | Single-file convention. |
@@ -84,7 +84,7 @@ Maintain this list in `docs/consumer-update-roadmap.md` (Tier-3). Today:
 - `vaultwares-cli`
 - `vault-player`
 - `vault-central`
-- `vault-themes` (self)
+- `vaultwares-themes` (self)
 - `vaultwares-pipelines`
 - `vault-guardian`
 - `vault-flows`
@@ -103,7 +103,7 @@ Any new VaultWares-org repo MUST be added here within 24h of creation.
 
 ## GitHub Action (recommended next step)
 
-Drop this in `vault-themes/.github/workflows/sync-managed-block.yml`:
+Drop this in `vaultwares-themes/.github/workflows/sync-managed-block.yml`:
 
 ```yaml
 name: Sync MANAGED block to consumers
@@ -113,7 +113,7 @@ on:
     paths:
       - "AGENTS.md"
       - "brand/**"
-      - "dist-to-vault-themes/sync-templates/managed-block.md"
+      - "dist-to-vaultwares-themes/sync-templates/managed-block.md"
 
 jobs:
   fan-out:
@@ -142,7 +142,7 @@ jobs:
           token: ${{ secrets.SYNC_PAT }}
           branch: auto-update-vaultwares-rules
           title: "chore: sync VaultWares MANAGED block"
-          body: "Auto-generated from vault-themes@${{ github.sha }}."
+          body: "Auto-generated from vaultwares-themes@${{ github.sha }}."
           commit-message: "chore: sync VaultWares MANAGED block"
 ```
 

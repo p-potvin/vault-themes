@@ -1,4 +1,4 @@
-# vault-themes / theme-manager
+# vaultwares-themes / theme-manager
 
 The **theme-manager** directory is the canonical distribution point for VaultWares
 design tokens across every language and platform that VaultWares products target.
@@ -30,8 +30,8 @@ theme-manager/
 ### 1. TypeScript / JavaScript (Vite, Next.js, any bundler)
 
 ```ts
-// Option A — direct import (vault-themes is a sibling/submodule)
-import { THEMES, VaultThemeManager } from "../vault-themes/theme-manager/exports/theme-manager";
+// Option A — direct import (vaultwares-themes is a sibling/submodule)
+import { THEMES, VaultThemeManager } from "../vaultwares-themes/theme-manager/exports/theme-manager";
 
 // Option B — if you copy or symlink the file
 import { THEMES, VaultThemeManager } from "./theme-manager";
@@ -67,7 +67,7 @@ Add **one** import in your project's main CSS file (e.g. `src/index.css`):
 
 ```css
 @import "tailwindcss";
-@import "../vault-themes/theme-manager/exports/vault-tailwind-v4.css";
+@import "../vaultwares-themes/theme-manager/exports/vault-tailwind-v4.css";
 ```
 
 This gives you utilities like `bg-background`, `text-text-primary`, `border-border`,
@@ -82,7 +82,7 @@ snippet above — the bridge only maps existing `--tokens` to Tailwind class nam
 
 ```js
 // tailwind.config.js
-const vaultExtend = require("./vault-themes/theme-manager/exports/theme-manager.tw");
+const vaultExtend = require("./vaultwares-themes/theme-manager/exports/theme-manager.tw");
 
 module.exports = {
     content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
@@ -102,13 +102,13 @@ module.exports = {
 ### 4. Python — PySide6 / Qt (QSS stylesheets)
 
 ```python
-# Option A — add vault-themes to sys.path
+# Option A — add vaultwares-themes to sys.path
 import sys
-sys.path.insert(0, '/path/to/vault-themes')
+sys.path.insert(0, '/path/to/vaultwares-themes')
 from theme_manager import THEMES, get_theme   # root-level convenience re-export
 
 # Option B — import directly from the exports file
-sys.path.insert(0, '/path/to/vault-themes/theme-manager/exports')
+sys.path.insert(0, '/path/to/vaultwares-themes/theme-manager/exports')
 from theme_manager import THEMES, VaultThemeManager, generate_qss
 
 # Usage
@@ -126,8 +126,8 @@ as attributes (snake_case). See `qt_exporter.py` for the full QSS generator.
 ### 5. Python — Package import (if installed as editable package)
 
 ```python
-# If vault-themes is installed with:  pip install -e .
-from vault_themes import THEMES, VaultThemeManager
+# If vaultwares-themes is installed with:  pip install -e .
+from vaultwares_themes import THEMES, VaultThemeManager
 ```
 
 The `theme-manager/python/__init__.py` re-exports the public API.
@@ -234,7 +234,7 @@ Every theme must define all 19 semantic tokens:
 ## Missing-Language Policy
 
 If your target language / platform does not have a theme manager file yet, create one
-in `vault-themes/theme-manager/exports/` following the naming convention:
+in `vaultwares-themes/theme-manager/exports/` following the naming convention:
 
 ```text
 theme-manager.<ext>    e.g. theme-manager.dart, theme-manager.swift, theme-manager.kt

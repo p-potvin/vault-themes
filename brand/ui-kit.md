@@ -1,7 +1,7 @@
 # VaultWares UI Kit — Source of Truth
 
 > **Last updated:** May 17, 2026 · **Version:** 0.1
-> **Canonical location:** `vault-themes/brand/ui-kit.md`
+> **Canonical location:** `vaultwares-themes/brand/ui-kit.md`
 > **Companion files:** [`brand-guide.md`](./brand-guide.md) · [`philosophy.md`](./philosophy.md) · [`tokens/tokens.ts`](./tokens/tokens.ts) · [`../AGENTS.md`](../AGENTS.md)
 
 This file is the canonical reference for **building VaultWares product UI** — desktop apps (Electron, PySide6, WinUI3), web SPAs, internal tools. It is read by every AI host operating on a VaultWares repository before any UI change.
@@ -123,7 +123,7 @@ Calm · precise · human · principled · competent. Closer to a premium noteboo
 
 ## 5. Component inventory
 
-Every primitive in the kit ships with the same posture: 30 px control height, hairline borders, paper-on-paper depth, mono metadata where appropriate. Sources: `vault-themes/components/` (when present) or the reference implementation in the design environment.
+Every primitive in the kit ships with the same posture: 30 px control height, hairline borders, paper-on-paper depth, mono metadata where appropriate. Sources: `vaultwares-themes/components/` (when present) or the reference implementation in the design environment.
 
 | Component | Shape | Notes |
 | --- | --- | --- |

@@ -2,10 +2,10 @@
    --------------------------------------------------------------------------
    For consumers using TypeScript. Pair with `themes.js`:
 
-       import "./themes.js"; // populates window.VAULT_THEMES
+       import "./themes.js"; // populates window.vaultwares_themes
        declare global {
          interface Window {
-           VAULT_THEMES: VaultTheme[];
+           vaultwares_themes: VaultTheme[];
            VAULT_THEME_BY_ID: Record<string, VaultTheme>;
            applyVaultTheme: (id: string, root?: HTMLElement) => VaultTheme | null;
            getVaultTheme: (id: string) => VaultTheme | undefined;
@@ -67,7 +67,7 @@ export interface VaultTheme {
   info_bg: string;
 }
 
-export declare const VAULT_THEMES: readonly VaultTheme[];
+export declare const vaultwares_themes: readonly VaultTheme[];
 export declare const VAULT_THEME_BY_ID: Readonly<Record<string, VaultTheme>>;
 
 /** Apply a theme by setting `--vt-*` CSS variables on `root` (default `<html>`). */

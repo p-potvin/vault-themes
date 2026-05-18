@@ -73,7 +73,7 @@ flat against dark surfaces.
 
 ### Color
 
-Color tokens live in `vault-themes.css` (auto-generated from the theme
+Color tokens live in `vaultwares-themes.css` (auto-generated from the theme
 manager) and are referenced via existing CSS variables: `--vault-bg`,
 `--vault-text`, `--vault-border`, `--vault-card-bg`, `--vault-muted`,
 `--vault-accent`, `--vault-accent-hover`. The dashboard never hardcodes hex
@@ -238,7 +238,7 @@ width changes on buttons). These are deliberate omissions.
 - All interactive elements receive `:focus-visible` rings via the global rule;
   do not override per-element.
 - Color contrast: text on backgrounds meets WCAG AA (≥4.5:1) in every theme
-  configuration. The auto-generated `vault-themes.css` is responsible for
+  configuration. The auto-generated `vaultwares-themes.css` is responsible for
   delivering compliant pairs; if you add a new theme, run a contrast check
   against `vault-text` over `vault-bg` AND `vault-text` over `vault-card-bg`.
 - The locked banner has `role="alert" aria-live="polite"`; the toast has
@@ -280,11 +280,11 @@ company-wide default. To reuse:
 1. Copy the `:root` token block + `body` rules + `:focus-visible` rule from
    `vault-central/src/styles/globals.css` into your project.
 2. Lift `.vault-card` and `.vault-btn` (or rename to your project's prefix).
-3. Pull color tokens from `vault-themes.css` via the existing theme manager
+3. Pull color tokens from `vaultwares-themes.css` via the existing theme manager
    so themes stay synchronized.
 4. Don't substitute different ease curves or durations. Consistency across
    products is more valuable than per-app tuning.
 
 If you find a gap (a state, a component class, an animation timing) not
-covered here, propose an addition to this document via the vault-themes
+covered here, propose an addition to this document via the vaultwares-themes
 repo so it becomes the single source of truth — don't fork the spec.
