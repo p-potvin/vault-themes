@@ -28,17 +28,28 @@ class QtThemeExporter:
         """
         t = theme  # alias
 
-        return f"""
+        self.stylesheet = f"""
             /* ── Base ─────────────────────────────────────────── */
-            QMainWindow, QDialog {{
-                background-color: {t.primary};
+            QMainWindow, QDialog, QWidget {{
+                background-color: {t.background};
                 color: {t.text};
-            }}
-
-            QWidget {{
                 font-family: 'Segoe UI', 'Inter', system-ui;
                 font-size: 12px;
-                color: {t.text};
+            }}
+
+            QSplitter::handle {{
+                background-color: transparent;
+            }}
+            QSplitter::handle:horizontal {{
+                width: 4px;
+            }}
+            QSplitter::handle:vertical {{
+                height: 4px;
+            }}
+
+            QScrollArea, QScrollArea > QWidget {{
+                background-color: transparent;
+                border: none;
             }}
 
             /* ── Labels ───────────────────────────────────────── */
@@ -46,6 +57,7 @@ class QtThemeExporter:
                 color: {t.text};
                 background: transparent;
             }}
+
 
             QLabel#SectionTitleConfig, QLabel#SectionTitleMonitor {{
                 color: {t.accent};

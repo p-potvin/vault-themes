@@ -87,7 +87,7 @@ class VaultThemeManager:
                 text="#EDE8DE",
                 text_muted="#8FA0A8",
                 text_inverse="#1C2226",
-                border="rgba(212,175,55,0.18)",
+                border="rgba(212,175,55,1)",
                 error="#E05C4A",        # terracotta — warm, fits gold palette
                 error_bg="rgba(224,92,74,0.14)",
                 warning="#E09D34",      # amber — analogous to gold
