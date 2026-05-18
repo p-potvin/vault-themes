@@ -1,0 +1,1 @@
+[app.jsx content from new-theme]
