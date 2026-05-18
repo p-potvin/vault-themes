@@ -11,6 +11,7 @@ Before changing UI, branding, design tokens, theme exports, agent instructions,
 auth UX, encrypted communication UX, or consumer propagation rules, read:
 
 - `brand/brand-guide.md`
+- `brand/ui-kit.md`
 - `brand/philosophy.md`
 - `brand/tokens/tokens.ts`
 - `brand/tokens/tailwind.config.ts`
