@@ -1,1 +1,0 @@
-[themes.d.ts content from new-theme]

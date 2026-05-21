@@ -1,1 +1,0 @@
-[components.jsx content from new-theme]

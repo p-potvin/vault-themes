@@ -1,1 +1,0 @@
-[themes.js content from new-theme]

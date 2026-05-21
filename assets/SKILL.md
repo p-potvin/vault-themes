@@ -1,5 +1,5 @@
 ---
-name: VaultWares
+name: VaultWares Branding
 description: Use whenever you design for VaultWares — the privacy-first cybersecurity company shipping hardware (VaultDrive, VaultHSM, VaultScan, VaultGate) and software (VaultCrypt, VaultAccess, VaultBackup, VaultMonitor). Calm, considered, bilingual EN/Quebec-FR. Solarized-inspired teal + paper grounds with gold (#CC9B21) accent and cyan (#21B8CC) interaction. Light Inter (or Segoe UI Semilight) typography, 8px spacing, hairline borders, soft blue-tinted shadows. The opposite of dark-terminal "hacker" security branding.
 ---
 
