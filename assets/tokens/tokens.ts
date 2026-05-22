@@ -13,8 +13,50 @@ export const vaultTokens = {
     green: '#4ECC21',
     burgundy: '#A63D40',
     deepSea: '#0A2540',
+    warmBg: '#F5F1E8',
+    warmRaised: '#FCFAF5',
+    warmMuted: '#ECE5D8',
+    consoleBg: '#161320',
+    consoleSurface: '#1F1A2B',
+    consoleRaised: '#2A2340',
+    consoleElevated: '#31274A',
+    consoleGold: '#D6A441',
+    consoleViolet: '#B07CFF',
+    signalOnline: '#6BE675',
+    signalRelay: '#55D6FF',
+    signalSync: '#B07CFF',
+    signalWarning: '#F0B94B',
+    signalAlert: '#FF6B7A',
     borderLight: 'rgba(0, 43, 54, 0.14)',
     borderDark: 'rgba(253, 246, 227, 0.18)',
+  },
+  operational: {
+    warm: {
+      background: '#F5F1E8',
+      raised: '#FCFAF5',
+      muted: '#ECE5D8',
+      textPrimary: '#161320',
+      textSecondary: '#746C82',
+      borderSubtle: 'rgba(22, 19, 32, 0.08)',
+    },
+    console: {
+      background: '#161320',
+      surface: '#1F1A2B',
+      raised: '#2A2340',
+      elevated: '#31274A',
+      textPrimary: '#FFFFFF',
+      textSecondary: 'rgba(237, 230, 255, 0.72)',
+      accent: '#D6A441',
+      accentSecondary: '#B07CFF',
+      borderSubtle: 'rgba(255, 255, 255, 0.06)',
+    },
+    signal: {
+      online: '#6BE675',
+      relay: '#55D6FF',
+      sync: '#B07CFF',
+      warning: '#F0B94B',
+      alert: '#FF6B7A',
+    },
   },
   semantic: {
     light: {
@@ -100,6 +142,7 @@ export const spacing = vaultTokens.spacing
 export const radius = vaultTokens.radius
 export const motion = vaultTokens.motion
 export const glass = vaultTokens.glass
+export const operational = vaultTokens.operational
 
 export type VaultTokens = typeof vaultTokens
 export type VaultMode = keyof typeof vaultTokens.semantic

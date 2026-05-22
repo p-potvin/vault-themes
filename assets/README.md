@@ -42,6 +42,8 @@ A privacy-first cybersecurity company shipping hardware and software products bu
 | `colors_and_type.css` | Canonical CSS variables — palette, type scale, spacing, radii, shadows, motion, glass. Import this in every prototype. |
 | `assets/logos/` | Wordmark variants, minimal "V" mark in gold/ink/mono, the wave logo, the bilingual SVG. |
 | `assets/favicons/` | Browser favicons by color and size. |
+| `console-operational-system.md` | Console-era operational branding layer from the VaultWares Console prototype. |
+| `assets/icons/vaultwares-console-icons.svg` | SVG symbol pack for operational and social glyphs from the console system. |
 | `preview/` | Design-system tab cards — palettes, type specimens, components, brand. |
 | `ui_kits/docs-site/` | Mintlify-style docs site (the live `docs.vaultwares.com` shape) recreated as a clickable React/JSX prototype. |
 | `ui_kits/brand-guide-app/` | The interactive brand-guide reference app from `vaultwares-themes/examples/brand-guide`. |
@@ -113,6 +115,14 @@ UI: `"Segoe UI Semilight" → "Segoe UI" → "Inter" weight 300`. Monospace: `"J
 **Backgrounds**
 
 Solid paper or solid base by default. Imagery is sparse, never decorative. When imagery appears it is product photography (matte hardware on neutral paper) or schematic line diagrams — **never** stock-photo people pointing at screens, **never** code-rain, **never** padlocks. Full-bleed gradients are forbidden; subtle radial fades from `paper-bright → paper` are allowed for hero panels only.
+
+**Console operational layer**
+
+The current web/app shell direction can also use the console operational layer in
+`console-operational-system.md`: warm shell surfaces (`#F5F1E8`,
+`#FCFAF5`, `#ECE5D8`) wrapped around deep aubergine console surfaces
+(`#161320`, `#1F1A2B`, `#2A2340`, `#31274A`). This layer is additive and should
+not replace the Solarized core tokens for documents or product UI.
 
 **Borders & dividers**
 
