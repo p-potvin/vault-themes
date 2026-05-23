@@ -12,12 +12,15 @@
   --vault-warm-border-subtle: rgba(22, 19, 32, 0.08);
 
   /* Console Mode / Terminal State */
-  --vault-console-bg: #161320;
-  --vault-console-surface: #1F1A2B;
+  --vault-console-bg: #0b0813;
+  --vault-console-surface: #13101c;
   --vault-console-raised: #2A2340;
-  --vault-console-elevated: #31274A;
+  --vault-console-elevated: #453763;
+  --vault-console-active: #614d8a;
+  --vault-console-text: #a394cc;
   --vault-console-border-subtle: rgba(255, 255, 255, 0.06);
   --vault-console-text-secondary: rgba(237, 230, 255, 0.72);
+      
 
   /* Accents */
   --vault-console-gold: #D6A441;

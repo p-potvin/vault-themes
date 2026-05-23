@@ -10,3 +10,4 @@ build/
 .vite/
 examples/brand-guide/dist/
 *.tsbuildinfo
+imports/
