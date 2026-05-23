@@ -221,5 +221,3 @@ Live SVGs at `assets/logos/vaultwares-wordmark-{light,dark}.svg` (from the docs 
 ## Caveats
 
 - **Font substitution flagged.** Segoe UI Semilight is Windows-only and not redistributable. We load **Inter weight 300** from rsms.me as the cross-platform stand-in. The brand-guide example app does the same. If you have licensed Segoe UI files, drop them in `fonts/` and update `--vault-font-sans`.
-- **Icon system substitution flagged.** The Mintlify docs site references FontAwesome by name in `docs.json`. The recreated docs UI kit uses **Lucide** instead (CDN), to match the React brand-guide app. Confirm if you want a FontAwesome variant.
-- **Theme color conflict.** `docs.json` declares `primary: #1E40AF`. The brand source of truth uses gold `#CC9B21`. We followed the brand repo. Update one or the other when you decide.
