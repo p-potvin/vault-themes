@@ -200,21 +200,22 @@ The Mintlify docs site (`docs.json`) uses **FontAwesome** icon names (`shield-ha
 - **No unicode glyphs as icons** (no `→` arrows, no `✓` check marks). Use Lucide.
 - **Do not draw replacement SVGs.** If the design needs an icon Lucide doesn't have, ask before substituting.
 
-**Logo as icon**
+**Logo — V+coil mark (May 2026)**
 
-The minimal V mark at `assets/logos/vaultwares-minimal-{gold,ink,mono}-filled.png` is used at favicon scale (16–32px). It is **not** a UI icon — it represents the brand only.
+The official logo is the standalone V+coil mark at `assets/logos/vaultwares-logo.svg` — gold V (#D6A441), ink coil ring (#241e36), gold coil center. No cyan, no wordmark in the mark itself.
 
-| Variant | Use |
-| --- | --- |
-| `…-gold-filled.png` | Default on dark backgrounds, app titlebars, dock icons. |
-| `…-ink-filled.png` | Light backgrounds, document headers. |
-| `…-mono-filled.png` / `-mono-v2.png` | Single-color contexts, embossing, watermarks. |
+| Variant | File | Use |
+| --- | --- | --- |
+| Master / light bg | `vaultwares-logo.svg` | Default everywhere. |
+| Light bg | `vaultwares-logo-light.svg` | Same as master; explicit light-mode copy. |
+| Dark bg | `vaultwares-logo-dark.svg` | Lighter coil stroke `rgba(237,230,255,0.72)`. |
+| Mono | `vaultwares-logo-mono.svg` | Single-color `#241e36`, print/watermark. |
 
-Never scale the minimal mark below 16×16px — switch to the full SVG wordmark instead. Never recolor with CSS filters; choose the right variant.
+Minimum height: **32px** digital, **10mm** print. Clear space: ½ logo height. Never stretch, recolor, rotate, or filter.
 
-**Wordmark**
+**Archived logo variants**
 
-Live SVGs at `assets/logos/vaultwares-wordmark-{light,dark}.svg` (from the docs repo) and `assets/logos/vaultwares-logo-{dark,mono}.svg` (from the brand repo). Minimum height: **32px** digital, **10mm** print. Clear space: ½ logo height. Never stretch, recolor, rotate, or filter.
+The previous minimal-V PNGs (gold-filled, ink-filled, mono-filled, mono-v2), `vaultwares-react-logo.jsx`, and `vw-gold-filled.ico` are archived in `assets/logos/_archive/`. They are preserved for historical reference but must not be used in new work.
 
 ---
 

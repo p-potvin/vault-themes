@@ -4,9 +4,21 @@
 Icons and glyphs in VaultWares Revisited are stark, utilitarian, and clean. They borrow heavily from technical schematics and HUD (Heads-Up Display) elements. 
 
 ## Primary Icon Library
-A dedicated set of React components or raw SVGs exported via `vaultwares-icons.tsx`. 
+Categorized React TSX components in `vaultwares-revisited/icons/`:
+
+| File | Categories |
+|---|---|
+| `navigation.tsx` | Dashboard, Menu, Settings, Search, Bell, User, Chevrons, Close, Check, Plus, Minus, Home |
+| `actions.tsx` | Edit, Trash, Copy, Download, Upload, ExternalLink, Filter, Refresh, Save, Link, GitCommit |
+| `monitoring.tsx` | Activity, BarChart, TrendUp/Down, AlertTriangle, Info, Clock, Calendar, Zap, PieChart |
+| `security.tsx` | Shield variants, Lock/Unlock, Key, Fingerprint, Eye, Scan, Bug, Hash |
+| `media.tsx` | Play, Pause, Stop, Skip, Volume |
+| `data.tsx` | Database, Server, Terminal, Document, FileText, Folder, List, Code |
+| `communication.tsx` | Mail, Phone, MessageSquare, Send, Globe |
+| `index.ts` | Barrel re-export of all categories |
+
 - **Stroke Width:** Generally bounded at `1.5` to `2` to ensure crispness on high-density displays.
-- **Coloring:** Never hardcoded. Icons must inherit `currentColor` or be specifically bound to `text-emerald-500` / `var(--vault-console-gold)` depending on state.
+- **Coloring:** Never hardcoded. Icons must inherit `currentColor` or be specifically bound to `var(--vault-console-gold)` depending on state.
 
 ## Rules for Usage
 1. **Action Icons:** 
