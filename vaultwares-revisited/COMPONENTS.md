@@ -3,6 +3,7 @@
 This document outlines standard primitives used across the VaultWares-Revisited design framework.
 
 ## 1. Shells & Backgrounds
+
 Shells control the primary background rendering, including subtle ambient glows to provide depth.
 
 - **`.vw-console-shell`**
@@ -14,6 +15,7 @@ Shells control the primary background rendering, including subtle ambient glows 
   Applies a subtle golden `radial-gradient` fading into the `--vault-warm-bg` parchment tone.
 
 ## 2. Cards & Containers
+
 Cards are transparent, glossy, and use specific compositing techniques.
 
 - **`.vw-card` (Console Card)**
@@ -27,9 +29,12 @@ Cards are transparent, glossy, and use specific compositing techniques.
   - Border-Radius: `28px`
 
 ## 3. Indicators (LEDs)
+
 To simulate hardware, "LED" elements are used to denote active states, connection statuses, or live syncs.
+
 - **`.vw-led`**
   Provides a very slow and subtle rhythmic hardware pulse.
+
   ```css
   @keyframes ledPulse {
     0% { opacity: 0.85; transform: scale(0.98); }
@@ -37,9 +42,12 @@ To simulate hardware, "LED" elements are used to denote active states, connectio
     100% { opacity: 0.85; transform: scale(0.98); }
   }
   ```
+
   *(Animation duration should be around 4s or longer to ensure subtlety)*
 
 ## 4. Scrollbars (Console specific)
+
 In Console Mode, native scrollbars are restyled to look like sleek terminal tracks:
+
 - Track: `#000`
 - Thumb: `--vault-console-raised` (Hover: `--vault-console-gold`)

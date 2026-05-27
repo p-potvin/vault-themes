@@ -5,6 +5,7 @@ All colors, fonts, and spacing constraints are defined by these core tokens. Nev
 ## 1. Color Palettes
 
 ### Warm Mode
+
 | Token | Hex | Usage |
 |---|---|---|
 | `--vault-warm-bg` | `#F5F1E8` | Deepest background for warm mode (the "desk") |
@@ -13,6 +14,7 @@ All colors, fonts, and spacing constraints are defined by these core tokens. Nev
 | `--vault-warm-border-subtle` | `rgba(22, 19, 32, 0.08)` | Dividers, borders in warm mode |
 
 ### Console Mode
+
 | Token | Hex | Usage |
 |---|---|---|
 | `--vault-console-bg` | `#161320` | Base canvas, app root background |
@@ -23,13 +25,16 @@ All colors, fonts, and spacing constraints are defined by these core tokens. Nev
 | `--vault-console-text-secondary`| `rgba(237, 230, 255, 0.72)` | Muted text in console mode |
 
 ### Brand Accents
+
 | Token | Hex | Usage |
 |---|---|---|
 | `--vault-console-gold` | `#D6A441` | Primary brand accent for the terminal. Links, highlights, primary buttons. |
 | `--vault-console-violet` | `#B07CFF` | Secondary accent. Focus rings, secondary highlights, sync indicators. |
 
 ### Signal Colors (Status)
+
 The "Signal" palette replaces standard red/green/yellow with a neon, LED-like palette.
+
 | Token | Hex | Meaning |
 |---|---|---|
 | `--vault-signal-online` | `#6BE675` | Success, operational, secured, healthy |
@@ -39,5 +44,6 @@ The "Signal" palette replaces standard red/green/yellow with a neon, LED-like pa
 | `--vault-signal-alert` | `#FF6B7A` | Critical failures, destructive actions |
 
 ## 2. Typography Tokens
-- `--font-sans`: `"Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif`
-- `--font-mono`: `"JetBrains Mono", ui-monospace, SFMono-Regular, monospace`
+
+- `--font-sans`: `"Segoe UI", "Inter", "ui-sans-serif", "system-ui", sans-serif`
+- `--font-mono`: `"JetBrains Mono", "Lucide Console", "ui-monospace", "SFMono-Regular", monospace`

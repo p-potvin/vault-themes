@@ -1,17 +1,18 @@
-# VaultWares-Revisited: Temporary Website Design System
-
-> **⚠️ AGENT NOTICE: TEMPORARY SECTION**
-> This directory (`vaultwares-revisited`) and its contents are a **temporary** and experimental staging area for the VaultWares website branding. Agents should **NOT** consult or use this section for styling any project. It is strictly a sandbox. Always use the canonical `VaultThemeManager` in the root of `vaultwares-themes`.
+# VaultWares-Revisited: Design System
 
 ## Overview
-The "VaultWares-Revisited" design system represents an evolution of VaultWares's identity, merging its classic "Paper & Gold" secure-facility aesthetic with a "Hacker Console" dynamic.
+
+VaultWares-Revisited represents an evolution of VaultWares's identity, merging its classic "Paper & Gold" secure-facility aesthetic with a "Hacker Console" dynamic.
 
 ## Core Aesthetic
+
 We utilize a dual-mode visual language, moving away from simple binary contrasts towards "Warm/Console":
+
 1. **Console Mode:** Represents terminals, servers, hacking tools, and active operations. Dominated by deep aubergine/midnight tones (`#161320`), technical glowing accents, and signal LEDs.
 2. **Warm Mode:** Represents physical documents, memos, ledgers, and institutional trust. Dominated by off-white parchment/linen (`#F5F1E8`), muted borders, and stark contrast ink.
 
 ## Directory Structure
+
 - [PHILOSOPHY.md](./PHILOSOPHY.md) - Conceptual guidelines, company tone, and branding philosophy.
 - [TOKENS.md](./TOKENS.md) - Exact CSS variables, color palettes, and typography rules.
 - [COMPONENTS.md](./COMPONENTS.md) - Primitive UI components like cards, shells, LEDs, and scrollbars.
