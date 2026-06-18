@@ -19,17 +19,23 @@ The system was assembled from the following materials. All paths below are read-
 | **Local asset folder** (mounted, read-only) | `assets/{logos,favicons,icons,source}` | Wordmark + minimal-V PNG/SVG variants, favicon set |
 | **Uploaded files** | `uploads/vaultwares-*` | Same logo set, plus `vaultwares-react-logo.jsx` placeholder |
 
-> Tokens here intentionally follow `vaultwares-themes/brand/tokens/tokens.ts` rather than the `docs.json` Mintlify theme (which uses a default Tailwind-blue `#1E40AF` set). The brand-guide repo is the canonical source.
+> Tokens here intentionally follow `vaultwares-themes/brand/tokens/tokens.ts`
 
 ---
 
-## What VaultWares makes
+## What is VaultWares
 
-A privacy-first cybersecurity company shipping hardware and software products built entirely from FOSS components. Bilingual EN/FR (Quebec French) as a product requirement, not an afterthought. Primary markets: Canada, France, EU.
+A privacy-first cybersecurity/software company selling hardware and software products built entirely from FOSS components. Bilingual EN/QC (Quebec French) as a product requirement, not an afterthought. Primary markets: Canada, USA, EU.
 
-**Hardware** — VaultDrive (encrypted USB storage), VaultHSM (hardware security modules), VaultScan (biometric terminals), VaultGate (network appliance).
+**Hardware**:
+VaultDrive (encrypted storage), VaultSentry (IDS), VaultSentinel (IDS/Ad blocker/Secure DNS), VaultMobile (GrapheneOS or QubesOS RISC-V phones), VaultWares HomeBox (Drop-in Single-Arm Gateway for Consumers), VaultKey (FiDO 2 hardware key).
 
-**Software** — VaultCrypt (encryption), VaultAccess (zero-trust IAM), VaultBackup (encrypted backup/DR), VaultMonitor (SIEM threat detection).
+**Software**: 
+- Vault Flows (node-based workflows for everyone)
+- Vault Explorer (secure home media server)
+- Vault Guardian (egress traffic blocker)
+- VaultWares Toolkit (Tools for integrating popular AI providers in your business' workflow).
+- See Github for more
 
 **Tagline** — *"Privacy first. Security in service."* · *"Your data. Your rules. VaultWares."*
 
@@ -42,10 +48,10 @@ A privacy-first cybersecurity company shipping hardware and software products bu
 | `colors_and_type.css` | Canonical CSS variables — palette, type scale, spacing, radii, shadows, motion, glass. Import this in every prototype. |
 | `assets/logos/` | Wordmark variants, minimal "V" mark in gold/ink/mono, the wave logo, the bilingual SVG. |
 | `assets/favicons/` | Browser favicons by color and size. |
-| `console-operational-system.md` | Console-era operational branding layer from the VaultWares Console prototype. |
+| `console-operational-system.md` | Console mode / Warm Mode branding layer from the VaultWares Redesign. |
 | `assets/icons/vaultwares-console-icons.svg` | SVG symbol pack for operational and social glyphs from the console system. |
 | `preview/` | Design-system tab cards — palettes, type specimens, components, brand. |
-| `ui_kits/docs-site/` | Mintlify-style docs site (the live `docs.vaultwares.com` shape) recreated as a clickable React/JSX prototype. |
+| `ui_kits/docs-site/` | React/JSX docs site (the live `docs.vaultwares.com` shape) prototype |
 | `ui_kits/brand-guide-app/` | The interactive brand-guide reference app from `vaultwares-themes/examples/brand-guide`. |
 | `SKILL.md` | Cross-compatible Claude Skill definition (brand voice + token use + asset inventory). |
 
@@ -58,16 +64,17 @@ VaultWares copy is **calm, precise, human, principled, and competent**. Writing 
 **Voice rules**
 
 - Second person ("you"), active voice. The product speaks plainly to the reader.
+- Never pretend data collection is done in the name of security. Always state that it is optional.
 - State what is true. Do not perform urgency. A locked vault is a locked vault — not "fortress-grade protection."
-- Bilingual parity (EN / Quebec FR) is required for any user-facing string. Layouts must tolerate French strings being **15–20% longer** than English.
+- Bilingual parity (EN / QC French) is required for any user-facing string. Layouts must tolerate French strings being **15–20% longer** than English.
 - Tagline anchors: *"Privacy first. Security in service."* / *"La confidentialité d'abord. La sécurité au service."*
-- No emoji in product UI or marketing surfaces. Icon system carries that load.
+- No emoji in product UI or marketing surfaces. SVG Icon system carries that load.
 
 **Casing**
 
 - Sentence case for buttons, menu items, and titles ("Continue", "Initialize device", "Vault secured").
 - Title Case only for proper nouns and theme/product names ("Golden Slate", "VaultDrive Enterprise").
-- Product names are one word, gold-cap V: **VaultWares**, **VaultDrive**, **VaultHSM**.
+- Product names usually include Vault or VaultWares as a prefix, with gold-cap V: **VaultWares Toolkit**, **VaultFlows**, **VaultGuardian**.
 
 **Forbidden language**
 
@@ -77,14 +84,14 @@ VaultWares copy is **calm, precise, human, principled, and competent**. Writing 
 | "military-grade encryption" | Name the algorithm. ("AES-256-XTS") or just *"Vault secured."* |
 | "hacker-proof", "bulletproof" | Honest scope. ("Tamper-evident", "Verified by FIPS 140-3 Level 3") |
 | "CRITICAL SECURITY WARNING" | "We noticed something. Here's what to do." |
-| "Proceed" | "Continue" |
 | Competitor product names | — |
+| Condescending language | Real terms |
 
 **Voice examples — show, don't tell**
 
 | Instead of… | We say… |
 | --- | --- |
-| "Encrypted with military-grade AES-256!" | "Vault secured." |
+| "Encrypted with military-grade AES-256!" | "Secured with zero-knowledge enryption." |
 | "Critical security warning!" | "We noticed something. Here's what to do." |
 | "Proceed to authentication." | "Continue." |
 | "We collect this for your security." | "This is optional and off by default." |

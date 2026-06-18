@@ -3,6 +3,10 @@
 `vaultwares-themes` is the shared VaultWares source of truth for brand direction,
 design tokens, reusable UI references, theme exports, and agent/IDE guidance.
 
+## IMPORTANT
+
+The old theme has been replaced by VaultWares Redesign, using warm mode (paper color) and console mode (aubergine, deep purple) together coexisting inside the same apps. New LEDs with 5 different colors, a slow smooth pulsing animation to be used sparsely to represent connectivity, active/working state. Fonts are Inter, Segoe UI, regular weight for serif and sans-serif fonts. JetBrains Mono Thin/Regular is used for console logs, code snippets, monospace fonts. The golden V is the official logo, icon and favicon.
+
 The repo is intentionally small at the root. Start here:
 
 | File / folder | Purpose |

@@ -90,8 +90,8 @@ export const vaultTokens = {
   },
   typography: {
     fontFamily: {
-      sans: ['"Segoe UI Semilight"', '"Segoe UI"', 'Inter', 'system-ui', 'sans-serif'],
-      mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      sans: ['"Segoe UI"', 'Inter', 'system-ui', 'sans-serif'],
+      mono: ['"JetBrains Mono"', 'SF Pro mono', 'SFMono-Regular', 'monospace'],
     },
     scale: {
       display: { fontSize: '56px', lineHeight: '64px', fontWeight: 300 },

@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "vaultwares-themes"
 version = "1.0.0"
-description = "VaultWares design system — theme tokens, color palette, and Qt exporter"
+description = "VaultWares design system — theme tokens, color palette, exporters, assets"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"

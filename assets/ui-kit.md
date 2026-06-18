@@ -15,7 +15,7 @@ If anything in this file conflicts with a host repo's stricter accessibility, se
 | This document defines | This document does NOT define |
 | --- | --- |
 | Component vocabulary, voice, motion, density, portability | Marketing pages, blog posts, docs.vaultwares.com (those live in `vaultwares-docs`) |
-| The instrument-grade UI for products (VaultMonitor admin, VaultCrypt client, etc.) | One-off internal scripts or developer-only CLIs |
+| The instrument-grade UI for products (Vault Monitor,  stats.vaultwares.ca, etc.) | One-off internal scripts or developer-only CLIs |
 | Token usage rules for any framework | Hex values themselves — those live in `tokens/tokens.ts` |
 | The EN ⇄ FR bilingual contract for visible strings | Translations themselves — those live in `i18n/brand.i18n.ts` |
 
@@ -34,7 +34,7 @@ VaultWares products are **professional instruments**, not websites. The componen
 | Bubble-pill status badges | 6 px colored dot + label, no chrome |
 | Page-level breadcrumbs | Tabstrip embedded in the title bar |
 | Pages of text | Dense lists with monospace metadata |
-| Full-bleed marketing hero | Two paper tones layered, depth from value not blur |
+| Full-bleed marketing hero | Console mode (main actions, aubergine-color) surrounded by Warm mode (menu, nav-bar, paper-color) |
 | Toast over a hero panel | Corner-docked toasts + status-bar messages |
 
 If a request looks like a website, *first* confirm it's actually a website (marketing surface) and not a product UI. Default assumption: it's a product UI.
@@ -47,29 +47,13 @@ Source of truth: [`tokens/tokens.ts`](./tokens/tokens.ts). Never hardcode hex, s
 
 ### Color
 
-| Token | Hex | Role |
-| --- | --- | --- |
-| `vault.base` | `#002B36` | Dark surface — deep teal (NOT black) |
-| `vault.paper` | `#FDF6E3` | Light surface — warm paper (NOT white) |
-| `vault.paperBright` | `#FDFCF7` | Elevated light surface |
-| `vault.ink` | `#002B36` | Primary text on paper |
-| `vault.slate` | `#4A5459` | Secondary text / surface |
-| `vault.muted` | `#586E75` | Captions / metadata |
-| `vault.deepSea` | `#0A2540` | Alt enterprise navy |
-| `vault.gold` | `#CC9B21` | **Primary brand accent** — V mark, primary actions, brand surfaces only |
-| `vault.gold.muted` | `#B78C1E` | Gold hover/pressed |
-| `vault.gold.light` | `#E5C06A` | Gold tint, dark-mode accent |
-| `vault.cyan` | `#21B8CC` | **Interaction signal** — focus, links, primary control radios |
-| `vault.green` | `#4ECC21` | Secured / success / "live" toggles |
-| `vault.burgundy` | `#A63D40` | Error / destructive |
-
-**Inviolable rules.** Gold = brand. Cyan = interaction. Green = secured/live. Burgundy = destructive. They never swap roles. Translucent semantic backgrounds use 12–15% alpha of the corresponding semantic color.
+See `.\tokens\tokens.ts`
 
 ### Typography
 
 ```
-sans: "Segoe UI Semilight", "Segoe UI", "Inter", system-ui, sans-serif   (weight 300)
-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace
+sans: "Segoe UI", "Inter", system-ui, sans-serif (weight 300)
+mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace
 ```
 
 Inter 300 is the cross-platform fallback for Segoe UI Semilight (not redistributable). Light weight is intentional — VaultWares does not shout.
@@ -81,7 +65,7 @@ Inter 300 is the cross-platform fallback for Segoe UI Semilight (not redistribut
 - **Motion**: `120ms` (taps) · `180ms` (state) · `240ms` (entry/exit). Easing: `cubic-bezier(0.2, 0.8, 0.2, 1)` for entries, `cubic-bezier(0.4, 0, 0.2, 1)` for state. **No infinite decorative loops.**
 - **Borders**: 1 px hairlines. `rgba(0,43,54,0.14)` on paper, `rgba(253,246,227,0.18)` on dark. 2 px reserved for focused/selected.
 
-### Glass (sparingly)
+### Glass (very sparingly)
 
 Glass is a *supporting* effect, not the identity. **Never full-page blur.** Three levels: `8 / 16 / 20 px`. **In product UI we default to NO glass** — the paper-on-paper layering carries depth. Glass is reserved for command palettes and the rare focused overlay.
 
@@ -95,7 +79,7 @@ Calm · precise · human · principled · competent. Closer to a premium noteboo
 
 - Second person, active voice. Sentence case.
 - Bilingual parity EN ↔ Quebec FR for every visible string. Layouts tolerate FR being **15–20% longer**.
-- Date format: `April 24, 2026` (EN) · `24 avril 2026` (FR).
+- Date format: `Mon, Apr 24 2026` (EN) · `Lun, 24 avril 2026` (FR).
 - Quebec French — *courriel* (not *email*), *fichier* (not *file*), *téléverser* (not *uploader*).
 - No emoji in product UI, marketing, or docs.
 - No unicode glyphs as UI icons (no `→`, no `✓`). Use Lucide.
@@ -109,8 +93,7 @@ Calm · precise · human · principled · competent. Closer to a premium noteboo
 | "just", "simply", "easy" (unless factually proven) | Describe the steps. |
 | "military-grade" / "fortress-grade" | Name the algorithm, or just *"Vault secured."* |
 | "hacker-proof" / "bulletproof" | Honest scope: "Tamper-evident", "Verified by FIPS 140-3 L3" |
-| "CRITICAL SECURITY WARNING" | *"We noticed something. Here's what to do."* |
-| "Proceed" | *"Continue."* |
+| "CRITICAL SECURITY WARNING" | *"Something important requires your attention."* |
 | "We collect this for your security." | *"This is optional and off by default."* |
 | Competitor product names | — |
 
@@ -123,20 +106,20 @@ Calm · precise · human · principled · competent. Closer to a premium noteboo
 
 ## 5. Component inventory
 
-Every primitive in the kit ships with the same posture: 30 px control height, hairline borders, paper-on-paper depth, mono metadata where appropriate. Sources: `vault-themes/components/` (when present) or the reference implementation in the design environment.
+Every primitive in the kit ships with the same posture: 20 px control height, hairline borders, paper-on-paper depth, mono metadata where appropriate. Sources: `vaultwares-themes/components/` (when present) or the reference implementation in the design environment.
 
 | Component | Shape | Notes |
 | --- | --- | --- |
-| **Button** | 30 px height · 7 px radius · 13 px text | Variants: `primary` (gold, paper text), `secondary` (paper-bright, hairline), `ghost` (transparent), `danger` (burgundy text + border). Sizes `sm` 26 / `md` 30 / `lg` 34. Keyboard hints (`Kbd`) live *inside* the button. |
-| **IconButton** | 28 px square · ghost by default | Always carries an `aria-label`. |
-| **Input** | 32 px height · 7 px radius · cyan focus (3 px halo @ 22% alpha) | `.mono` variant for IDs, paths, fingerprints. Error → burgundy border + soft burgundy halo. |
-| **PasswordInput** | Input + eye toggle | Toggle is icon-only, 22 px. |
+| **Button** | 20 px height · 7 px radius · 13 px text | Variants: `primary` (gold, paper text), `secondary` (paper-bright, hairline), `ghost` (transparent), `danger` (burgundy text + border). Sizes `sm` 26 / `md` 30 / `lg` 34. Keyboard hints (`Kbd`) live *inside* the button. |
+| **IconButton** | 18 px square · ghost by default | Always carries an `aria-label`. |
+| **Input** | 22 px height · 7 px radius · purple focus (3 px halo @ 22% alpha) | `.mono` variant for IDs, paths, fingerprints. Error → burgundy border + soft burgundy halo. |
+| **PasswordInput** | Input + eye toggle | Toggle is icon-only, 12 px. |
 | **SearchInput** | Input + leading search icon + trailing `Kbd` | Default kbd hint: `⌘K`. |
-| **Select** | 32 px · inline-SVG chevron · 10 px right padding | `appearance: none` cross-browser. Cursor `pointer`. |
+| **Select** | 22 px · inline-SVG chevron · 10 px right padding | `appearance: none` cross-browser. Cursor `pointer`. |
 | **Textarea** | Auto-height · min 80 px · resize vertical | |
-| **Toggle** | 32 × 18 pill · GREEN when ON | Off state is `rgba(0,43,54,0.18)`. Hover deepens. |
-| **Checkbox** | 16 px · GOLD when ON | Brand action — gold reads as "I'm asserting this." |
-| **Radio** | 16 px · CYAN when ON | Interaction — cyan reads as "I picked this." |
+| **Toggle** | 22 × 12 pill · GREEN when ON | Off state is `rgba(0,43,54,0.18)`. Hover deepens. |
+| **Checkbox** | 10 px · GOLD when ON | Brand action — gold reads as "I'm asserting this." |
+| **Radio** | 10 px · Purple when ON | Interaction — purple reads as "I picked this." |
 | **Status** | 6 px dot + label | Tones: `secured` (green) · `update` (gold) · `idle` (muted) · `locked` (burgundy) · `offline` (faint). `pulse` for live states only. |
 | **Badge** | 18 px height · mono · 10 px · uppercase | Tones: `default` `outline` `fips` (deep-sea + gold) `gold` (filled) `success` `warning` `danger` `info`. |
 | **Tag** | 20 px pill · removable `x` | Lower density than Badge. Use for free-form labels. |
@@ -198,7 +181,7 @@ Lucide is the default. 1.5–2 px stroke, rounded joins, never filled (except th
 
 | Use case | Lucide name |
 | --- | --- |
-| Brand mark in titlebars / dock | (use `vaultwares-minimal-{gold,ink,mono}-filled.png` — this is **brand**, not a UI icon) |
+| Brand mark in titlebars / dock | (use `vaultwares-minimal-gold-filled.png` — this is **brand**, not a UI icon) |
 | Secured / vault | `shield-check` |
 | Lock / encrypt | `lock` |
 | Key / rotate | `key` / `rotate-cw` |

@@ -29,30 +29,10 @@
   --vault-console-border-subtle: rgba(255, 255, 255, 0.06);
   --vault-warm-border-subtle: rgba(22, 19, 32, 0.08);
   --vault-console-text-secondary: rgba(237, 230, 255, 0.72);
-  --vault-font-sans: "Segoe UI Semilight", "Segoe UI", Inter, system-ui, sans-serif;
-  --vault-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --vault-font-sans: "Segoe UI", Inter, system-ui, sans-serif;
+  --vault-font-mono: 'JetBrains Mono', 'SF Mono Regular', ui-monospace, monospace;
   --vault-radius: 8px;
   --vault-radius-panel: 20px;
   --vault-motion-base: 180ms;
   --vault-glass-blur-panel: 16px;
-}
-
-:root,
-[data-vault-theme="light"] {
-  --vault-background: var(--vault-paper);
-  --vault-surface: var(--vault-paper-bright);
-  --vault-surface-elevated: rgba(253, 252, 247, 0.86);
-  --vault-text-primary: var(--vault-ink);
-  --vault-text-secondary: var(--vault-muted);
-  --vault-border-subtle: rgba(0, 43, 54, 0.14);
-}
-
-[data-vault-theme="dark"],
-.dark {
-  --vault-background: var(--vault-base);
-  --vault-surface: var(--vault-slate);
-  --vault-surface-elevated: rgba(74, 84, 89, 0.72);
-  --vault-text-primary: var(--vault-paper);
-  --vault-text-secondary: #D8D0B8;
-  --vault-border-subtle: rgba(253, 246, 227, 0.18);
 }
