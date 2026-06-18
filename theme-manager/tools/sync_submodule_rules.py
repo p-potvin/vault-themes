@@ -80,19 +80,7 @@ TARGETS = {
     "codex": Target("codex", Path("AGENTS.md"), MANAGED_BLOCK),
     "claude": Target("claude", Path("CLAUDE.md"), MANAGED_BLOCK),
     "copilot": Target("copilot", Path(".github/copilot-instructions.md"), MANAGED_BLOCK),
-    "cursor": Target("cursor", Path(".cursor/rules/vaultwares.mdc"), MANAGED_BLOCK),
-    "cursorrules": Target("cursorrules", Path(".cursorrules"), MANAGED_BLOCK),
-    "windsurf": Target("windsurf", Path(".windsurf/rules/vaultwares.md"), MANAGED_BLOCK),
-    "windsurfrules": Target("windsurfrules", Path(".windsurfrules"), MANAGED_BLOCK),
-    "continue": Target("continue", Path(".continue/rules/vaultwares.md"), MANAGED_BLOCK),
-    "vscode": Target("vscode", Path(".vscode/vaultwares-themes.instructions.md"), MANAGED_BLOCK),
-    "cli": Target("cli", Path("CONTEXT.md"), MANAGED_BLOCK),
-    "tui": Target("tui", Path("TUI_AGENTS.md"), MANAGED_BLOCK),
-    "aider": Target("aider", Path("CONVENTIONS.md"), MANAGED_BLOCK),
-    "gemini": Target("gemini", Path("GEMINI.md"), MANAGED_BLOCK),
-    "zed": Target("zed", Path(".rules"), MANAGED_BLOCK),
-    "cody": Target("cody", Path(".cody/rules/vaultwares.md"), MANAGED_BLOCK),
-    "jb": Target("jb", Path(".idea/aiassistant/context.md"), MANAGED_BLOCK),
+    "gemini": Target("gemini", Path("GEMINI.md"), MANAGED_BLOCK)
 }
 
 
