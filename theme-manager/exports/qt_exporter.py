@@ -355,3 +355,125 @@ class QtThemeExporter:
             /* Use inline style="color: ..." in log messages, e.g.: */
             /* f"<span style='color: {{theme.error}}'>error message</span>" */
         """
+
+    def generate_revisited_console_qss(self) -> str:
+        \"\"\"
+        Generates PySide6 QSS specifically for the VaultWares Revisited Console Mode.
+        \"\"\"
+        return \"\"\"
+            /* -- Console Base ------------------------------------------- */
+            QWidget#ConsoleShell {
+                background-color: #161320;
+                color: #a394cc;
+            }
+
+            /* -- Cards & Containers ------------------------------------ */
+            QFrame.vw-card {
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                background-color: #2A2340;
+                border-radius: 28px;
+            }
+
+            /* -- Labels ----------------------------------------- */
+            QLabel {
+                color: #a394cc;
+                background: transparent;
+                font-family: 'Segoe UI', 'Inter', system-ui;
+            }
+
+            /* -- Inputs ----------------------------------------- */
+            QLineEdit, QTextEdit, QSpinBox, QComboBox {
+                background-color: #1F1A2B;
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: 7px;
+                padding: 5px 10px;
+                min-height: 30px;
+                color: #a394cc;
+                selection-background-color: #D6A441;
+                selection-color: #161320;
+            }
+            QLineEdit:focus, QTextEdit:focus, QSpinBox:focus, QComboBox:focus {
+                border: 1.5px solid #D6A441;
+                background-color: #31274A;
+            }
+
+            /* -- Buttons ---------------------------------------- */
+            QPushButton {
+                background-color: #1F1A2B;
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: 8px;
+                padding: 7px 16px;
+                color: #a394cc;
+                font-weight: 500;
+                min-height: 30px;
+            }
+            QPushButton:hover {
+                background-color: #31274A;
+                border-color: #B07CFF;
+            }
+            QPushButton.primary {
+                background-color: #D6A441;
+                color: #161320;
+                font-weight: 700;
+                border: none;
+            }
+            QPushButton.primary:hover {
+                background-color: #B07CFF;
+            }
+
+            /* -- Progress Bar ----------------------------------- */
+            QProgressBar {
+                background-color: #1F1A2B;
+                border: none;
+                border-radius: 8px;
+                text-align: center;
+                color: #a394cc;
+                font-size: 10px;
+                font-weight: 600;
+            }
+            QProgressBar::chunk {
+                background-color: #B07CFF;
+                border-radius: 8px;
+            }
+        \"\"\"
+
+    def generate_revisited_warm_qss(self) -> str:
+        \"\"\"
+        Generates PySide6 QSS specifically for the VaultWares Revisited Warm Mode.
+        \"\"\"
+        return \"\"\"
+            /* -- Warm Base ------------------------------------------- */
+            QWidget#WarmShell {
+                background-color: #F5F1E8;
+                color: #161320;
+            }
+
+            /* -- Cards & Containers ------------------------------------ */
+            QFrame.vw-warm-card {
+                border: 1px solid rgba(22, 19, 32, 0.08);
+                background-color: #FCFAF5;
+                border-radius: 28px;
+            }
+
+            /* -- Labels ----------------------------------------- */
+            QLabel {
+                color: #161320;
+                background: transparent;
+                font-family: 'Segoe UI', 'Inter', system-ui;
+            }
+
+            /* -- Buttons ---------------------------------------- */
+            QPushButton {
+                background-color: #FCFAF5;
+                border: 1px solid rgba(22, 19, 32, 0.08);
+                border-radius: 8px;
+                padding: 7px 16px;
+                color: #161320;
+                font-weight: 500;
+                min-height: 30px;
+            }
+            QPushButton:hover {
+                background-color: #ECE5D8;
+                border-color: #161320;
+            }
+        \"\"\"
