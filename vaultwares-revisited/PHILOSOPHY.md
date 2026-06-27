@@ -12,15 +12,17 @@ VaultWares is positioned as a highly secure, sophisticated, and slightly mysteri
 
 The visual language is divided into two conceptual spaces:
 
-### 1. The Console State
+### 1. The Console State (The Operational Core)
 
-- **Concept:** The operational surface. This is where active monitoring, code execution, and telemetry occur.
-- **Visuals:** Deep aubergine and indigo (`--vault-console-bg`). Elements look slightly elevated, etched, or glowing, mimicking a high-end CLI terminal. Radiating glows simulate CRT screen bleed.
+- **Concept:** The central container where active monitoring, code execution, run logs, modals, and telemetry occur. It is the active "screen" sitting on the desk.
+- **Visuals:** Deep aubergine and indigo (`--vault-console-bg`). Elements look opaque and matte (avoid glassmorphism), mimicking high-end etched hardware displays. Radiating glows simulate CRT screen bleed.
 
-### 2. The Warm Document State
+### 2. The Warm Document State (The Structural Frame)
 
-- **Concept:** The archival surface. This is where ledgers, read-only data, public-facing company descriptions, and official documents live.
+- **Concept:** The structural skeleton and archival surface. This provides the app's routing frame (navigation bars, headers, side drawers) and houses read-only data or ledgers. It is the physical desk.
 - **Visuals:** Papery, physical, and grounded. Employs parchment backgrounds (`--vault-warm-bg`) to reduce eye strain, reminiscent of a printed manual or top-secret dossier.
+
+**Integration Philosophy:** By wrapping the highly technical, dark Console workspace inside the lighter, grounded Warm navigation frame, we achieve the distinct "Swiss bank meets zero-day penetration testing" aesthetic.
 
 ## Typography
 

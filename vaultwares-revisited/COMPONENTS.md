@@ -16,11 +16,11 @@ Shells control the primary background rendering, including subtle ambient glows 
 
 ## 2. Cards & Containers
 
-Cards are transparent, glossy, and use specific compositing techniques.
+Cards are opaque, matte, and designed to look like solid hardware panels or physical paper, strictly avoiding frosted "glassmorphism."
 
 - **`.vw-card` (Console Card)**
   - Border: `1px solid var(--vault-console-border-subtle)`
-  - Background: `color-mix(in srgb, var(--vault-console-raised) 86%, transparent)` (Slightly transparent for depth)
+  - Background: `var(--vault-console-raised)` (Opaque matte finish)
   - Border-Radius: `28px` (High radius for a modern smooth feel)
 
 - **`.vw-warm-card` (Warm Card)**
