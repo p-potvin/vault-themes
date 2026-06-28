@@ -357,10 +357,10 @@ class QtThemeExporter:
         """
 
     def generate_revisited_console_qss(self) -> str:
-        \"\"\"
+        """
         Generates PySide6 QSS specifically for the VaultWares Revisited Console Mode.
-        \"\"\"
-        return \"\"\"
+        """
+        return """
             /* -- Console Base ------------------------------------------- */
             QWidget#ConsoleShell {
                 background-color: #161320;
@@ -435,13 +435,13 @@ class QtThemeExporter:
                 background-color: #B07CFF;
                 border-radius: 8px;
             }
-        \"\"\"
+        """
 
     def generate_revisited_warm_qss(self) -> str:
-        \"\"\"
+        """
         Generates PySide6 QSS specifically for the VaultWares Revisited Warm Mode.
-        \"\"\"
-        return \"\"\"
+        """
+        return """
             /* -- Warm Base ------------------------------------------- */
             QWidget#WarmShell {
                 background-color: #F5F1E8;
@@ -476,4 +476,4 @@ class QtThemeExporter:
                 background-color: #ECE5D8;
                 border-color: #161320;
             }
-        \"\"\"
+        """
