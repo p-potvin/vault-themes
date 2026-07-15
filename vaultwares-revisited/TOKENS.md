@@ -17,12 +17,20 @@ All colors, fonts, and spacing constraints are defined by these core tokens. Nev
 
 | Token | Hex | Usage |
 |---|---|---|
-| `--vault-console-bg` | `#161320` | Base canvas, app root background |
-| `--vault-console-surface`| `#1F1A2B` | Default container background |
+| `--vault-console-bg` | `#0b0813` | Base canvas, app root background |
+| `--vault-console-surface`| `#13101c` | Default container background |
 | `--vault-console-raised` | `#2A2340` | Highly elevated layer, popovers, active cards |
-| `--vault-console-elevated`| `#31274A` | Modals, tooltips, drag states |
+| `--vault-console-elevated`| `#453763` | Modals, tooltips, drag states |
+| `--vault-console-active` | `#614d8a` | Active/pressed console surfaces |
+| `--vault-console-text` | `#a394cc` | Primary text in console mode |
 | `--vault-console-border-subtle`| `rgba(255, 255, 255, 0.06)` | Lines separating console panels |
 | `--vault-console-text-secondary`| `rgba(237, 230, 255, 0.72)` | Muted text in console mode |
+
+> **Note:** `#161320` is the **ink** (warm-mode foreground), not the console
+> background — the two were previously conflated here. `revisited.css` does not
+> define an ink token, so consumers declare one in their own semantic layer on
+> top of the import, e.g. `--vault-ink: #161320` in `vault-explorer/index.css`.
+> Follow that pattern rather than hardcoding the hex.
 
 ### Brand Accents
 
