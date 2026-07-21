@@ -1,0 +1,45 @@
+<!--
+  VaultWares Revisited — Avalonia token port.
+  Source of truth: vaultwares-revisited/TOKENS.md. Keep this file's values in
+  sync with that document by hand; there is no build step between them.
+
+  This dictionary carries only the raw palette — it does not declare
+  `VaultInk`. Per TOKENS.md, the warm-mode foreground ("ink") is not a
+  revisited.css token; each consumer declares it in its own semantic layer
+  on top of this import (see ports/avalonia/README.md).
+-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Warm mode: the structural frame (the "desk") -->
+    <SolidColorBrush x:Key="VaultWarmBg">#F5F1E8</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultWarmRaised">#FCFAF5</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultWarmMuted">#ECE5D8</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultWarmBorderSubtle">#14161320</SolidColorBrush>
+
+    <!-- Console mode: the operational core (the "screen") -->
+    <SolidColorBrush x:Key="VaultConsoleBg">#0b0813</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleSurface">#13101c</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleRaised">#2A2340</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleElevated">#453763</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleActive">#614d8a</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleText">#a394cc</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleTextSecondary">#B8EDE6FF</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleBorderSubtle">#0FFFFFFF</SolidColorBrush>
+
+    <!-- Brand accents -->
+    <SolidColorBrush x:Key="VaultConsoleGold">#D6A441</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultConsoleViolet">#B07CFF</SolidColorBrush>
+
+    <!-- Signal palette (status) -->
+    <SolidColorBrush x:Key="VaultSignalOnline">#6BE675</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultSignalRelay">#55D6FF</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultSignalSync">#B07CFF</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultSignalWarning">#F0B94B</SolidColorBrush>
+    <SolidColorBrush x:Key="VaultSignalAlert">#FF6B7A</SolidColorBrush>
+
+    <!-- Typography -->
+    <FontFamily x:Key="VaultFontSans">Segoe UI, Inter, ui-sans-serif, system-ui, sans-serif</FontFamily>
+    <FontFamily x:Key="VaultFontMono">JetBrains Mono, Cascadia Mono, Consolas, ui-monospace, monospace</FontFamily>
+
+</ResourceDictionary>
